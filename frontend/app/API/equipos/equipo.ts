@@ -1,7 +1,7 @@
 import { api } from "../api";
 
-export const registrarEquipo = async () => {
-  const response = await api.post("/equipos/");
+export const registrarEquipo = async (data: any) => {
+  const response = await api.post("/equipos/", data);
   return response.data;
 };
 
@@ -11,12 +11,12 @@ export const consultarEquipo = async () => {
 };
 
 export const consultarEquipos = async (id: number) => {
-  const response = await api.get("/equipos/${id}");
+  const response = await api.get("/equipos/${id}/");
   return response.data;
 };
 
-export const actualizarEquipo = async (id: number) => {
-  const response = await api.put("/equipos/${id}/");
+export const actualizarEquipo = async (id: number, data: any) => {
+  const response = await api.put("/equipos/${id}/", data);
   return response.data;
 };
 
