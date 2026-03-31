@@ -1,4 +1,4 @@
-import { api } from "./api";
+import { api } from "../api";
 
 export const registrarEquipo = async () => {
   const response = await api.post("/equipos/");

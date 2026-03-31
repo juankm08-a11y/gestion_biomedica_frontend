@@ -16,13 +16,3 @@ export const cerrarOrden = async (id: number) => {
   );
   return response.data;
 };
-
-export const verificarAlertas = async () => {
-  const response = await axios.get("/mantenimientos/verificar-alertas/");
-  return response.data;
-};
-
-export const supervisarMantenimiento = async () => {
-  const response = await axios.get("/mantenimientos/programados/");
-  return response.data;
-};
