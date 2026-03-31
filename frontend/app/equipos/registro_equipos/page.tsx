@@ -1,5 +1,6 @@
 "use client";
 
+import { registrarEquipo } from "@/app/api/equipos/equipo";
 import axios from "axios";
 import { useState } from "react";
 
@@ -14,8 +15,16 @@ export default function FormularioRegistro() {
     ubicacion: "",
   });
 
-  const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    try {
+      const response = await registrarEquipo(equipoData);
+
+      console.log(response);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -28,19 +37,83 @@ export default function FormularioRegistro() {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <label>Nombre:</label>
-        <input type="text" placeholder="Nombre: " />
-        <label>Marca:</label>
-        <label>Modelo:</label>
-        <label>Fabricante:</label>
-        <label>TipoTecnologia</label>
-        <label>Ubicacion:</label>
-        <button>Registrar Ubicacion</button>
-      </form>
-      <button>Guardar Equipo</button>
-      <button>Cancelar</button>
+    <div className="min-h-screen bg-gray-100 flex items-center justify-center p-10 border-[10px] border-red-600">
+      <div className="bg-white w-[900px] shadow-md border border border-gray-300 p-10">
+        <div className="mb-6">
+          <h1 className="text-2xl font-bold text-gray-800">
+            REGISTRO DE HOJAS DE VIDA DE EQUIPOS BIOMEDICOS
+          </h1>
+        </div>
+        <div className="border border-gray-300 p-8">
+          <h2 className="text-center font-semibold mb-6">
+            FORMULARIO DE REGISTRO
+          </h2>
+          <form
+            onSubmit={handleSubmit}
+            className="grid grid-cols-2 gap-x-10 gap-y-6 items-center max-w-xl mx-auto"
+          >
+            <label className="font-semibold text-gray-700">NOMBRE</label>
+            <input
+              className="border border-gray-300 p-2 w-full focus:outline focus:ring-2 focus:ring-red-400"
+              type="text"
+              placeholder="Nombre:"
+              name="nombre"
+              onChange={handleChange}
+            />
+            <label className="font-semibold text-gray-700">MARCA</label>
+            <input
+              className="border border-gray-300 p-2 w-full focus:outline focus:ring-2 focus:ring-red-400"
+              type="text"
+              placeholder="Marca:"
+              name="marca"
+              onChange={handleChange}
+            />
+            <label className="font-semibold text-gray-700">MODELO</label>
+            <input
+              className="border border-gray-300 p-2 w-full focus:outline focus:ring-2 focus:ring-red-400"
+              type="text"
+              name="modelo"
+              placeholder="Modelo:"
+              onChange={handleChange}
+            />
+            <label className="font-semibold text-gray-700">FABRICANTE</label>
+            <input
+              className="border border-gray-300 p-2 w-full focus:outline focus:ring-2 focus:ring-red-400"
+              type="text"
+              name="fabricante"
+              placeholder="Fabricante:"
+              onChange={handleChange}
+            />
+            <label className="font-semibold text-gray-700">
+              TIPO TECNOLOGIA
+            </label>
+            <input
+              className="border border-gray-300 p-2 w-full focus:outline focus:ring-2 focus:ring-red-400"
+              type="text"
+              name="tipoTecnologia"
+              placeholder="tipo tecnologia: "
+              onChange={handleChange}
+            />
+            <label className="font-semibold text-gray-700">UBICACION</label>
+            <input
+              className="border border-gray-300 p-2 w-full focus:outline focus:ring-2 focus:ring-red-400"
+              type="text"
+              name="Ubicacion"
+              onChange={handleChange}
+              placeholder="ubicacion:"
+            />
+            <button className="col-span-2 mx-auto mt-4 border border-gray-400 px-6 py-2 rounded-full hover:bg-gray-100">
+              Registrar Ubicacion
+            </button>
+            <button className="border border-gray-400 px-8 py-3 rounded-full hover:bg-gray-100 font-medium">
+              Guardar Equipo
+            </button>
+            <button className="border border-gray-400 px-8 py-3 rounded-full hover:bg-gray-100 font-medium">
+              Cancelar
+            </button>
+          </form>
+        </div>
+      </div>
     </div>
   );
 }
