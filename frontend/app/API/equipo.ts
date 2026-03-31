@@ -1,9 +1,8 @@
-import axios from "axios";
 import { api } from "./api";
-import { NextResponse } from "next/server";
 
 export const createEquipo = async () => {
   const response = await api.post("/equipos/");
+  return response.data;
 };
 
 export const getEquipos = async () => {
