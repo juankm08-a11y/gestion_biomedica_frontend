@@ -8,7 +8,7 @@ export const createProgramacion = async () => {
   return response.data;
 };
 
-export const updateProgramacion = async () => {
+export const updateProgramacion = async (id: number) => {
   const response = await axios.put(
     "/mantenimientos/programacion_mantenmiento/<int:pk>/",
   );
