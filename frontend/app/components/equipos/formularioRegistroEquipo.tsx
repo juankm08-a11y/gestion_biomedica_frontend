@@ -14,7 +14,7 @@ export default function FormularioRegistro() {
     ubicacion: "",
   });
 
-  const handleSubmit = (e: React.ChangeEvent) => {
+  const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
   };
 
