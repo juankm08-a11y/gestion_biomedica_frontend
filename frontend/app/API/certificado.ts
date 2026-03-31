@@ -1,11 +1,11 @@
 import axios from "axios";
 
-export const createCertificado = async () => {
+export const registrarCertificado = async () => {
   const response = await axios.post("/mantenimientos/certificado_metrologico");
   return response.data;
 };
 
-export const getCertificado = async (id: number) => {
+export const verCertificado = async (id: number) => {
   const response = await axios.get(
     "/mantenimientos/certificado_metrologico/<int:pk>/",
   );
@@ -17,7 +17,7 @@ export const cargarArchivoAdjunto = async () => {
   return response.data;
 };
 
-export const getArchivoAdjunto = async () => {
+export const verArchivoAdjunto = async () => {
   const response = await axios.get("/mantenimientos/archivo_adjunto/<int:pk>/");
   return response.data;
 };
