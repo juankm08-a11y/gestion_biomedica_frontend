@@ -1,11 +1,23 @@
-import { NextResponse } from "next/server";
+import axios from "axios";
 
-export const connectBackend = async () => {
-  const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
+const BASE_URL = process.env.NEXT_API_URL;
 
-  if (!BASE_URL) {
-    return NextResponse.json({ error: "API URL not found" }, { status: 500 });
+if (!BASE_URL) {
+  throw new Error("NEXT_PUBLIC_API_URL no está definda");
+}
+
+export const api = axios.create({
+  baseURL: BASE_URL,
+});
+
+api.interceptors.request.use((config) => {
+  if (typeof window !== "undefined") {
+    const token = localStorage.getItem("token");
+
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
   }
-  console.log(`Conexion con backend exitoso ${BASE_URL}/`);
-  return NextResponse.json({ message: "Connection success" }, { status: 200 });
-};
+
+  return config;
+});
