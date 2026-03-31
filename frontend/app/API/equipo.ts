@@ -1,20 +1,27 @@
 import axios from "axios";
-import { API } from "./api";
+import { api } from "./api";
 import { NextResponse } from "next/server";
 
-export async function createEquipo() {
-  const equipo = await axios.post(`${API}`);
-  console.log(`${equipo}`);
-  return NextResponse.json({
-    message: "Equipo creado correctamente",
-    status: 201,
-  });
-}
+export const createEquipo = async () => {
+  const response = await api.post("/equipos/");
+};
 
-export async function consultarEquipo(id) {
-  const equipo = await axios.get(`${API}/<int:pk>/`);
-  return NextResponse.json({
-    message: "Equipo encontrado",
-    status: 201,
-  });
-}
+export const getEquipos = async () => {
+  const response = await api.get("/equipos/");
+  return response.data;
+};
+
+export const getEquipo = async (id: number) => {
+  const response = await api.get("/equipos/${id}");
+  return response.data;
+};
+
+export const putEquipo = async (id: number) => {
+  const response = await api.put("/equipos/${id}/");
+  return response.data;
+};
+
+export const deleteEquipo = async (id: number) => {
+  const response = await api.delete("/equipos/${id}");
+  return response.data;
+};
