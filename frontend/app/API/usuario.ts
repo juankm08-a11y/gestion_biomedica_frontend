@@ -1,16 +1,16 @@
 import axios from "axios";
 
-export const registroUsuario = async () => {
+export const registrarSesion = async () => {
   const response = await axios.post("/usuarios/registro/");
   return response.data;
 };
 
-export const loginUsuario = async () => {
+export const inciarSesion = async () => {
   const response = await axios.post("/usuarios/login/");
   return response.data;
 };
 
-export const logOut = async () => {
+export const cerrarSesion = async () => {
   const response = await axios.post("/usuarios/logout/");
   return response.data;
 };
