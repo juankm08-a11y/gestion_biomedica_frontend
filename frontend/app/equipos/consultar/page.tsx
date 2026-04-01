@@ -1,6 +1,7 @@
 "use client";
 
-import { consultarEquipo } from "@/app/api/equipos/equipo";
+import { consultarEquipo, eliminarEquipo } from "@/app/api/equipos/equipo";
+import { ROUTES } from "@/app/routes/routes";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -28,6 +29,22 @@ export default function EquiposPage() {
     equipo.nombre.toLowerCase().includes(buscar.toLowerCase()),
   );
 
+  const handleEliminar = async (id: number) => {
+    const confirmar = confirm("¿Estás seguro que deseas eliminar este equipo?");
+
+    if (!confirmar) return;
+
+    try {
+      await eliminarEquipo(id);
+
+      alert("Equipo eliminado correctamente");
+
+      cargarEquipos();
+    } catch (error) {
+      console.error("Error al eliminr equipo: ", error);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gray-100 p-6 border-[10px] border-gray-600">
       <div className="flex items-center justify-between mb-6">
@@ -48,6 +65,7 @@ export default function EquiposPage() {
         <table className="w-full text-sm">
           <thead className="border-b bg-gray-100">
             <tr>
+              <th className="p-3 text-left">ACCIONES</th>
               <th className="p-3 text-left">NOMBRE</th>
               <th className="p-3 text-left">MARCA</th>
               <th className="p-3 text-left">MODELO</th>
@@ -81,10 +99,16 @@ export default function EquiposPage() {
         >
           Registrar equipo
         </button>
-        <button className="border px-6 py-3 rounded-full hover:bg-gray-100">
+        <button
+          onClick={() => router.push(ROUTES.equipos.EQUIPO_ACTUALIZAR)}
+          className="border px-6 py-3 rounded-full hover:bg-gray-100"
+        >
           Editar Equipo
         </button>
-        <button className="border px-6 py-3 rounded-full hover:bg-gray-100">
+        <button
+          onClick={() => handleEliminar}
+          className="border px-6 py-3 rounded-full hover:bg-gray-100"
+        >
           Eliminar Equipo
         </button>
       </div>

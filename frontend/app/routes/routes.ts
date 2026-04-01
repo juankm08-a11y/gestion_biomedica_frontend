@@ -7,6 +7,7 @@ export const ROUTES = {
     EQUIPOS: "/equipos",
     EQUIPOS_VER: "/equipos/consultar",
     EQUIPO_CREAR: "/equipos/registro",
+    EQUIPO_ACTUALIZAR: "/equipos/[id]",
     EQUIPO_DETALLE: (id: number) => `/equipos/${id}`,
   },
 
