@@ -26,6 +26,18 @@ export default function FormularioRegistro() {
 
       alert("Equipo registrado correctamente");
       console.log(response);
+
+      setEquipoData({
+        nombre: "",
+        marca: "",
+        modelo: "",
+        serie: "",
+        fabricante: "",
+        tipoTecnologia: "",
+        ubicacion: "",
+      });
+
+      router.push(ROUTES.equipos.EQUIPOS_VER);
     } catch (error) {
       console.error(error);
     }

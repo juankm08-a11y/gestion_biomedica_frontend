@@ -35,6 +35,18 @@ export default function FormularioActualizarEquipo({ id }: any) {
 
       alert("Equipo actualizado correctamente");
 
+      console.log(response);
+
+      setEquipoData({
+        nombre: "",
+        marca: "",
+        modelo: "",
+        serie: "",
+        fabricante: "",
+        tipoTecnologia: "",
+        ubicacion: "",
+      });
+
       router.push(ROUTES.equipos.EQUIPOS_VER);
     } catch (error) {
       console.error(error);
