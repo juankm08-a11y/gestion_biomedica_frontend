@@ -40,7 +40,7 @@ export default function FormularioRegistro() {
   };
 
   const handleCancelar = () => {
-    router.push("/dashboard");
+    router.push(ROUTES.dashboard.DASHBOARD);
   };
 
   return (
@@ -65,6 +65,7 @@ export default function FormularioRegistro() {
               type="text"
               placeholder="Nombre:"
               name="nombre"
+              value={equipoData.nombre}
               onChange={handleChange}
             />
             <label className="font-semibold text-gray-700">MARCA</label>
@@ -74,6 +75,7 @@ export default function FormularioRegistro() {
               placeholder="Marca:"
               name="marca"
               onChange={handleChange}
+              value={equipoData.marca}
             />
             <label className="font-semibold text-gray-700">MODELO</label>
             <input
@@ -81,6 +83,7 @@ export default function FormularioRegistro() {
               type="text"
               name="modelo"
               placeholder="Modelo:"
+              value={equipoData.modelo}
               onChange={handleChange}
             />
             <label className="font-semibold text-gray-700">SERIE</label>
@@ -89,6 +92,7 @@ export default function FormularioRegistro() {
               name="serie"
               placeholder="Serie:"
               onChange={handleChange}
+              value={equipoData.serie}
             />
             <label className="font-semibold text-gray-700">FABRICANTE</label>
             <input
@@ -96,6 +100,7 @@ export default function FormularioRegistro() {
               type="text"
               name="fabricante"
               placeholder="Fabricante:"
+              value={equipoData.fabricante}
               onChange={handleChange}
             />
             <label className="font-semibold text-gray-700">
@@ -107,6 +112,7 @@ export default function FormularioRegistro() {
               name="tipoTecnologia"
               placeholder="tipo tecnologia: "
               onChange={handleChange}
+              value={equipoData.tipoTecnologia}
             />
             <label className="font-semibold text-gray-700">UBICACION</label>
             <input
@@ -115,6 +121,7 @@ export default function FormularioRegistro() {
               name="ubicacion"
               onChange={handleChange}
               placeholder="ubicacion:"
+              value={equipoData.ubicacion}
             />
             <button
               className="col-span-2 mx-auto mt-4 border border-gray-400 px-6 py-2 rounded-full hover:bg-gray-100"
