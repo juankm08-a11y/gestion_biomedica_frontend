@@ -15,7 +15,7 @@ export default function EquiposPage() {
     try {
       const response = await consultarEquipo();
 
-      setEquipos(response);
+      setEquipos(Array.isArray(response) ? response : []);
     } catch (error) {
       console.error("Error cargando equipos:", error);
     }
