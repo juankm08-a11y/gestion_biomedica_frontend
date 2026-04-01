@@ -95,7 +95,7 @@ export default function EquiposPage() {
       <div className="flex justify-center gap-6 mt-8">
         <button
           className="border px-6 py-3 rounded-full hover:bg-gray-100"
-          onClick={() => router.push("/equipos/registro")}
+          onClick={() => router.push(ROUTES.equipos.EQUIPO_CREAR)}
         >
           Registrar equipo
         </button>
