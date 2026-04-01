@@ -22,7 +22,9 @@ export default function FormularioUbicacion() {
       const response = await registrarUbicacion(ubicacionData);
 
       console.log(response);
-    } catch (error) {}
+    } catch (error) {
+      console.error("error al registrar ubicacion: ", error);
+    }
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
