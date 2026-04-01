@@ -22,7 +22,10 @@ export default function FormularioActualizarEquipo({ id }: any) {
     const cargarEquipo = async () => {
       const responses = await consultarEquipos(id);
 
-      setEquipoData(responses);
+      setEquipoData((prev) => ({
+        ...prev,
+        ...responses,
+      }));
     };
     cargarEquipo();
   }, [id]);
@@ -71,12 +74,12 @@ export default function FormularioActualizarEquipo({ id }: any) {
       <div className="bg-white w-[900px] shadow-md border border border-gray-300 p-10">
         <div className="mb-6">
           <h1 className="text-2xl font-bold text-gray-800">
-            REGISTRO DE HOJAS DE VIDA DE EQUIPOS BIOMEDICOS
+            FORMULARIO DE ACTUALIZACION DE HOJAS DE VIDA DE EQUIPOS BIOMEDICOS
           </h1>
         </div>
         <div className="border border-gray-300 p-8">
           <h2 className="text-center font-semibold mb-6">
-            FORMULARIO DE REGISTRO
+            FORMULARIO DE EDICION
           </h2>
           <form
             onSubmit={handleSubmit}
@@ -150,18 +153,21 @@ export default function FormularioActualizarEquipo({ id }: any) {
               className="col-span-2 mx-auto mt-4 border border-gray-400 px-6 py-2 rounded-full hover:bg-gray-100"
               onClick={() => router.push(ROUTES.ubicaciones.UBICACION_CREAR)}
             >
-              Actualizar Ubicacion
+              Actualizar Equipo
             </button>
 
-            <button className="border border-gray-400 px-8 py-3 rounded-full hover:bg-gray-100 font-medium">
-              Guardar Equipo
-            </button>
             <button
               className="border border-gray-400 px-8 py-3 rounded-full hover:bg-gray-100 font-medium"
               onClick={handleCancelar}
               type="button"
             >
               Cancelar
+            </button>
+            <button
+              className="border border-gray-400 px-8 py-3 rounded-full hover:bg-gray-100 font-medium"
+              onClick={() => router.push(ROUTES.dashboard.DASHBOARD)}
+            >
+              Regresar a Dashboard
             </button>
           </form>
         </div>

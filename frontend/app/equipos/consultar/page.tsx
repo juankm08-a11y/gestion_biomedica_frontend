@@ -15,7 +15,7 @@ export default function EquiposPage() {
     try {
       const response = await consultarEquipo();
 
-      setEquipos(Array.isArray(response) ? response : []);
+      setEquipos(Array.isArray(response.data) ? response.data : []);
     } catch (error) {
       console.error("Error cargando equipos:", error);
     }
@@ -46,7 +46,7 @@ export default function EquiposPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 p-6 border-[10px] border-gray-600">
+    <div className="min-h-screen bg-gray-100 p-6 border-[10px] border-red-600">
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-xl font-semibold">Lista Equipos</h1>
       </div>
@@ -65,7 +65,6 @@ export default function EquiposPage() {
         <table className="w-full text-sm">
           <thead className="border-b bg-gray-100">
             <tr>
-              <th className="p-3 text-left">ACCIONES</th>
               <th className="p-3 text-left">NOMBRE</th>
               <th className="p-3 text-left">MARCA</th>
               <th className="p-3 text-left">MODELO</th>
@@ -79,6 +78,22 @@ export default function EquiposPage() {
           <tbody>
             {equiposFiltrados.map((equipo) => (
               <tr key={equipo.idEquipo}>
+                <td className="p-3 flex gap-2">
+                  <button
+                    onClick={() =>
+                      router.push(ROUTES.equipos.EQUIPO_ACTUALIZAR)
+                    }
+                  >
+                    Editar
+                  </button>
+
+                  <button
+                    onClick={() => handleEliminar(equipo.idEquipo)}
+                    className="border px-6 py-3 rounded-full hover:bg-gray-100"
+                  >
+                    Eliminar Equipo
+                  </button>
+                </td>
                 <td className="p-3">{equipo.nombre}</td>
                 <td className="p-3">{equipo.marca}</td>
                 <td className="p-3">{equipo.modelo}</td>
@@ -100,16 +115,10 @@ export default function EquiposPage() {
           Registrar equipo
         </button>
         <button
-          onClick={() => router.push(ROUTES.equipos.EQUIPO_ACTUALIZAR)}
           className="border px-6 py-3 rounded-full hover:bg-gray-100"
+          onClick={() => router.push(ROUTES.dashboard.DASHBOARD)}
         >
-          Editar Equipo
-        </button>
-        <button
-          onClick={() => handleEliminar}
-          className="border px-6 py-3 rounded-full hover:bg-gray-100"
-        >
-          Eliminar Equipo
+          Regresar a Dashboard
         </button>
       </div>
     </div>

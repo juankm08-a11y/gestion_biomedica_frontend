@@ -153,6 +153,12 @@ export default function FormularioRegistro() {
             >
               Cancelar
             </button>
+            <button
+              className="border border-gray-400 px-8 py-3 rounded-full hover:bg-gray-100 font-medium"
+              onClick={() => router.push(ROUTES.dashboard.DASHBOARD)}
+            >
+              Regresar a Dashboard
+            </button>
           </form>
         </div>
       </div>

@@ -1,6 +1,7 @@
 "use client";
 
 import { registrarUbicacion } from "@/app/api/equipos/ubicacion";
+import { ROUTES } from "@/app/routes/routes";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -104,6 +105,12 @@ export default function FormularioUbicacion() {
               type="button"
             >
               Cancelar
+            </button>
+            <button
+              className="border border-gray-400 px-8 py-3 rounded-full hover:bg-gray-100 font-medium"
+              onClick={() => router.push(ROUTES.equipos.EQUIPO_CREAR)}
+            >
+              Regresar a Formulario
             </button>
           </form>
         </div>
