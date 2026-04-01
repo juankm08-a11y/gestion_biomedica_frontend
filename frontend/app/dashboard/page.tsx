@@ -1,7 +1,5 @@
 "use client";
 
-import { useState } from "react";
-import FormularioRegistro from "../equipos/registro/page";
 import { useRouter } from "next/navigation";
 import { ROUTES } from "../routes/routes";
 
@@ -21,6 +19,9 @@ export default function Dashboard() {
         onClick={() => router.push(ROUTES.mantenimientos.MANTENIMIENTO_CREAR)}
       >
         Registrar Mantenimiento
+      </button>
+      <button onClick={() => router.push(ROUTES.codigosQr.CODIGOQR_GENERAR)}>
+        Generar Codigo QR
       </button>
     </div>
   );
