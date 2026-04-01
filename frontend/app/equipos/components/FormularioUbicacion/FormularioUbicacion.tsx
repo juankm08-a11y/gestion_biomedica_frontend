@@ -96,7 +96,7 @@ export default function FormularioUbicacion() {
             />
             <button className="border border-gray-400 px-8 py-3 rounded-full hover:bg-gray-100 font-medium">
               {" "}
-              Registrar Actualizacion
+              Registrar Ubicacion
             </button>
             <button
               className="border border-gray-400 px-8 py-3 rounded-full hover:bg-gray-100 font-medium"
