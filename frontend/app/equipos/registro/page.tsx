@@ -24,6 +24,7 @@ export default function FormularioRegistro() {
     try {
       const response = await registrarEquipo(equipoData);
 
+      alert("Equipo registrado correctamente");
       console.log(response);
     } catch (error) {
       console.error(error);
