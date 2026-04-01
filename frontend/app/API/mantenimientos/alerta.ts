@@ -1,6 +1,6 @@
-import axios from "axios";
+import { api } from "../api";
 
 export const verificarAlertas = async () => {
-  const response = await axios.get("/mantenimientos/verificar-alertas/");
+  const response = await api.get("/mantenimientos/verificar-alertas/");
   return response.data;
 };

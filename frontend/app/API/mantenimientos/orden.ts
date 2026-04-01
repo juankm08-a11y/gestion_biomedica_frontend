@@ -1,18 +1,16 @@
-import axios from "axios";
+import { api } from "../api";
 
-export const crearOrden = async () => {
-  const response = await axios.post("/mantenimientos/orden_servicio/");
+export const crearOrden = async (data: any) => {
+  const response = await api.post("/mantenimientos/orden_servicio/", data);
   return response.data;
 };
 
-export const actualizarOrden = async (id: number) => {
-  const response = await axios.put("/mantenimientos/orden_servicio/<int:pk>/");
+export const actualizarOrden = async (id: number, data: any) => {
+  const response = await api.put(`/mantenimientos/orden_servicio/${id}/`, data);
   return response.data;
 };
 
 export const cerrarOrden = async (id: number) => {
-  const response = await axios.patch(
-    "/mantenimientos/orden_servicio/<int:pk>/",
-  );
+  const response = await api.patch(`/mantenimientos/orden_servicio/${id}/`);
   return response.data;
 };

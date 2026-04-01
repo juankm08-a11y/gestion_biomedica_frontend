@@ -1,16 +1,16 @@
-import axios from "axios";
+import { api } from "../api";
 
-export const registrarMantenimiento = async () => {
-  const response = await axios.post("/mantenimientos/");
+export const registrarMantenimiento = async (data: any) => {
+  const response = await api.post("/mantenimientos/", data);
   return response.data;
 };
 
-export const actualizarMantenimiento = async (id: number) => {
-  const response = await axios.put("/mantenimientos/<int:pk>/");
+export const actualizarMantenimiento = async (id: number, data: any) => {
+  const response = await api.put(`/mantenimientos/${id}/`, data);
   return response.data;
 };
 
 export const eliminarMantenimiento = async (id: number) => {
-  const response = await axios.delete("/mantenmientos/<int:pk>/");
+  const response = await api.delete(`/mantenmientos/${id}/`);
   return response.data;
 };

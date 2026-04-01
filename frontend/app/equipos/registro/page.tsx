@@ -1,7 +1,8 @@
 "use client";
 
 import { registrarEquipo } from "@/app/api/equipos/equipo";
-import axios from "axios";
+import { ROUTES } from "@/app/routes/routes";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function FormularioRegistro() {
@@ -14,6 +15,8 @@ export default function FormularioRegistro() {
     tipoTecnologia: "",
     ubicacion: "",
   });
+
+  const router = useRouter();
 
   const handleSubmit = async (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -34,6 +37,10 @@ export default function FormularioRegistro() {
       ...prevData,
       [name]: value,
     }));
+  };
+
+  const handleCancelar = () => {
+    router.push("/dashboard");
   };
 
   return (
@@ -76,6 +83,13 @@ export default function FormularioRegistro() {
               placeholder="Modelo:"
               onChange={handleChange}
             />
+            <label className="font-semibold text-gray-700">SERIE</label>
+            <input
+              type="text"
+              name="serie"
+              placeholder="Serie:"
+              onChange={handleChange}
+            />
             <label className="font-semibold text-gray-700">FABRICANTE</label>
             <input
               className="border border-gray-300 p-2 w-full focus:outline focus:ring-2 focus:ring-red-400"
@@ -97,18 +111,26 @@ export default function FormularioRegistro() {
             <label className="font-semibold text-gray-700">UBICACION</label>
             <input
               className="border border-gray-300 p-2 w-full focus:outline focus:ring-2 focus:ring-red-400"
-              type="text"
-              name="Ubicacion"
+              type="number"
+              name="ubicacion"
               onChange={handleChange}
               placeholder="ubicacion:"
             />
-            <button className="col-span-2 mx-auto mt-4 border border-gray-400 px-6 py-2 rounded-full hover:bg-gray-100">
-              Registrar Ubicacion
+            <button
+              className="col-span-2 mx-auto mt-4 border border-gray-400 px-6 py-2 rounded-full hover:bg-gray-100"
+              onClick={() => router.push(ROUTES.ubicaciones.UBICACION_CREAR)}
+            >
+              Actualizar Ubicacion
             </button>
+
             <button className="border border-gray-400 px-8 py-3 rounded-full hover:bg-gray-100 font-medium">
               Guardar Equipo
             </button>
-            <button className="border border-gray-400 px-8 py-3 rounded-full hover:bg-gray-100 font-medium">
+            <button
+              className="border border-gray-400 px-8 py-3 rounded-full hover:bg-gray-100 font-medium"
+              onClick={handleCancelar}
+              type="button"
+            >
               Cancelar
             </button>
           </form>

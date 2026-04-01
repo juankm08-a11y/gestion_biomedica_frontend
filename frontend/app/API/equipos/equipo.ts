@@ -11,16 +11,16 @@ export const consultarEquipo = async () => {
 };
 
 export const consultarEquipos = async (id: number) => {
-  const response = await api.get("/equipos/${id}/");
+  const response = await api.get(`/equipos/${id}/`);
   return response.data;
 };
 
 export const actualizarEquipo = async (id: number, data: any) => {
-  const response = await api.put("/equipos/${id}/", data);
+  const response = await api.put(`/equipos/${id}/`, data);
   return response.data;
 };
 
 export const eliminarEquipo = async (id: number) => {
-  const response = await api.delete("/equipos/${id}");
+  const response = await api.delete(`/equipos/${id}/`);
   return response.data;
 };

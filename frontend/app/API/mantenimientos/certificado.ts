@@ -1,13 +1,16 @@
-import axios from "axios";
+import { api } from "../api";
 
-export const registrarCertificado = async () => {
-  const response = await axios.post("/mantenimientos/certificado_metrologico");
+export const registrarCertificado = async (data: any) => {
+  const response = await api.post(
+    "/mantenimientos/certificado_metrologico",
+    data,
+  );
   return response.data;
 };
 
 export const verCertificado = async (id: number) => {
-  const response = await axios.get(
-    "/mantenimientos/certificado_metrologico/<int:pk>/",
+  const response = await api.get(
+    `/mantenimientos/certificado_metrologico/${id}/`,
   );
   return response.data;
 };
