@@ -1,19 +1,21 @@
 "use client";
 
+import { useState } from "react";
+import FormularioRegistro from "../equipos/registro/page";
 import { useRouter } from "next/navigation";
 import { ROUTES } from "../routes/routes";
 
-export default function Equipos() {
+export default function Dashboard() {
   const router = useRouter();
   return (
-    <main>
-      <h1>HOJA DE VIDA DE EQUIPOS</h1>
+    <div>
       <button onClick={() => router.push(ROUTES.equipos.EQUIPO_CREAR)}>
-        Formulario para Registrar Equipos
+        Registrar Equipo
       </button>
+
       <button onClick={() => router.push(ROUTES.equipos.EQUIPOS_VER)}>
-        Ver Equipos
+        Ver Lista de Equipos
       </button>
-    </main>
+    </div>
   );
 }
