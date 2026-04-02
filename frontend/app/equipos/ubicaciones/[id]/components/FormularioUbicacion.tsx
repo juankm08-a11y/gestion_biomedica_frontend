@@ -22,7 +22,18 @@ export default function FormularioUbicacion() {
     try {
       const response = await registrarUbicacion(ubicacionData);
 
+      alert("Ubicacion registrada correctamente");
+
+      setUbicacionData({
+        sede: "",
+        departamento: "",
+        ciudad: "",
+        area: "",
+        detalle: "",
+      });
+
       console.log(response);
+      router.push(ROUTES.equipos.EQUIPOS_VER);
     } catch (error) {
       console.error("error al registrar ubicacion: ", error);
     }
@@ -38,7 +49,7 @@ export default function FormularioUbicacion() {
   };
 
   const handleCancelar = () => {
-    router.push("/dashboard");
+    router.push(ROUTES.equipos.EQUIPOS_VER);
   };
 
   return (
@@ -95,24 +106,28 @@ export default function FormularioUbicacion() {
               placeholder="detalle"
               onChange={handleChange}
             />
-            <button className="border border-gray-400 px-8 py-3 rounded-full hover:bg-gray-100 font-medium">
-              {" "}
+            <button
+              type="submit"
+              className="border border-gray-400 px-8 py-3 rounded-full hover:bg-gray-100 font-medium"
+            >
               Registrar Ubicacion
             </button>
-            <button
-              className="border border-gray-400 px-8 py-3 rounded-full hover:bg-gray-100 font-medium"
-              onClick={handleCancelar}
-              type="button"
-            >
-              Cancelar
-            </button>
-            <button
-              className="border border-gray-400 px-8 py-3 rounded-full hover:bg-gray-100 font-medium"
-              onClick={() => router.push(ROUTES.equipos.EQUIPO_CREAR)}
-            >
-              Regresar a Formulario
-            </button>
           </form>
+
+          <button
+            className="border border-gray-400 px-8 py-3 rounded-full hover:bg-gray-100 font-medium"
+            onClick={handleCancelar}
+            type="button"
+          >
+            Cancelar
+          </button>
+          <button
+            type="button"
+            className="border border-gray-400 px-8 py-3 rounded-full hover:bg-gray-100 font-medium"
+            onClick={() => router.push(ROUTES.equipos.EQUIPO_CREAR)}
+          >
+            Regresar a Lista Equipos
+          </button>
         </div>
       </div>
     </div>

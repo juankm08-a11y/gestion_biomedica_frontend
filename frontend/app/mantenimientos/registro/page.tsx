@@ -11,137 +11,96 @@ export default function FormularioMantenimiento() {
     tipo: "",
     fechaInicio: "",
     fechaFin: "",
-    estado: "",
+    estado: "pendiente",
     responsable: "",
   });
 
   const router = useRouter();
 
-  const handleSubmit = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     try {
       const response = await registrarMantenimiento(mantenimientoData);
 
       alert("Mantenimiento registrado correctamente");
-      console.log(response);
 
-      router.push(ROUTES.dashboard.DASHBOARD);
+      console.log(response);
 
       setMantenimientoData({
         equipo: "",
         tipo: "",
         fechaInicio: "",
         fechaFin: "",
-        estado: "",
+        estado: "pendiente",
         responsable: "",
       });
+
+      router.push(ROUTES.mantenimientos.MANTENIMIENTOS_CONSULTAR);
     } catch (error) {
-      console.error("Error al registrar mantenimiento: ", error);
+      console.error(error);
     }
   };
 
-  const handleChange = (e: any) => {
+  const handleChange = async (e: any) => {
     const { name, value } = e.target;
 
-    setMantenimientoData({
-      ...mantenimientoData,
+    setMantenimientoData((prevData) => ({
+      ...prevData,
       [name]: value,
-    });
+    }));
   };
 
-  const handleCancelar = () => {
-    router.push(ROUTES.dashboard.DASHBOARD);
-  };
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center p-10 border-[10px] border-red-600">
-      <div className="bg-white w-[900px] shadow-md border border border-gray-300 p-10">
-        <div className="mb-6">
-          <h1 className="text-2xl font-bold text-gray-800">
-            FORMULARIO DE REGISTRO DE MANTENIMIENTOS
-          </h1>
-        </div>
-        <div className="border border-gray-300 p-8">
-          <h2 className="text-center font-semibold mb-6">
-            Formulario de registro
-          </h2>
+    <form
+      onSubmit={handleSubmit}
+      className="grid grid-cols-2 gap-x-10 gap-y-6 items-center max-w-xl mx-auto"
+    >
+      <label className="font-semibold text-gray-700">EQUIPO ID</label>
+      <input
+        type="number"
+        name="equipo"
+        onChange={handleChange}
+        className="border p-2"
+      />
 
-          <form className="grid grid-cols-2 gap-x-10 gap-y-6 items-center max-w-xl mx-auto">
-            <label className="font-semibold text-gray-700">EQUIPO</label>
-            <input
-              className="border border-gray-300 p-2 w-full focus:outline focus:ring-2 focus:ring-red-400"
-              type="text"
-              name="equipo"
-              onChange={handleChange}
-              value={mantenimientoData.equipo}
-              placeholder="Equipo"
-            />
-            <label className="font-semibold text-gray-700">TIPO</label>
+      <label className="font-semibold text-gray-700">TIPO</label>
+      <input name="tipo" onChange={handleChange} className="border p-2" />
 
-            <input
-              className="border border-gray-300 p-2 w-full focus:outline focus:ring-2 focus:ring-red-400"
-              type="text"
-              name="tipo"
-              onChange={handleChange}
-              value={mantenimientoData.tipo}
-              placeholder="Tipo"
-            />
-            <label className="font-semibold text-gray-700">FECHA INICIO</label>
-            <input
-              className="border border-gray-300 p-2 w-full focus:outline focus:ring-2 focus:ring-red-400"
-              type="text"
-              name="fechaInicio"
-              value={mantenimientoData.fechaInicio}
-              onChange={handleChange}
-              placeholder="fechaInicio"
-            />
-            <label className="font-semibold text-gray-700">FECHA FIN</label>
-            <input
-              className="border border-gray-300 p-2 w-full focus:outline focus:ring-2 focus:ring-red-400"
-              type="text"
-              name="fechaFin"
-              value={mantenimientoData.fechaFin}
-              onChange={handleChange}
-              placeholder="fechaFin"
-            />
-            <label className="font-semibold text-gray-700">ESTADO</label>
-            <input
-              className="border border-gray-300 p-2 w-full focus:outline focus:ring-2 focus:ring-red-400"
-              type="text"
-              name="estado"
-              value={mantenimientoData.estado}
-              onChange={handleChange}
-              placeholder="estado"
-            />
-            <label className="font-semibold text-gray-700">RESPONSABLE</label>
-            <input
-              className="border border-gray-300 p-2 w-full focus:outline focus:ring-2 focus:ring-red-400"
-              type="text"
-              name="responsable"
-              value={mantenimientoData.responsable}
-              onChange={handleChange}
-              placeholder="responsable"
-            />
-            <button className="col-span-2 mx-auto mt-4 border border-gray-400 px-6 py-2 rounded-full hover:bg-gray-100">
-              Registrar Mantenimiento
-            </button>
+      <label className="font-semibold text-gray-700">FECHA INICIO</label>
+      <input
+        type="date"
+        name="fechaInicio"
+        onChange={handleChange}
+        className="border p-2"
+      />
 
-            <button
-              className="border border-gray-400 px-8 py-3 rounded-full hover:bg-gray-100 font-medium"
-              onClick={handleCancelar}
-              type="button"
-            >
-              Cancelar
-            </button>
-            <button
-              className="border border-gray-400 px-8 py-3 rounded-full hover:bg-gray-100 font-medium"
-              onClick={() => router.push(ROUTES.dashboard.DASHBOARD)}
-            >
-              Regresar a Dashboard
-            </button>
-          </form>
-        </div>
-      </div>
-    </div>
+      <label className="font-semibold text-gray-700">FECHA FIN</label>
+      <input
+        type="date"
+        name="fechaFin"
+        onChange={handleChange}
+        className="border p-2"
+      />
+
+      <label className="font-semibold text-gray-700">ESTADO</label>
+      <select name="estado" onChange={handleChange} className="border p-2">
+        <option value="pendiente">Pendiente</option>
+        <option value="en_proceso">En proceso</option>
+        <option value="finalizado">Finalizado</option>
+      </select>
+
+      <label className="font-semibold text-gray-700">RESPONSABLE ID</label>
+      <input
+        type="number"
+        name="responsable"
+        onChange={handleChange}
+        className="border p-2"
+      />
+
+      <button className="border px-6 py-3 rounded-full col-span-2">
+        Registrar mantenimiento
+      </button>
+    </form>
   );
 }

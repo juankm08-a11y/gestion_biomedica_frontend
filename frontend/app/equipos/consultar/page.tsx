@@ -5,7 +5,7 @@ import { ROUTES } from "@/app/routes/routes";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-export default function EquiposPage() {
+export default function ListaEquipos() {
   const [equipos, setEquipos] = useState<any[]>([]);
   const [buscar, setBuscar] = useState("");
 
@@ -17,7 +17,7 @@ export default function EquiposPage() {
 
       setEquipos(Array.isArray(response.data) ? response.data : []);
     } catch (error) {
-      console.error("Error cargando equipos:", error);
+      console.error(error);
     }
   };
 
@@ -30,96 +30,89 @@ export default function EquiposPage() {
   );
 
   const handleEliminar = async (id: number) => {
-    const confirmar = confirm("¿Estás seguro que deseas eliminar este equipo?");
+    if (!confirm("¿Deseas eliminar este equipo?")) return;
 
-    if (!confirmar) return;
+    alert("Equipo eliminado correctamente");
 
-    try {
-      await eliminarEquipo(id);
+    await eliminarEquipo(id);
 
-      alert("Equipo eliminado correctamente");
-
-      cargarEquipos();
-    } catch (error) {
-      console.error("Error al eliminr equipo: ", error);
-    }
+    cargarEquipos();
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 p-6 border-[10px] border-red-600">
-      <div className="flex items-center justify-between mb-6">
-        <h1 className="text-xl font-semibold">Lista Equipos</h1>
-      </div>
-      <div className="flex items-center gap-2 mb-4">
-        <input
-          type="text"
-          placeholder="Buscar equipo..."
-          className="border w-full p-2"
-          value={buscar}
-          onChange={(e) => setBuscar(e.target.value)}
-        />
-        <button className="border p-2 rounded">Buscar</button>
-      </div>
+    <div className="min-h-screen bg-gray-100 flex items-center justify-center p-10 border-[10px] border-red-600">
+      <div className="bg-white w-full w-[1600px] shadow-md border border border-gray-300 p-10">
+        <div className="mb-6">
+          <h1 className="text-lg font-semibold">Lista de Equipos</h1>
+        </div>
+        <div className="flex gap-4 mb-6">
+          <input
+            type="text"
+            placeholder="Buscar equipo..."
+            className="border p-2 flex-1 text-base"
+            value={buscar}
+            onChange={(e) => setBuscar(e.target.value)}
+          />
+          <button className="border px-4 py-2">Buscar</button>
+        </div>
 
-      <div className="border bg-white">
-        <table className="w-full text-sm">
-          <thead className="border-b bg-gray-100">
-            <tr>
-              <th className="p-3 text-left">NOMBRE</th>
-              <th className="p-3 text-left">MARCA</th>
-              <th className="p-3 text-left">MODELO</th>
-              <th className="p-3 text-left">SERIE</th>
-              <th className="p-3 text-left">FABRICANTE</th>
-              <th className="p-3 text-left">TIPO TECNOLOGIA</th>
-              <th className="p-3 text-left">UBICACION</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            {equiposFiltrados.map((equipo) => (
-              <tr key={equipo.idEquipo}>
-                <td className="p-3 flex gap-2">
-                  <button
-                    onClick={() =>
-                      router.push(ROUTES.equipos.EQUIPO_ACTUALIZAR)
-                    }
-                  >
-                    Editar
-                  </button>
-
-                  <button
-                    onClick={() => handleEliminar(equipo.idEquipo)}
-                    className="border px-6 py-3 rounded-full hover:bg-gray-100"
-                  >
-                    Eliminar Equipo
-                  </button>
-                </td>
-                <td className="p-3">{equipo.nombre}</td>
-                <td className="p-3">{equipo.marca}</td>
-                <td className="p-3">{equipo.modelo}</td>
-                <td className="p-3">{equipo.serie}</td>
-                <td className="p-3">{equipo.fabricante}</td>
-                <td className="p-3">{equipo.tipoTecnologia}</td>
-                <td className="p-3">{equipo.ubicacion}</td>
+        <div className="border border-gray-300 overflow-x-auto">
+          <table className="w-full min-w-[1200px] text-base">
+            <thead className="bg-gray-100 border-b">
+              <tr>
+                <th className="p-4 text-left">NOMBRE</th>
+                <th className="p-4 text-left">MARCA</th>
+                <th className="p-4 text-left">MODELO</th>
+                <th className="p-4 text-left">SERIE</th>
+                <th className="p-4 text-left">FABRICANTE</th>
+                <th className="p-4 text-left">TIPO TECNOLOGIA</th>
+                <th className="p-4 text-left">UBICACION</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+            </thead>
 
-      <div className="flex justify-center gap-6 mt-8">
-        <button
-          className="border px-6 py-3 rounded-full hover:bg-gray-100"
-          onClick={() => router.push(ROUTES.equipos.EQUIPO_CREAR)}
-        >
-          Registrar equipo
-        </button>
-        <button
-          className="border px-6 py-3 rounded-full hover:bg-gray-100"
-          onClick={() => router.push(ROUTES.dashboard.DASHBOARD)}
-        >
-          Regresar a Dashboard
-        </button>
+            <tbody>
+              {equiposFiltrados.map((equipo) => (
+                <tr key={equipo.idEquipo} className="border-b">
+                  <td className="p-4 flex gap-2">
+                    <button
+                      onClick={() => router.push(`/equipos/${equipo.idEquipo}`)}
+                      className="px-6 py-3 rounded text-base"
+                    >
+                      Editar
+                    </button>
+                    <button
+                      onClick={() => handleEliminar(equipo.idEquipo)}
+                      className="px-6 py-3 rounded text-base"
+                    >
+                      Eliminar
+                    </button>
+                  </td>
+                  <td className="p-3">{equipo.nombre}</td>
+                  <td className="p-3">{equipo.marca}</td>
+                  <td className="p-3">{equipo.modelo}</td>
+                  <td className="p-3">{equipo.serie}</td>
+                  <td className="p-3">{equipo.fabricante}</td>
+                  <td className="p-3">{equipo.tipoTecnologia}</td>
+                  <td className="p-3">{equipo.ubicacion}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <div className="flex justify-between mt-8">
+          <button
+            onClick={() => router.push(ROUTES.equipos.EQUIPO_CREAR)}
+            className="border-8 px-8 py-3 rounded-full"
+          >
+            Registrar equipo
+          </button>
+          <button
+            onClick={() => ROUTES.dashboard.DASHBOARD}
+            className="border-8 px-8 py-3 rounded-full"
+          >
+            Regresar a Dashboard
+          </button>
+        </div>
       </div>
     </div>
   );
