@@ -14,15 +14,6 @@ export default function Dashboard() {
       <button onClick={() => router.push(ROUTES.equipos.EQUIPOS_VER)}>
         Ver Lista de Equipos
       </button>
-
-      <button
-        onClick={() => router.push(ROUTES.mantenimientos.MANTENIMIENTO_CREAR)}
-      >
-        Registrar Mantenimiento
-      </button>
-      <button onClick={() => router.push(ROUTES.codigosQr.CODIGOQR_GENERAR)}>
-        Generar Codigo QR
-      </button>
     </div>
   );
 }

@@ -1,6 +1,6 @@
-import axios from "axios";
+import { api } from "../api";
 
 export const consultarReporte = async () => {
-  const response = await axios.get("/reportes/");
+  const response = await api.get("/reportes/");
   return response.data;
 };
