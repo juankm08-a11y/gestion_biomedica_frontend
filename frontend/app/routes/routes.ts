@@ -5,31 +5,40 @@ export const ROUTES = {
 
   equipos: {
     EQUIPOS: "/equipos",
-    EQUIPOS_VER: "/equipos/consultar",
-    EQUIPO_CREAR: "/equipos/registro",
+    EQUIPOS_VER: "/equipos/consulta-equipos",
+    EQUIPO_CREAR: "/equipos/registro-equipos",
     EQUIPO_ACTUALIZAR: "/equipos/[id]",
   },
 
   ubicaciones: {
-    UBICACION_CREAR: "/equipos/ubicaciones",
-    UBICACION_ACTUALIZAR: "/equipos/ubicaciones",
+    UBICACION_CREAR: "/equipos/ubicacion-equipo",
+    UBICACION_ACTUALIZAR: "/equipos/ubicacion-equipo/[id]",
   },
 
   mantenimientos: {
     MANTENIMIENTO_CREAR: "/mantenimientos/registro",
     MANTENIMIENTOS_CONSULTAR: "/mantenimientos/consultar",
     MANTENIMIENTO_ACTUALIZAR: "/mantenimientos/[id]",
-    MANTENIMIENTO_ARCHIIVOSADJUNTOS: "/mantenimientos/archivosadjuntos",
-    MANTENIMIENTO_CERTIFICADOS: "/mantenimientos/certificados",
-    MANTENIMIENTO_ORDENSERVICIO: "/mantenimientos/orden-servicio",
-    MANTENIMIENTO_REGISTRO: "/mantenimientos/registro",
-    MANTENIMIENTO_SUPERVISIO: "/mantenimientos/supervision",
   },
 
-  programacion: {
-    PROGRAMACION_CONSULTAR: "/programaciones/consulta-programacion",
-    PROGRAMACION_EDITAR: "/programaciones/[id]",
-    PROGRAMACION_CREAR: "/programaciones/registro-programacion",
+  notificaciones: {
+    NOTIFICACIONES: "/notificaciones",
+  },
+
+  programacionMantenimiento: {
+    PROGRMACIONMANTENIMIENTO_CONSULTAR:
+      "/programacion-mantenimiento/consulta-programacion",
+    PROGRAMACIONMANTENIMIENTO_CREAR:
+      "/programacion-mantenimiento/registro-programacion",
+    PROGRAMACIONMANTENIMIENTO_ACTUALIZAR: "/programacion-mantenimiento/[id]",
+  },
+
+  ordenServicio: {
+    ORDENSERVICIO: "/orden-servicio",
+  },
+
+  certificados: {
+    CERTIFICADOS: "/certificados",
   },
 
   login: {
@@ -54,8 +63,12 @@ export const ROUTES = {
   reportes: {
     REPORTE_REGISTRAR: "/reportes/registro",
   },
-  usuarios: {
-    USUARIO_REGISTRAR: "/usuarios/registro",
-    USUARIO_AUTENTICAR: "/usuarios/login",
+
+  archivosAdjuntos: {
+    ARCHIVOSADJUNTOS: "/archivos-adjuntos",
+  },
+
+  supervisarMantenimiento: {
+    SUPERVISAR_MANTENIMIENTO: "/supervisar-mantenimiento",
   },
 };

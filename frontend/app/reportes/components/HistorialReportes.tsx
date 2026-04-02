@@ -4,7 +4,7 @@ import { consultarReporte } from "@/app/api/reportes/reporte";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-export default function ListaReportes() {
+export default function HistorialReportes() {
   const [reportes, setReportes] = useState<any[]>([]);
   const router = useRouter();
 

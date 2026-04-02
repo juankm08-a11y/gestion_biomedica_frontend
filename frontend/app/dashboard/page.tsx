@@ -34,7 +34,11 @@ export default function Dashboard() {
       </button>
 
       <button
-        onClick={() => router.push(ROUTES.programacion.PROGRAMACION_CREAR)}
+        onClick={() =>
+          router.push(
+            ROUTES.programacionMantenimiento.PROGRAMACIONMANTENIMIENTO_CREAR,
+          )
+        }
       >
         Registrar Programacion
       </button>

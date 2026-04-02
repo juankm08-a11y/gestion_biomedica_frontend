@@ -1,9 +1,9 @@
-import ListaReportes from "./components/ListaReporte";
+import HistorialReportes from "./components/HistorialReportes";
 
-export default function HistorialReportes() {
+export default function ListaReportes() {
   return (
     <div>
-      <ListaReportes />
+      <HistorialReportes />
     </div>
   );
 }
