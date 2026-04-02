@@ -1,9 +1,13 @@
 import FormularioActualizarEquipo from "../components/FormularioActualizarEquipo/FormularioActualizarEquipo";
 
-export default function ActualizarEquipo() {
+export default function ActualizarEquipo({
+  params,
+}: {
+  params: { id: string };
+}) {
   return (
     <div>
-      <FormularioActualizarEquipo id={1} />
+      <FormularioActualizarEquipo id={Number(params.id)} />
     </div>
   );
 }

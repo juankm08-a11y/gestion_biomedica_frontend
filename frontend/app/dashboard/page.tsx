@@ -1,7 +1,5 @@
 "use client";
 
-import { useState } from "react";
-import FormularioRegistro from "../equipos/registro/page";
 import { useRouter } from "next/navigation";
 import { ROUTES } from "../routes/routes";
 
