@@ -24,3 +24,8 @@ export const recuperarContraseña = async () => {
   const response = await api.put("/usuarios/recuperar-contraseña/");
   return response.data;
 };
+
+export const consultarUsuarios = async () => {
+  const response = await api.get("/usuarios/ver-usuarios/");
+  return response.data;
+};

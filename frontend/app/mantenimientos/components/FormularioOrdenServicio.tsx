@@ -1,6 +1,6 @@
 "use client";
 
-import { crearOrden } from "@/app/api/mantenimientos/orden";
+import { crearOrden } from "@/app/api/ordenes-servicio/ordenesServicio";
 import { useState } from "react";
 
 export default function FormularioOrdenServicio() {

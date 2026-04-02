@@ -1,6 +1,6 @@
 "use client";
 
-import { cargarArchivoAdjunto } from "@/app/api/mantenimientos/archivoAdjunto";
+import { cargarArchivoAdjunto } from "@/app/api/archivosAdjuntos/archivoAdjunto";
 import { useState } from "react";
 
 export default function ArchivosAdjuntosPanel() {

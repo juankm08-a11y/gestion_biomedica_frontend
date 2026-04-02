@@ -1,6 +1,6 @@
 "use client";
 
-import { registrarCertificado } from "@/app/api/mantenimientos/certificado";
+import { registrarCertificado } from "@/app/api/certificados/certificado";
 import { useState } from "react";
 
 export default function FormularioCertificado() {

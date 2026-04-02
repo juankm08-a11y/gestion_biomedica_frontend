@@ -26,6 +26,12 @@ export const ROUTES = {
     MANTENIMIENTO_SUPERVISIO: "/mantenimientos/supervision",
   },
 
+  programacion: {
+    PROGRAMACION_CONSULTAR: "/programaciones/consulta-programacion",
+    PROGRAMACION_EDITAR: "/programaciones/[id]",
+    PROGRAMACION_CREAR: "/programaciones/registro-programacion",
+  },
+
   login: {
     LOGIN: "/login",
   },

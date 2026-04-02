@@ -1,6 +1,6 @@
 "use client";
 
-import { supervisarMantenimiento } from "@/app/api/mantenimientos/supervisarMantenimiento";
+import { supervisarMantenimiento } from "@/app/api/supervisarMantenimiento/supervisarMantenimiento";
 import { useEffect, useState } from "react";
 
 export default function SupervisionMantenimientoPage() {

@@ -1,6 +1,9 @@
 "use client";
 
-import { cerrarOrden, consultarOrden } from "@/app/api/mantenimientos/orden";
+import {
+  cerrarOrden,
+  consultarOrden,
+} from "@/app/api/ordenes-servicio/ordenesServicio";
 import { useEffect, useState } from "react";
 
 export default function ListaOrdenesServicio() {

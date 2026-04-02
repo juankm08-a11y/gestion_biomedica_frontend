@@ -1,9 +1,5 @@
 "use client";
 
-import {
-  generarNotificacion,
-  verNotificacion,
-} from "@/app/api/mantenimientos/notificacion";
 import { useEffect, useState } from "react";
 
 export default function NotificacionesPage() {
