@@ -6,6 +6,9 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function FormularioActualizarEquipo({ id }: any) {
+  if (!id || isNaN(id)) {
+    return <p>Cargando equipo...</p>;
+  }
   const [equipoData, setEquipoData] = useState({
     nombre: "",
     marca: "",
@@ -19,18 +22,20 @@ export default function FormularioActualizarEquipo({ id }: any) {
   const router = useRouter();
 
   useEffect(() => {
+    if (!id || isNaN(id)) return;
     const cargarEquipo = async () => {
-      const responses = await consultarEquipos(id);
+      try {
+        const response = await consultarEquipos(id);
 
-      setEquipoData((prev) => ({
-        ...prev,
-        ...responses,
-      }));
+        setEquipoData(response.data);
+      } catch (error) {
+        console.error(error);
+      }
     };
     cargarEquipo();
   }, [id]);
 
-  const handleSubmit = async (e: React.ChangeEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     try {
@@ -92,7 +97,7 @@ export default function FormularioActualizarEquipo({ id }: any) {
               placeholder="Nombre:"
               name="nombre"
               onChange={handleChange}
-              value={equipoData.nombre}
+              value={equipoData.nombre || ""}
             />
             <label className="font-semibold text-gray-700">MARCA</label>
             <input
@@ -101,7 +106,7 @@ export default function FormularioActualizarEquipo({ id }: any) {
               placeholder="Marca:"
               name="marca"
               onChange={handleChange}
-              value={equipoData.marca}
+              value={equipoData.marca || ""}
             />
             <label className="font-semibold text-gray-700">MODELO</label>
             <input
@@ -110,7 +115,7 @@ export default function FormularioActualizarEquipo({ id }: any) {
               name="modelo"
               placeholder="Modelo:"
               onChange={handleChange}
-              value={equipoData.modelo}
+              value={equipoData.modelo || ""}
             />
             <label className="font-semibold text-gray-700">SERIE</label>
             <input
@@ -118,7 +123,7 @@ export default function FormularioActualizarEquipo({ id }: any) {
               name="serie"
               placeholder="Serie:"
               onChange={handleChange}
-              value={equipoData.serie}
+              value={equipoData.serie || ""}
             />
             <label className="font-semibold text-gray-700">FABRICANTE</label>
             <input
@@ -127,7 +132,7 @@ export default function FormularioActualizarEquipo({ id }: any) {
               name="fabricante"
               placeholder="Fabricante:"
               onChange={handleChange}
-              value={equipoData.fabricante}
+              value={equipoData.fabricante || ""}
             />
             <label className="font-semibold text-gray-700">
               TIPO TECNOLOGIA
@@ -138,7 +143,7 @@ export default function FormularioActualizarEquipo({ id }: any) {
               name="tipoTecnologia"
               placeholder="tipo tecnologia: "
               onChange={handleChange}
-              value={equipoData.tipoTecnologia}
+              value={equipoData.tipoTecnologia || ""}
             />
             <label className="font-semibold text-gray-700">UBICACION</label>
             <input
@@ -147,29 +152,36 @@ export default function FormularioActualizarEquipo({ id }: any) {
               name="ubicacion"
               onChange={handleChange}
               placeholder="ubicacion:"
-              value={equipoData.ubicacion}
+              value={equipoData.ubicacion || ""}
             />
             <button
-              className="col-span-2 mx-auto mt-4 border border-gray-400 px-6 py-2 rounded-full hover:bg-gray-100"
-              onClick={() => router.push(ROUTES.ubicaciones.UBICACION_CREAR)}
+              type="submit"
+              className="border border-gray-400 px-8 py-3 rounded-full hover:bg-gray-100 font-medium"
             >
               Actualizar Equipo
             </button>
-
             <button
+              type="button"
               className="border border-gray-400 px-8 py-3 rounded-full hover:bg-gray-100 font-medium"
               onClick={handleCancelar}
-              type="button"
             >
               Cancelar
             </button>
-            <button
-              className="border border-gray-400 px-8 py-3 rounded-full hover:bg-gray-100 font-medium"
-              onClick={() => router.push(ROUTES.dashboard.DASHBOARD)}
-            >
-              Regresar a Dashboard
-            </button>
           </form>
+          <button
+            type="button"
+            className="col-span-2 mx-auto mt-4 border border-gray-400 px-6 py-2 rounded-full hover:bg-gray-100"
+            onClick={() => router.push(ROUTES.ubicaciones.UBICACION_ACTUALIZAR)}
+          >
+            Actualizar Ubicacion
+          </button>
+
+          <button
+            className="border border-gray-400 px-8 py-3 rounded-full hover:bg-gray-100 font-medium"
+            onClick={() => router.push(ROUTES.dashboard.DASHBOARD)}
+          >
+            Regresar a Dashboard
+          </button>
         </div>
       </div>
     </div>

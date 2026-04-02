@@ -5,7 +5,7 @@ export const registrarUbicacion = async (data: any) => {
   return response.data;
 };
 
-export const actualizarUbicacion = async (id: number) => {
-  const response = await api.put(`/equipos/ubicaciones/${id}`);
+export const actualizarUbicacion = async (id: number, data: any) => {
+  const response = await api.put(`/equipos/ubicaciones/${id}/`, data);
   return response.data;
 };
