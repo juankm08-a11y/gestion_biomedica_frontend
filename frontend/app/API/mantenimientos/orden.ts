@@ -5,6 +5,11 @@ export const crearOrden = async (data: any) => {
   return response.data;
 };
 
+export const consultarOrden = async () => {
+  const response = await api.get("/mantenimientos/orden_servicio");
+  return response.data;
+};
+
 export const actualizarOrden = async (id: number, data: any) => {
   const response = await api.put(`/mantenimientos/orden_servicio/${id}/`, data);
   return response.data;
