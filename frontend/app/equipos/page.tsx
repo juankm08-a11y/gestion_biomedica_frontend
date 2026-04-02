@@ -1,6 +1,6 @@
-import FormularioActualizarEquipo from "./[id]/components/FormularioActualizarEquipo";
-import ListaEquipos from "./consultar/page";
-import FormularioRegistro from "./registro/page";
+import FormularioActualizarEquipo from "./components/FormularioActualizarEquipo";
+import ListaEquipos from "./consulta-equipos/page";
+import FormularioRegistro from "./registro-equipos/page";
 
 export default function Equipos() {
   return (

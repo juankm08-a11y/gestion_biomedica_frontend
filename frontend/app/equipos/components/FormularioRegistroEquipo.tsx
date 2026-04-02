@@ -5,7 +5,7 @@ import { ROUTES } from "@/app/routes/routes";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-export default function FormularioRegistro() {
+export default function FormularioRegistroEquipo() {
   const [equipoData, setEquipoData] = useState({
     nombre: "",
     marca: "",
@@ -53,7 +53,7 @@ export default function FormularioRegistro() {
   };
 
   const handleCancelar = () => {
-    router.push(ROUTES.equipos.EQUIPOS_VER);
+    router.push(ROUTES.dashboard.DASHBOARD);
   };
 
   return (
@@ -78,7 +78,7 @@ export default function FormularioRegistro() {
               type="text"
               placeholder="Nombre:"
               name="nombre"
-              value={equipoData.nombre || ""}
+              value={equipoData.nombre}
               onChange={handleChange}
             />
             <label className="font-semibold text-gray-700">MARCA</label>
@@ -88,7 +88,7 @@ export default function FormularioRegistro() {
               placeholder="Marca:"
               name="marca"
               onChange={handleChange}
-              value={equipoData.marca || ""}
+              value={equipoData.marca}
             />
             <label className="font-semibold text-gray-700">MODELO</label>
             <input
@@ -96,7 +96,7 @@ export default function FormularioRegistro() {
               type="text"
               name="modelo"
               placeholder="Modelo:"
-              value={equipoData.modelo || ""}
+              value={equipoData.modelo}
               onChange={handleChange}
             />
             <label className="font-semibold text-gray-700">SERIE</label>
@@ -105,7 +105,7 @@ export default function FormularioRegistro() {
               name="serie"
               placeholder="Serie:"
               onChange={handleChange}
-              value={equipoData.serie || ""}
+              value={equipoData.serie}
             />
             <label className="font-semibold text-gray-700">FABRICANTE</label>
             <input
@@ -113,7 +113,7 @@ export default function FormularioRegistro() {
               type="text"
               name="fabricante"
               placeholder="Fabricante:"
-              value={equipoData.fabricante || ""}
+              value={equipoData.fabricante}
               onChange={handleChange}
             />
             <label className="font-semibold text-gray-700">
@@ -125,7 +125,7 @@ export default function FormularioRegistro() {
               name="tipoTecnologia"
               placeholder="tipo tecnologia: "
               onChange={handleChange}
-              value={equipoData.tipoTecnologia || ""}
+              value={equipoData.tipoTecnologia}
             />
             <label className="font-semibold text-gray-700">UBICACION</label>
             <input
@@ -134,38 +134,32 @@ export default function FormularioRegistro() {
               name="ubicacion"
               onChange={handleChange}
               placeholder="ubicacion:"
-              value={equipoData.ubicacion || ""}
+              value={equipoData.ubicacion}
             />
             <button
-              type="submit"
-              onClick={() => router.push(ROUTES.dashboard.DASHBOARD)}
               className="col-span-2 mx-auto mt-4 border border-gray-400 px-6 py-2 rounded-full hover:bg-gray-100"
+              onClick={() => router.push(ROUTES.ubicaciones.UBICACION_CREAR)}
             >
+              Actualizar Ubicacion
+            </button>
+
+            <button className="border border-gray-400 px-8 py-3 rounded-full hover:bg-gray-100 font-medium">
               Guardar Equipo
             </button>
+            <button
+              className="border border-gray-400 px-8 py-3 rounded-full hover:bg-gray-100 font-medium"
+              onClick={handleCancelar}
+              type="button"
+            >
+              Cancelar
+            </button>
+            <button
+              className="border border-gray-400 px-8 py-3 rounded-full hover:bg-gray-100 font-medium"
+              onClick={() => router.push(ROUTES.dashboard.DASHBOARD)}
+            >
+              Regresar a Dashboard
+            </button>
           </form>
-
-          <button
-            type="button"
-            className="col-span-2 mx-auto mt-4 border border-gray-400 px-6 py-2 rounded-full hover:bg-gray-100"
-            onClick={() => router.push(ROUTES.ubicaciones.UBICACION_CREAR)}
-          >
-            Registrar Ubicacion
-          </button>
-
-          <button
-            className="border border-gray-400 px-8 py-3 rounded-full hover:bg-gray-100 font-medium"
-            onClick={handleCancelar}
-            type="button"
-          >
-            Cancelar
-          </button>
-          <button
-            className="border border-gray-400 px-8 py-3 rounded-full hover:bg-gray-100 font-medium"
-            onClick={() => router.push(ROUTES.dashboard.DASHBOARD)}
-          >
-            Regresar a Dashboard
-          </button>
         </div>
       </div>
     </div>

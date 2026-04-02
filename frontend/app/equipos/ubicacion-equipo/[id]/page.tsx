@@ -1,7 +1,7 @@
 "use client";
 
 import { useParams } from "next/navigation";
-import FormularioActualizarUbicacion from "./components/FormularioActualizarUbicacion";
+import FormularioActualizarUbicacion from "../components/FormularioActualizarUbicacion1";
 
 export default function ActualizarUbicacionPage() {
   const params = useParams();

@@ -1,10 +1,8 @@
 "use client";
-
 import { actualizarEquipo, consultarEquipos } from "@/app/api/equipos/equipo";
 import { ROUTES } from "@/app/routes/routes";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-
 export default function FormularioActualizarEquipo({ id }: any) {
   if (!id || isNaN(id)) {
     return <p>Cargando equipo...</p>;
@@ -18,15 +16,12 @@ export default function FormularioActualizarEquipo({ id }: any) {
     tipoTecnologia: "",
     ubicacion: "",
   });
-
   const router = useRouter();
-
   useEffect(() => {
     if (!id || isNaN(id)) return;
     const cargarEquipo = async () => {
       try {
         const response = await consultarEquipos(id);
-
         setEquipoData(response.data);
       } catch (error) {
         console.error(error);
@@ -34,17 +29,12 @@ export default function FormularioActualizarEquipo({ id }: any) {
     };
     cargarEquipo();
   }, [id]);
-
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
     try {
       const response = await actualizarEquipo(id, equipoData);
-
       alert("Equipo actualizado correctamente");
-
       console.log(response);
-
       setEquipoData({
         nombre: "",
         marca: "",
@@ -54,26 +44,18 @@ export default function FormularioActualizarEquipo({ id }: any) {
         tipoTecnologia: "",
         ubicacion: "",
       });
-
       router.push(ROUTES.equipos.EQUIPOS_VER);
     } catch (error) {
-      console.error(error);
+      console.error("Error el actualizar el equipo:", error);
     }
   };
-
   const handleChange = (e: any) => {
     const { name, value } = e.target;
-
-    setEquipoData({
-      ...equipoData,
-      [name]: value,
-    });
+    setEquipoData({ ...equipoData, [name]: value });
   };
-
   const handleCancelar = () => {
     router.push(ROUTES.equipos.EQUIPOS_VER);
   };
-
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center p-10 border-[10px] border-red-600">
       <div className="bg-white w-[900px] shadow-md border border border-gray-300 p-10">
@@ -90,7 +72,7 @@ export default function FormularioActualizarEquipo({ id }: any) {
             onSubmit={handleSubmit}
             className="grid grid-cols-2 gap-x-10 gap-y-6 items-center max-w-xl mx-auto"
           >
-            <label className="font-semibold text-gray-700">NOMBRE</label>
+            <label className="font-semibold text-gray-700">NOMBRE</label>{" "}
             <input
               className="border border-gray-300 p-2 w-full focus:outline focus:ring-2 focus:ring-red-400"
               type="text"
@@ -99,7 +81,7 @@ export default function FormularioActualizarEquipo({ id }: any) {
               onChange={handleChange}
               value={equipoData.nombre || ""}
             />
-            <label className="font-semibold text-gray-700">MARCA</label>
+            <label className="font-semibold text-gray-700">MARCA</label>{" "}
             <input
               className="border border-gray-300 p-2 w-full focus:outline focus:ring-2 focus:ring-red-400"
               type="text"
@@ -108,7 +90,7 @@ export default function FormularioActualizarEquipo({ id }: any) {
               onChange={handleChange}
               value={equipoData.marca || ""}
             />
-            <label className="font-semibold text-gray-700">MODELO</label>
+            <label className="font-semibold text-gray-700">MODELO</label>{" "}
             <input
               className="border border-gray-300 p-2 w-full focus:outline focus:ring-2 focus:ring-red-400"
               type="text"
@@ -117,7 +99,7 @@ export default function FormularioActualizarEquipo({ id }: any) {
               onChange={handleChange}
               value={equipoData.modelo || ""}
             />
-            <label className="font-semibold text-gray-700">SERIE</label>
+            <label className="font-semibold text-gray-700">SERIE</label>{" "}
             <input
               type="text"
               name="serie"
@@ -125,7 +107,7 @@ export default function FormularioActualizarEquipo({ id }: any) {
               onChange={handleChange}
               value={equipoData.serie || ""}
             />
-            <label className="font-semibold text-gray-700">FABRICANTE</label>
+            <label className="font-semibold text-gray-700">FABRICANTE</label>{" "}
             <input
               className="border border-gray-300 p-2 w-full focus:outline focus:ring-2 focus:ring-red-400"
               type="text"
@@ -145,7 +127,7 @@ export default function FormularioActualizarEquipo({ id }: any) {
               onChange={handleChange}
               value={equipoData.tipoTecnologia || ""}
             />
-            <label className="font-semibold text-gray-700">UBICACION</label>
+            <label className="font-semibold text-gray-700">UBICACION</label>{" "}
             <input
               className="border border-gray-300 p-2 w-full focus:outline focus:ring-2 focus:ring-red-400"
               type="number"
@@ -153,7 +135,7 @@ export default function FormularioActualizarEquipo({ id }: any) {
               onChange={handleChange}
               placeholder="ubicacion:"
               value={equipoData.ubicacion || ""}
-            />
+            />{" "}
             <button
               type="submit"
               className="border border-gray-400 px-8 py-3 rounded-full hover:bg-gray-100 font-medium"
@@ -175,7 +157,6 @@ export default function FormularioActualizarEquipo({ id }: any) {
           >
             Actualizar Ubicacion
           </button>
-
           <button
             className="border border-gray-400 px-8 py-3 rounded-full hover:bg-gray-100 font-medium"
             onClick={() => router.push(ROUTES.dashboard.DASHBOARD)}
