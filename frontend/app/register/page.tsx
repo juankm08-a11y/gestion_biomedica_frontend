@@ -7,7 +7,7 @@ export default function RegisterUsuarioPage() {
   const [data, setData] = useState({
     nombre: "",
     correo: "",
-    estado: "",
+    estado: "activo",
     password: "",
     rol: "",
   });
@@ -25,7 +25,7 @@ export default function RegisterUsuarioPage() {
     e.preventDefault();
 
     try {
-      await registrarSesion();
+      await registrarSesion(data);
 
       alert("Usuario creado correctamente");
     } catch (error) {
@@ -35,8 +35,8 @@ export default function RegisterUsuarioPage() {
 
   return (
     <div>
+      <h1>Registro de Usuario</h1>
       <form onSubmit={handleSubmit}>
-        <div>Registro de usuario</div>
         <input
           type="text"
           placeholder="nombre"
@@ -47,25 +47,25 @@ export default function RegisterUsuarioPage() {
         <input
           type="email"
           name="correo"
+          placeholder="correo"
           onChange={handleChange}
           value={data.correo}
         />
         <input
           type="password"
           name="password"
+          placeholder="contraseña"
           onChange={handleChange}
           value={data.password}
         />
-        <input
-          type="text"
-          name="estado"
-          onChange={handleChange}
-          value={data.estado}
-        />
-        <select name="" onChange={handleChange} value={data.rol}>
+        <select name="estado" onChange={handleChange} value={data.estado}>
+          <option value="activo">Activo</option>
+          <option value="inactivo">Inactivo</option>
+        </select>
+        <select name="rol" onChange={handleChange} value={data.rol}>
           <option value="">Seleccionar rol</option>
-          <option value="ingeniero">Ingeniero</option>
-          <option value="tecnico">Tecnico</option>
+          <option value="ingenierobiomedico">Ingeniero Biomédico</option>
+          <option value="tecnicobiomedico">Tecnico Biomédico</option>
           <option value="coordinador">Coordinador</option>
           <option value="administrador">Administrador</option>
           <option value="superadministrador">SuperAdministrador</option>

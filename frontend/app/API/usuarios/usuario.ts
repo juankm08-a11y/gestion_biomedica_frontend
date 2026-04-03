@@ -1,12 +1,12 @@
 import { api } from "../api";
 
-export const registrarSesion = async () => {
-  const response = await api.post("/usuarios/registro/");
+export const registrarSesion = async (data: any) => {
+  const response = await api.post("/usuarios/registro/", data);
   return response.data;
 };
 
 export const inciarSesion = async (data: any) => {
-  const response = await api.post("/usuarios/login/");
+  const response = await api.post("/usuarios/login/", data);
   return response.data;
 };
 
