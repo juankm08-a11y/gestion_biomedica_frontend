@@ -1,34 +1,12 @@
-"use client";
+import ConsultaNotificacion from "./consulta-notificacion/page";
+import CrearNotificacion from "./registro-notificacion/page";
 
-import { useEffect, useState } from "react";
-
-export default function NotificacionesPage() {
-  const [notificaciones, setNotificaciones] = useState<any[]>([]);
-
-  const cargarNotificaciones = async () => {
-    const response = await generarNotificacion();
-    setNotificaciones(response.data);
-  };
-
-  useEffect(() => {
-    cargarNotificaciones();
-  }, []);
-
+export default function NotificacionPage() {
   return (
     <div>
-      <h1>Notificaciones</h1>
-      <div>
-        {notificaciones.map((notificacion) => (
-          <div key={notificacion.id}>
-            <div>
-              <div>
-                <p>{notificacion.mensaje}</p>
-                <p>{notificacion.estado}</p>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
+      <h1>Hola Mundo desde Notificaciones</h1>
+      <CrearNotificacion />
+      <ConsultaNotificacion />
     </div>
   );
 }

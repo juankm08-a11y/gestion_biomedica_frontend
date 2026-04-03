@@ -1,39 +1,40 @@
 "use client";
 
 import { consultarReporte } from "@/app/api/reportes/reporte";
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-export default function HistorialReportes() {
-  const [reportes, setReportes] = useState<any[]>([]);
-  const router = useRouter();
+export default function ReporteDashboard() {
+  const [reporte, setRporte] = useState<any>(null);
 
-  const cargarReportes = async () => {
-    try {
-      const response = await consultarReporte();
-
-      setReportes(response);
-    } catch (error) {
-      console.error(error);
-    }
+  const cargarReporte = async () => {
+    const data = await consultarReporte();
+    setRporte(data);
   };
 
   useEffect(() => {
-    cargarReportes();
+    cargarReporte();
   }, []);
+
+  if (!reporte) return <p>Cargando reporte...</p>;
 
   return (
     <div>
-      <table>
-        <thead>
-          <tr>
-            <th>TOTAL_EQUIPOS</th>
-            <th>TOTAL_MANTENIMIENTOS</th>
-            <th>MANTENIMIENTOS PENDIENTES</th>
-            <th>ORDENES EJECUTADAS</th>
-          </tr>
-        </thead>
-      </table>
+      <div>
+        <h3>Total Equipos</h3>
+        <p>{reporte.totalEquipos}</p>
+      </div>
+      <div>
+        <h3>Total Mantenimientos</h3>
+        <p>{reporte.totalMantenimientos}</p>
+      </div>
+      <div>
+        <h3>Mantenimientos Pendientes</h3>
+        <p>{reporte.mantenimientosPendientes}</p>
+      </div>
+      <div>
+        <h3>Ordenes Ejecutadas</h3>
+        <p>{reporte.ordenesEjecutadas}</p>
+      </div>
     </div>
   );
 }

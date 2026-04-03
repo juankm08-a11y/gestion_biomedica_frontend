@@ -1,3 +1,5 @@
+"use client";
+
 import { consultarEquipo } from "@/app/api/equipos/equipo";
 import { actualizarProgramacion } from "@/app/api/programacionMantenimiento/programacion";
 import { ROUTES } from "@/app/routes/routes";
@@ -10,7 +12,7 @@ export default function ActualizarProgramacion({ id }: any) {
   const [data, setData] = useState({
     equipo: "",
     frecuenciaMantenimiento: "",
-    frecuenciaCalibracion: "",
+    frecuenciaCalibracion: "meses",
     unidadFrecuencia: "",
     proximoMantenimiento: "",
     proximoCalibracion: "",
@@ -22,7 +24,7 @@ export default function ActualizarProgramacion({ id }: any) {
     const cargarEquipos = async () => {
       const response = await consultarEquipo();
 
-      setEquipos(Array.isArray(response) ? response : []);
+      setEquipos(Array.isArray(response.data) ? response.data : []);
     };
 
     cargarEquipos();
@@ -39,18 +41,18 @@ export default function ActualizarProgramacion({ id }: any) {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-
-    await actualizarProgramacion(id);
-
+    alibracion: (data.proximoCalibracion || null,
+      await actualizarProgramacion(id, data));
     alert("Programación actualizada correctamente");
-
-    router.push(ROUTES.programacion.PROGRAMACION_CONSULTAR);
+    router.push(
+      ROUTES.programacionMantenimiento.PROGRAMACIONMANTENIMIENTO_CONSULTAR,
+    );
   };
 
   return (
     <form onSubmit={handleSubmit}>
       <label>Equipo</label>
-      <select name="equipo" onChange={handleChange} value={data.equipo}>
+      <select name="equipo" onChange={handleChange} value={data.equipo || ""}>
         <option value="">Seleccionar equipo</option>
 
         {equipos.map((equipo) => (
@@ -62,24 +64,45 @@ export default function ActualizarProgramacion({ id }: any) {
 
       <label>Frecuencia Mantenimiento</label>
       <input
-        type="text"
+        type="number"
         name="frecuenciaMantenimiento"
         onChange={handleChange}
-        value={data.frecuenciaMantenimiento}
+        value={data.frecuenciaMantenimiento || ""}
       />
       <label>Frecuencia Calibración</label>
       <input
-        type="text"
+        type="number"
         name="frecuenciaCalibracion"
         onChange={handleChange}
-        value={data.frecuenciaCalibracion}
+        value={data.frecuenciaCalibracion || ""}
       />
 
-      <select name="unidadFrecuencia" onChange={handleChange}>
+      <select
+        name="unidadFrecuencia"
+        value={data.unidadFrecuencia || ""}
+        onChange={handleChange}
+      >
+        <option value="">Selecciona unidad</option>
         <option value="dias">Dias</option>
         <option value="meses">Meses</option>
         <option value="anios">Años</option>
       </select>
+
+      <label>Proximo Mantenimiento</label>
+      <input
+        type="date"
+        value={data.proximoMantenimiento || ""}
+        name="proximoMantenimiento"
+        onChange={handleChange}
+      />
+
+      <label>Proximo Calibracion</label>
+      <input
+        type="date"
+        value={data.proximoCalibracion || ""}
+        onChange={handleChange}
+        name="proximoCalibracion"
+      />
       <button>Actualizar Programacion</button>
     </form>
   );

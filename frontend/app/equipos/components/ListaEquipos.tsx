@@ -86,6 +86,13 @@ export default function ListaEquipos() {
                     >
                       Eliminar
                     </button>
+                    <button
+                      onClick={() =>
+                        router.push(`/codigos-qr/${equipo.idEquipo}`)
+                      }
+                    >
+                      Ver QR
+                    </button>
                   </td>
                   <td className="p-3">{equipo.nombre}</td>
                   <td className="p-3">{equipo.marca}</td>

@@ -1,4 +1,4 @@
-import FormularioRegistroMantenimiento from "../[id]/components/FormularioRegistroMantenimiento";
+import FormularioRegistroMantenimiento from "../components/FormularioRegistroMantenimiento";
 
 export default function RegistroMantenimiento() {
   return (

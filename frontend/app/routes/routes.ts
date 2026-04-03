@@ -23,10 +23,12 @@ export const ROUTES = {
 
   notificaciones: {
     NOTIFICACIONES: "/notificaciones",
+    NOTIFICACIONES_CREAR: "/notificaciones/registro-notificacion",
+    NOTIFICACIONES_CONSULTAR: "/notificaciones/consulta-notificacion",
   },
 
   programacionMantenimiento: {
-    PROGRMACIONMANTENIMIENTO_CONSULTAR:
+    PROGRAMACIONMANTENIMIENTO_CONSULTAR:
       "/programacion-mantenimiento/consulta-programacion",
     PROGRAMACIONMANTENIMIENTO_CREAR:
       "/programacion-mantenimiento/registro-programacion",
@@ -35,10 +37,15 @@ export const ROUTES = {
 
   ordenServicio: {
     ORDENSERVICIO: "/orden-servicio",
+    ORDENSERVICIO_CREAR: "/orden-servicio/registro-orden",
+    ORDENSERVICIO_CONSULTAR: "/orden-servicio/consulta-orden",
+    ORDENSERVICIO_ACTUALIZAR: "/orden-servicio/[id]",
   },
 
   certificados: {
     CERTIFICADOS: "/certificados",
+    CERTIFICADOS_CREAR: "/certificados/registro-certificado",
+    CERTIFICADOS_CONSULTAR: "/certificados/consulta-certificado",
   },
 
   login: {
@@ -58,14 +65,18 @@ export const ROUTES = {
   },
 
   codigosQr: {
-    CODIGOQR_GENERAR: "/codigos-qr",
+    CODIGOQR_CONSULTAR: "/codigos-qr/[equipoId]",
   },
   reportes: {
-    REPORTE_REGISTRAR: "/reportes/registro",
+    REPORTES: "/reportes",
   },
 
   archivosAdjuntos: {
-    ARCHIVOSADJUNTOS: "/archivos-adjuntos",
+    ARCHIVOSADJUNTOS: "/equipos/archivosadjuntos",
+    ARCHIVOSADJUNTOS_CARGA:
+      "/equipos/archivosadjuntos/carga-archivo/[equipoId]",
+    ARCHIVOSADJUNTOS_CONSULTA:
+      "/equipos/archivosadjuntos/consulta-archivo/[equipoId]",
   },
 
   supervisarMantenimiento: {

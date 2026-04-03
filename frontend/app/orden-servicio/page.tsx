@@ -1,5 +1,6 @@
-import FormularioOrdenServicio from "../components/FormularioOrdenServicio";
-import ListaOrdenesServicio from "../components/ListaOrdenesServicio";
+"use client";
+import VerOrden from "./consulta-orden/page";
+import RegistroOrden from "./registro-orden/page";
 
 export default function OrdenesServicioPage() {
   return (
@@ -8,12 +9,12 @@ export default function OrdenesServicioPage() {
 
       <div className="bg-white border border-gray-300 p-6 mb-8">
         <h2 className="text-lg font-semibold mb-4">Registrar Orden</h2>
-        <FormularioOrdenServicio />
+        <VerOrden />
       </div>
 
       <div className="bg-white border border-gray-300 p-6">
         <h2 className="text-lg font-smibold mb-4">Lista de Ordenes</h2>
-        <ListaOrdenesServicio />
+        <RegistroOrden />
       </div>
     </div>
   );

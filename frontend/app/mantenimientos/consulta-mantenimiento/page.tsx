@@ -1,4 +1,4 @@
-import HistorialMantenimiento from "../[id]/components/HistorialMantenimiento";
+import HistorialMantenimiento from "../components/HistorialMantenimiento";
 
 export default function RegistroMantenimiento() {
   return (

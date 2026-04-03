@@ -14,9 +14,9 @@ export const consultarProgramacion = async () => {
   return response.data;
 };
 
-export const actualizarProgramacion = async (id: number) => {
+export const actualizarProgramacion = async (id: number, data: any) => {
   const response = await api.put(
-    `/mantenimientos/programacion_mantenmiento/${id}`,
+    `/mantenimientos/programacion_mantenimiento/${id}/`,
   );
   return response.data;
 };

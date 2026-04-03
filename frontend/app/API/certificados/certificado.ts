@@ -8,7 +8,12 @@ export const registrarCertificado = async (data: any) => {
   return response.data;
 };
 
-export const verCertificado = async (id: number) => {
+export const consultarCertificados = async () => {
+  const response = await api.get(`/mantenimientos/certificado_metrologico/`);
+  return response.data;
+};
+
+export const consultarCertificado = async (id: number) => {
   const response = await api.get(
     `/mantenimientos/certificado_metrologico/${id}/`,
   );

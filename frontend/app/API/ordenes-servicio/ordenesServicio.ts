@@ -6,7 +6,7 @@ export const crearOrden = async (data: any) => {
 };
 
 export const consultarOrden = async () => {
-  const response = await api.get("/mantenimientos/orden_servicio");
+  const response = await api.get("/mantenimientos/orden_servicio/");
   return response.data;
 };
 

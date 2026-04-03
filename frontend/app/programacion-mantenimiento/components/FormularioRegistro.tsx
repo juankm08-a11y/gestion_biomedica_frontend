@@ -2,11 +2,14 @@
 
 import { consultarEquipo } from "@/app/api/equipos/equipo";
 import { crearProgramacion } from "@/app/api/programacionMantenimiento/programacion";
+import { ROUTES } from "@/app/routes/routes";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function FormularioRegistroProgramacion() {
   const [equipos, setEquipos] = useState<any[]>([]);
 
+  const router = useRouter();
   const [programaciones, setProgramaciones] = useState<any[]>([]);
   const [programacionData, setProgramacionData] = useState({
     equipo: "",
@@ -39,6 +42,10 @@ export default function FormularioRegistroProgramacion() {
     await crearProgramacion(programacionData);
 
     alert("Programacion registrada correctamente");
+
+    router.push(
+      ROUTES.programacionMantenimiento.PROGRAMACIONMANTENIMIENTO_CONSULTAR,
+    );
   };
 
   return (

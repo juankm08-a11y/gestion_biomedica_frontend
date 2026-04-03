@@ -1,9 +1,9 @@
 "use client";
 
 import { useParams } from "next/navigation";
-import FormularioActualizarMantenimiento from "../components/FormularioActualizarMantenimiento";
+import FormularioActualizarOrden from "../components/FormularioActualizarOrden";
 
-export default function ActualizarMantenimiento() {
+export default function ActualizarOrden() {
   const params = useParams();
 
   const id = Number(Array.isArray(params.id) ? params.id[0] : params.id);
@@ -13,7 +13,7 @@ export default function ActualizarMantenimiento() {
   }
   return (
     <div>
-      <FormularioActualizarMantenimiento id={id} />
+      <FormularioActualizarOrden id={id} />
     </div>
   );
 }

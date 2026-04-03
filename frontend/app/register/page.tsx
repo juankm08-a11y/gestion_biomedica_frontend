@@ -62,12 +62,14 @@ export default function RegisterUsuarioPage() {
           onChange={handleChange}
           value={data.estado}
         />
-        <input
-          type="text"
-          name="rol"
-          onChange={handleChange}
-          value={data.rol}
-        />
+        <select name="" onChange={handleChange} value={data.rol}>
+          <option value="">Seleccionar rol</option>
+          <option value="ingeniero">Ingeniero</option>
+          <option value="tecnico">Tecnico</option>
+          <option value="coordinador">Coordinador</option>
+          <option value="administrador">Administrador</option>
+          <option value="superadministrador">SuperAdministrador</option>
+        </select>
         <button>Registrar</button>
       </form>
     </div>

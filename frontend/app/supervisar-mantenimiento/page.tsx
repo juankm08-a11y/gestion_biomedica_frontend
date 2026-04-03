@@ -1,10 +1,11 @@
 "use client";
 
-import { supervisarMantenimiento } from "@/app/api/supervisarMantenimiento/supervisarMantenimiento";
 import { useEffect, useState } from "react";
+import { supervisarMantenimiento } from "../api/supervisarMantenimiento/supervisarMantenimiento";
 
-export default function SupervisionMantenimientoPage() {
+export default function SupervisarMantenimiento() {
   const [programaciones, setProgramaciones] = useState<any[]>([]);
+
   const cargarProgramaciones = async () => {
     const response = await supervisarMantenimiento();
 
@@ -17,16 +18,17 @@ export default function SupervisionMantenimientoPage() {
 
   return (
     <div>
-      <h1>Supervisión de Mantenimiento</h1>
-      <div>
-        <table>
-          <thead></thead>
+      <h2>Supervisión de Mantenimiento</h2>
+
+      <table>
+        <thead>
           <tr>
             <th>Equipo</th>
             <th>Próximo Mantenimiento</th>
-            <th>Próximo Calibración</th>
+            <th>Próxima Calibración</th>
+            <th>Estado</th>
           </tr>
-        </table>
+        </thead>
         <tbody>
           {programaciones.map((p, index) => (
             <tr key={index}>
@@ -37,7 +39,7 @@ export default function SupervisionMantenimientoPage() {
             </tr>
           ))}
         </tbody>
-      </div>
+      </table>
     </div>
   );
 }
