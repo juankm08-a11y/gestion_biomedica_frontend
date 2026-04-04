@@ -189,8 +189,25 @@ export default function FormularioActualizarMantenimiento({ id }: any) {
             ))}
           </select>
 
-          <button>Actualizar Mantenimiento</button>
+          <button
+            type="submit"
+            className="border border-gray-400 px-8 py-3 rounded-full hover:bg-gray-100 font-medium"
+          >
+            Actualizar Mantenimiento
+          </button>
         </form>
+        <button
+          type="button"
+          className="border border-gray-400 px-8 py-3 rounded-full hover:bg-gray-100 font-medium"
+        >
+          Cancelar
+        </button>
+        <button
+          className="border border-gray-400 px-8 py-3 rounded-full hover:bg-gray-100 font-medium"
+          onClick={() => router.push(ROUTES.dashboard.DASHBOARD)}
+        >
+          Regresar a Dashboard
+        </button>
       </div>
     </div>
   );

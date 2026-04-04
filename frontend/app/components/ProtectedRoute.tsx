@@ -1,7 +1,8 @@
 "use client";
-import { useRouter } from "next/router";
+
 import React, { useEffect } from "react";
 import { isAuthenticated, tieneRol } from "../utils/auth";
+import { useRouter } from "next/navigation";
 
 interface Props {
   children: React.ReactNode;

@@ -47,7 +47,7 @@ export default function FormularioRegistroOrden() {
 
     console.log("ORDEN:", payload);
 
-    router.push(ROUTES.ordenServicio.ORDENSERVICIO);
+    router.push(ROUTES.dashboard.DASHBOARD);
   };
   return (
     <form onSubmit={handleSubmit}>

@@ -149,6 +149,7 @@ export default function Dashboard() {
             >
               Actualizar Orden
             </button>
+            <button onClick={handleLogOut}>Cerrar Sesion</button>
           </div>
         </div>
       </div>

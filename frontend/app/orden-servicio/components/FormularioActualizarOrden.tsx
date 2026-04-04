@@ -91,14 +91,13 @@ export default function FormularioActualizarOrden({ id }: any) {
   };
 
   return (
-    <div>
-      <div>
-        <div>
-          <h1></h1>
+    <div className="min-h-screen bg-gray-100 flex items-center justify-center p-10 border-[10px] border-red-600">
+      <div className="bg-white w-full w-[1600px] shadow-md  border border-gray-300 p-10">
+        <div className="mb-6">
+          <h1 className="text-lg font-semibold">Actualizar Orden</h1>
         </div>
       </div>
       <div>
-        <h2></h2>
         <form onSubmit={handleSubmit}>
           <label>MANTENIMIENTO</label>
           <select

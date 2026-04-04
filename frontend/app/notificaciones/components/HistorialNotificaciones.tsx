@@ -30,7 +30,7 @@ export default function HistorialNotificaciones() {
   };
 
   return (
-    <div>
+    <div className="min-h-screen bg-gray-100 flex items-center justify-center p-10 border-[10px] border-red-600">
       <table>
         <thead>
           <tr>
