@@ -61,13 +61,10 @@ export default function FormularioActualizarEquipo({ id }: any) {
       <div className="bg-white w-[900px] shadow-md border border border-gray-300 p-10">
         <div className="mb-6">
           <h1 className="text-2xl font-bold text-gray-800">
-            FORMULARIO DE ACTUALIZACION DE HOJAS DE VIDA DE EQUIPOS BIOMEDICOS
+            ACTUALIZAR EQUIPOS BIOMEDICOS
           </h1>
         </div>
         <div className="border border-gray-300 p-8">
-          <h2 className="text-center font-semibold mb-6">
-            FORMULARIO DE EDICION
-          </h2>
           <form
             onSubmit={handleSubmit}
             className="grid grid-cols-2 gap-x-10 gap-y-6 items-center max-w-xl mx-auto"

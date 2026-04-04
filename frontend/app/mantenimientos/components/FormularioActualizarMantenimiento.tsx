@@ -167,7 +167,7 @@ export default function FormularioActualizarMantenimiento({ id }: any) {
             value={mantenimientoData.fechaInicio || ""}
           />
 
-          <label>FECHA FIN</label>
+          <label className="font-semibold text-gray-700">FECHA FIN</label>
           <input
             type="date"
             name="fechaFin"
@@ -175,13 +175,16 @@ export default function FormularioActualizarMantenimiento({ id }: any) {
             value={mantenimientoData.fechaFin || ""}
           />
 
-          <label>RESPONSABLE</label>
+          <label className="font-semibold text-gray-700">RESPONSABLE</label>
           <select
             name="responsable"
             onChange={handleChange}
+            className="border border-gray-300 p-2 w-full focus:outline focus:ring-2 focus:ring-red-400"
             value={mantenimientoData.responsable || ""}
           >
-            <option value="">Seleccionar responsable</option>
+            <option value="" className="p-3 border-b">
+              Seleccionar responsable
+            </option>
             {usuarios.map((usuario) => (
               <option key={usuario.idUsuario} value={usuario.idUsuario}>
                 {usuario.nombre}
@@ -198,6 +201,7 @@ export default function FormularioActualizarMantenimiento({ id }: any) {
         </form>
         <button
           type="button"
+          onClick={handleCancelar}
           className="border border-gray-400 px-8 py-3 rounded-full hover:bg-gray-100 font-medium"
         >
           Cancelar

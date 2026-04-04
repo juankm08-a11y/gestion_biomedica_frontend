@@ -5,7 +5,7 @@ import { ROUTES } from "@/app/routes/routes";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-export default function ListaEquipos() {
+export default function HistorialEquipos() {
   const [equipos, setEquipos] = useState<any[]>([]);
   const [buscar, setBuscar] = useState("");
 

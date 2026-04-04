@@ -1,5 +1,5 @@
 import ProtectedRoute from "@/app/components/ProtectedRoute";
-import ListaEquipos from "../components/ListaEquipos";
+import ListaEquipos from "../components/HistorialEquipos";
 
 export default function ConsultaEquipos() {
   return (

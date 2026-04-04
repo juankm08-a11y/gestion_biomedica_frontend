@@ -84,92 +84,96 @@ export default function FormularioRegistroMantenimiento() {
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center p-10 border-[10px] border-red-600">
       <div className="bg-white w-[900px] shadow-md border border border-gray-300 p-10">
-        <div>
-          <div className="mb-6">
-            <h1 className="text-2xl font-bold text-gray-800">
-              REGISTRAR MANTENIMIENTO
-            </h1>
-          </div>
-          <div className="border border-gray-300 p-8">
-            <form
-              onSubmit={handleSubmit}
-              className="grid grid-cols-2 gap-x-10 gap-y-6 items-center max-w-xl mx-auto"
+        <div className="mb-6">
+          <h1 className="text-2xl font-bold text-gray-800">
+            REGISTRAR MANTENIMIENTO
+          </h1>
+        </div>
+        <div className="border border-gray-300 p-8">
+          <form
+            onSubmit={handleSubmit}
+            className="grid grid-cols-2 gap-x-10 gap-y-6 items-center max-w-xl mx-auto"
+          >
+            <label className="font-semibold text-gray-700">EQUIPO</label>
+            <select
+              name="equipo"
+              onChange={handleChange}
+              value={mantenimientoData.equipo || ""}
+              className="border border-gray-300 p-2 w-full focus:outline focus:ring-2 focus:ring-red-400"
             >
-              <label className="font-semibold text-gray-700">EQUIPO</label>
-              <select
-                name="equipo"
-                onChange={handleChange}
-                value={mantenimientoData.equipo || ""}
-                className="border p-2"
-              >
-                <option value="">Seleccionar equipo</option>
-                {equipos.map((equipo) => (
-                  <option key={equipo.idEquipo} value={equipo.idEquipo}>
-                    {equipo.nombre}
-                  </option>
-                ))}
-              </select>
+              <option value="">Seleccionar equipo</option>
+              {equipos.map((equipo) => (
+                <option key={equipo.idEquipo} value={equipo.idEquipo}>
+                  {equipo.nombre}
+                </option>
+              ))}
+            </select>
 
-              <label className="font-semibold text-gray-700">TIPO</label>
-              <input
-                name="tipo"
-                value={mantenimientoData.tipo || ""}
-                onChange={handleChange}
-                className="border p-2"
-                placeholder="Tipo"
-              />
+            <label className="font-semibold text-gray-700">TIPO</label>
+            <input
+              name="tipo"
+              value={mantenimientoData.tipo || ""}
+              onChange={handleChange}
+              className="border border-gray-300 p-2 w-full focus:outline focus:ring-2 focus:ring-red-400"
+              placeholder="Tipo"
+            />
 
-              <label className="font-semibold text-gray-700">ESTADO</label>
-              <select
-                value={mantenimientoData.estado || ""}
-                name="estado"
-                onChange={handleChange}
-                className="border p-2"
-              >
-                <option value="aprobado">aprobado</option>
-                <option value="pendiente">pendiente</option>
-                <option value="ejecutado">ejecutado</option>
-              </select>
+            <label className="font-semibold text-gray-700">ESTADO</label>
+            <select
+              value={mantenimientoData.estado || ""}
+              name="estado"
+              onChange={handleChange}
+              className="border border-gray-300 p-2 w-full focus:outline focus:ring-2 focus:ring-red-400"
+            >
+              <option value="aprobado" className="p-3">
+                aprobado
+              </option>
+              <option value="pendiente" className="p-3">
+                pendiente
+              </option>
+              <option value="ejecutado" className="p-3">
+                ejecutado
+              </option>
+            </select>
 
-              <label className="font-semibold text-gray-700">
-                FECHA INICIO
-              </label>
-              <input
-                type="date"
-                value={mantenimientoData.fechaInicio || ""}
-                name="fechaInicio"
-                onChange={handleChange}
-                className="border p-2"
-              />
+            <label className="font-semibold text-gray-700">FECHA INICIO</label>
+            <input
+              type="date"
+              value={mantenimientoData.fechaInicio || ""}
+              name="fechaInicio"
+              onChange={handleChange}
+              className="border border-gray-300 p-2 w-full focus:outline focus:ring-2 focus:ring-red-400"
+            />
 
-              <label className="font-semibold text-gray-700">FECHA FIN</label>
-              <input
-                type="date"
-                value={mantenimientoData.fechaFin || ""}
-                name="fechaFin"
-                onChange={handleChange}
-                className="border p-2"
-              />
+            <label className="font-semibold text-gray-700">FECHA FIN</label>
+            <input
+              type="date"
+              value={mantenimientoData.fechaFin || ""}
+              name="fechaFin"
+              onChange={handleChange}
+              className="border border-gray-300 p-2 w-full focus:outline focus:ring-2 focus:ring-red-400"
+            />
 
-              <label className="font-semibold text-gray-700">RESPONSABLE</label>
-              <select
-                name="responsable"
-                onChange={handleChange}
-                value={mantenimientoData.responsable || ""}
-                className="border p-2"
-              >
-                <option value="">Seleccionar responsable</option>
-                {usuarios.map((usuario) => (
-                  <option key={usuario.idUsuario} value={usuario.idUsuario}>
-                    {usuario.nombre}
-                  </option>
-                ))}
-              </select>
-              <button className="border px-6 py-3 rounded-full col-span-2">
-                Registrar mantenimiento
-              </button>
-            </form>
-          </div>
+            <label className="font-semibold text-gray-700">RESPONSABLE</label>
+            <select
+              name="responsable"
+              onChange={handleChange}
+              value={mantenimientoData.responsable || ""}
+              className="border border-gray-300 p-2 w-full focus:outline focus:ring-2 focus:ring-red-400"
+            >
+              <option value="" className="px-2 text-left">
+                Seleccionar responsable
+              </option>
+              {usuarios.map((usuario) => (
+                <option key={usuario.idUsuario} value={usuario.idUsuario}>
+                  {usuario.nombre}
+                </option>
+              ))}
+            </select>
+            <button className="border px-6 py-3 rounded-full col-span-2">
+              Registrar mantenimiento
+            </button>
+          </form>
         </div>
       </div>
     </div>

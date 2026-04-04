@@ -75,7 +75,7 @@ export default function FormularioActualizarOrden({ id }: any) {
         descripcion: "",
         estado: "pendiente",
       });
-      router.push(ROUTES.mantenimientos.MANTENIMIENTOS_CONSULTAR);
+      router.push(ROUTES.dashboard.DASHBOARD);
     } catch (error) {
       console.error("Error al actualizar el mantenimiento: ", error);
     }
@@ -97,9 +97,12 @@ export default function FormularioActualizarOrden({ id }: any) {
           <h1 className="text-lg font-semibold">Actualizar Orden</h1>
         </div>
       </div>
-      <div>
-        <form onSubmit={handleSubmit}>
-          <label>MANTENIMIENTO</label>
+      <div className="border border-gray-300 p-8">
+        <form
+          onSubmit={handleSubmit}
+          className="grid grid-cols-2 gap-x-10 gap-y-6 items-center max-w-xl mx-auto"
+        >
+          <label className="font-semibold text-gray-700">MANTENIMIENTO</label>
           <select
             name="mantenimiento"
             onChange={handleChange}
@@ -117,7 +120,7 @@ export default function FormularioActualizarOrden({ id }: any) {
             ))}
           </select>
 
-          <label>TIPO SERVICIO</label>
+          <label className="font-semibold text-gray-700">TIPO SERVICIO</label>
           <input
             type="text"
             value={ordenData.tipoServicio || ""}
@@ -127,7 +130,7 @@ export default function FormularioActualizarOrden({ id }: any) {
             onChange={handleChange}
           />
 
-          <label>FECHA INICIO</label>
+          <label className="font-semibold text-gray-700">FECHA INICIO</label>
           <input
             type="date"
             name="fechaInicio"
@@ -135,7 +138,7 @@ export default function FormularioActualizarOrden({ id }: any) {
             value={ordenData.fechaInicio || ""}
           />
 
-          <label>FECHA FIN</label>
+          <label className="font-semibold text-gray-700">FECHA FIN</label>
           <input
             type="date"
             name="fechaFin"
@@ -143,7 +146,7 @@ export default function FormularioActualizarOrden({ id }: any) {
             value={ordenData.fechaFin || ""}
           />
 
-          <label>DESCRIPCION</label>
+          <label className="font-semibold text-gray-700">DESCRIPCION</label>
           <input
             type="text"
             value={ordenData.descripcion || ""}
@@ -155,15 +158,33 @@ export default function FormularioActualizarOrden({ id }: any) {
 
           <select
             name="estado"
+            className="border border-gray-300 p-2 w-full focus:outline focus:ring-2 focus:ring-red-400"
             value={ordenData.estado || ""}
             onChange={handleChange}
           >
-            <option value="aprobado">aprobado</option>
-            <option value="pendiente">pendiente</option>
-            <option value="ejecutado">ejecutado</option>
+            <option value="aprobado" className="p-3">
+              aprobado
+            </option>
+            <option value="pendiente" className="p-3">
+              pendiente
+            </option>
+            <option value="ejecutado" className="p-3">
+              ejecutado
+            </option>
           </select>
 
-          <button>Actualizar Orden</button>
+          <button
+            type="submit"
+            className="border border-gray-400 px-8 py-3 rounded-full hover:bg-gray-100 font-medium"
+          >
+            Actualizar Orden
+          </button>
+          <button
+            type="button"
+            className="border border-gray-400 px-8 py-3 rounded-full hover:bg-gray-100 font-medium"
+          >
+            Cancelar
+          </button>
         </form>
       </div>
     </div>
