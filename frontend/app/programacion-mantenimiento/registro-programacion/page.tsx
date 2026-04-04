@@ -1,11 +1,12 @@
 "use client";
 
+import ProtectedRoute from "@/app/components/ProtectedRoute";
 import FormularioRegistroProgramacion from "../components/FormularioRegistro";
 
 export default function RegistroProgramacion() {
   return (
-    <div>
-      <FormularioRegistroProgramacion />
-    </div>
+    <ProtectedRoute roles={["superadministrador", "tecnicobiomedico"]}>
+      <RegistroProgramacion />
+    </ProtectedRoute>
   );
 }

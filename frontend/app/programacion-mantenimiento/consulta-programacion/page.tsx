@@ -1,9 +1,10 @@
+import ProtectedRoute from "@/app/components/ProtectedRoute";
 import HistorialProgramacion from "../components/HistorialProgramacion";
 
 export default function ListaProgramaciones() {
   return (
-    <div>
+    <ProtectedRoute roles={["superadministrador", "tecnicobiomedico"]}>
       <HistorialProgramacion />
-    </div>
+    </ProtectedRoute>
   );
 }

@@ -3,7 +3,6 @@ import { actualizarEquipo, consultarEquipos } from "@/app/api/equipos/equipo";
 import { ROUTES } from "@/app/routes/routes";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import RoleGuard from "../../components/RoleGuard";
 export default function FormularioActualizarEquipo({ id }: any) {
   if (!id || isNaN(id)) {
     return <p>Cargando equipo...</p>;
@@ -151,23 +150,14 @@ export default function FormularioActualizarEquipo({ id }: any) {
               Cancelar
             </button>
           </form>
-          <RoleGuard
-            roles={[
-              "superadministrador",
-              "administrador",
-              "ingenierobiomedico",
-            ]}
+
+          <button
+            type="button"
+            className="col-span-2 mx-auto mt-4 border border-gray-400 px-6 py-2 rounded-full hover:bg-gray-100"
+            onClick={() => router.push(ROUTES.ubicaciones.UBICACION_ACTUALIZAR)}
           >
-            <button
-              type="button"
-              className="col-span-2 mx-auto mt-4 border border-gray-400 px-6 py-2 rounded-full hover:bg-gray-100"
-              onClick={() =>
-                router.push(ROUTES.ubicaciones.UBICACION_ACTUALIZAR)
-              }
-            >
-              Actualizar Ubicacion
-            </button>
-          </RoleGuard>
+            Actualizar Ubicacion
+          </button>
           <button
             className="border border-gray-400 px-8 py-3 rounded-full hover:bg-gray-100 font-medium"
             onClick={() => router.push(ROUTES.dashboard.DASHBOARD)}

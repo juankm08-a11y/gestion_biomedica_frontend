@@ -37,14 +37,14 @@ export default function FormularioActualizarUbicacion({ id }: any) {
 
       alert("Ubicación actualizada correctamente");
 
-      router.push(ROUTES.equipos.EQUIPOS_VER);
+      router.push(ROUTES.equipos.EQUIPO_VER);
     } catch (error) {
       console.error(error);
     }
   };
 
   const handleCancelar = () => {
-    router.push(ROUTES.equipos.EQUIPOS_VER);
+    router.push(ROUTES.equipos.EQUIPO_VER);
   };
 
   return (

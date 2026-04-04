@@ -1,9 +1,7 @@
 "use client";
 
 import { consultarEquipo, eliminarEquipo } from "@/app/api/equipos/equipo";
-import RoleGuard from "@/app/components/RoleGuard";
 import { ROUTES } from "@/app/routes/routes";
-import { tieneRol } from "@/app/utils/auth";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -76,36 +74,18 @@ export default function ListaEquipos() {
               {equiposFiltrados.map((equipo) => (
                 <tr key={equipo.idEquipo} className="border-b">
                   <td className="p-4 flex gap-2">
-                    <RoleGuard
-                      roles={[
-                        "superadministrador",
-                        "administrador",
-                        "ingenierobiomedico",
-                      ]}
+                    <button
+                      onClick={() => router.push(`/equipos/${equipo.idEquipo}`)}
+                      className="px-6 py-3 rounded text-base"
                     >
-                      <button
-                        onClick={() =>
-                          router.push(`/equipos/${equipo.idEquipo}`)
-                        }
-                        className="px-6 py-3 rounded text-base"
-                      >
-                        Editar
-                      </button>
-                    </RoleGuard>
-                    <RoleGuard
-                      roles={[
-                        "superadministrador",
-                        "administrador",
-                        "ingenierobiomedico",
-                      ]}
+                      Editar
+                    </button>
+                    <button
+                      onClick={() => handleEliminar(equipo.idEquipo)}
+                      className="px-6 py-3 rounded text-base"
                     >
-                      <button
-                        onClick={() => handleEliminar(equipo.idEquipo)}
-                        className="px-6 py-3 rounded text-base"
-                      >
-                        Eliminar
-                      </button>
-                    </RoleGuard>
+                      Eliminar
+                    </button>
                     <button
                       onClick={() =>
                         router.push(`/codigos-qr/${equipo.idEquipo}`)

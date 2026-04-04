@@ -1,3 +1,4 @@
+import ProtectedRoute from "@/app/components/ProtectedRoute";
 import SubirArchivo from "../../../components/SubirArchivo";
 
 export default async function CargarArchivo({
@@ -12,8 +13,10 @@ export default async function CargarArchivo({
     return <p>ID de equipo inválido</p>;
   }
   return (
-    <div>
+    <ProtectedRoute
+      roles={["superadministrador", "administrador", "ingenierobiomedico"]}
+    >
       <SubirArchivo equipoId={id} />
-    </div>
+    </ProtectedRoute>
   );
 }

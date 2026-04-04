@@ -33,7 +33,7 @@ export default function FormularioUbicacion() {
       });
 
       console.log(response);
-      router.push(ROUTES.equipos.EQUIPOS_VER);
+      router.push(ROUTES.equipos.EQUIPO_VER);
     } catch (error) {
       console.error("error al registrar ubicacion: ", error);
     }
@@ -49,7 +49,7 @@ export default function FormularioUbicacion() {
   };
 
   const handleCancelar = () => {
-    router.push(ROUTES.equipos.EQUIPOS_VER);
+    router.push(ROUTES.equipos.EQUIPO_VER);
   };
 
   return (

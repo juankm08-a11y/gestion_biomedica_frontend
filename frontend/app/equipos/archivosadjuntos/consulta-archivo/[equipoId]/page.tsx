@@ -1,3 +1,4 @@
+import ProtectedRoute from "@/app/components/ProtectedRoute";
 import HistorialArchivos from "../../../components/HistorialArchivos";
 
 export default async function ConsultaArchivo({
@@ -8,8 +9,10 @@ export default async function ConsultaArchivo({
   const { equipoId } = await params;
 
   return (
-    <div>
+    <ProtectedRoute
+      roles={["superadministrador", "administrador", "ingenierobiomedico"]}
+    >
       <HistorialArchivos equipoId={Number(equipoId)} />
-    </div>
+    </ProtectedRoute>
   );
 }

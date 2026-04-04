@@ -1,9 +1,10 @@
+import ProtectedRoute from "@/app/components/ProtectedRoute";
 import FormularioRegistroMantenimiento from "../components/FormularioRegistroMantenimiento";
 
 export default function RegistroMantenimiento() {
   return (
-    <div>
+    <ProtectedRoute roles={["superadministrador", "ingenierobiomedico"]}>
       <FormularioRegistroMantenimiento />
-    </div>
+    </ProtectedRoute>
   );
 }

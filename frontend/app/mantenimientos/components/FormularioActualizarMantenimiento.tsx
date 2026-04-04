@@ -96,27 +96,32 @@ export default function FormularioActualizarMantenimiento({ id }: any) {
 
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center p-10 border-[10px] border-red-600">
-      <div>
-        <div>
-          <h1></h1>
+      <div className="bg-white w-[900px] shadow-md border border border-gray-300 p-10">
+        <div className="mb-6">
+          <h1 className="text-2xl font-bold text-gray-800">
+            ACTUALIZAR MANTENIMIENTO
+          </h1>
         </div>
       </div>
-      <div>
-        <h2></h2>
-        <form onSubmit={handleSubmit}>
-          <label>EQUIPO</label>
+      <div className="order border-gray-300 p-8">
+        <form
+          onSubmit={handleSubmit}
+          className="grid grid-cols-2 gap-x-10 gap-y-6 items-center max-w-xl mx-auto"
+        >
+          <label className="font-semibold text-gray-700">EQUIPO</label>
           <input
             type="text"
             name="equipo"
+            className="border border-gray-300 p-2 w-full focus:outline focus:ring-2 focus:ring-red-400"
             value={mantenimientoData.equipo || ""}
             onChange={handleChange}
           />
-          <label>TIPO</label>
+          <label className="font-semibold text-gray">TIPO</label>
           <select
             name="equipo"
             onChange={handleChange}
             value={mantenimientoData.equipo || ""}
-            className="border p-2"
+            className="border border-gray-300 p-2 w-full focus:outline focus:ring-2 focus:ring-red-400"
           >
             <option value="">Seleccionar equipo</option>
             {equipos.map((equipo) => (
@@ -126,30 +131,38 @@ export default function FormularioActualizarMantenimiento({ id }: any) {
             ))}
           </select>
 
-          <label>TIPO</label>
+          <label className="font-semibold text-gray-700">TIPO</label>
           <input
             type="text"
             value={mantenimientoData.tipo || ""}
             name="tipo"
             placeholder="Tipo"
-            className="border p-2"
+            className="border border-gray-300 p-2 w-full focus:outline focus:ring-2 focus:ring-red-400"
             onChange={handleChange}
           />
-          <label>ESTADO</label>
+          <label className="text-gray-700">ESTADO</label>
           <select
+            className="border border-gray-300 p-2 w-full focus:outline focus:ring-2 focus:ring-red-400"
             name="estado"
             value={mantenimientoData.estado || ""}
             onChange={handleChange}
           >
-            <option value="aprobado">aprobado</option>
-            <option value="pendiente">pendiente</option>
-            <option value="ejecutado">ejecutado</option>
+            <option value="aprobado" className="p-3">
+              aprobado
+            </option>
+            <option value="pendiente" className="p-3">
+              pendiente
+            </option>
+            <option value="ejecutado" className="p-3">
+              ejecutado
+            </option>
           </select>
 
-          <label>FECHA INICIO</label>
+          <label className="font-semibold text-gray-700">FECHA INICIO</label>
           <input
             type="date"
             name="fechaInicio"
+            className="border border-gray-300 p-2 w-full focus:outline focus:ring-2 focus:ring-red-400"
             onChange={handleChange}
             value={mantenimientoData.fechaInicio || ""}
           />

@@ -1,45 +1,10 @@
-"use client";
+import ProtectedRoute from "../components/ProtectedRoute";
+import SupervisarMantenimiento from "./components/SupervisarMantenimiento";
 
-import { useEffect, useState } from "react";
-import { supervisarMantenimiento } from "../api/supervisarMantenimiento/supervisarMantenimiento";
-
-export default function SupervisarMantenimiento() {
-  const [programaciones, setProgramaciones] = useState<any[]>([]);
-
-  const cargarProgramaciones = async () => {
-    const response = await supervisarMantenimiento();
-
-    setProgramaciones(response.data);
-  };
-
-  useEffect(() => {
-    cargarProgramaciones();
-  }, []);
-
+export default function ListaReportes() {
   return (
-    <div>
-      <h2>Supervisión de Mantenimiento</h2>
-
-      <table>
-        <thead>
-          <tr>
-            <th>Equipo</th>
-            <th>Próximo Mantenimiento</th>
-            <th>Próxima Calibración</th>
-            <th>Estado</th>
-          </tr>
-        </thead>
-        <tbody>
-          {programaciones.map((p, index) => (
-            <tr key={index}>
-              <td>{p.equipo}</td>
-              <td>{p.proximoMantenimiento}</td>
-              <td>{p.proximoCalibracion}</td>
-              <td>{p.estado}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+    <ProtectedRoute roles={["superadministrador", "coordinador"]}>
+      <SupervisarMantenimiento />
+    </ProtectedRoute>
   );
 }

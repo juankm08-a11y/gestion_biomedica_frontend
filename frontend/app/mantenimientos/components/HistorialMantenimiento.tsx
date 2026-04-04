@@ -4,7 +4,6 @@ import {
   consultarMantenimiento,
   eliminarMantenimiento,
 } from "@/app/api/mantenimientos/mantenimiento";
-import RoleGuard from "@/app/components/RoleGuard";
 import { ROUTES } from "@/app/routes/routes";
 import { tieneRol } from "@/app/utils/auth";
 import { useRouter } from "next/navigation";
@@ -82,32 +81,24 @@ export default function HistorialMantenimiento() {
                 <td className="p-3">{mantenimiento.responsable}</td>
 
                 <td className="p-3 flex gap-2">
-                  <RoleGuard
-                    roles={["superadministrador", "ingenierobiomedico"]}
+                  <button
+                    onClick={() =>
+                      router.push(
+                        `/mantenimientos/${mantenimiento.idMantenimiento}`,
+                      )
+                    }
+                    className="border px-4 py-2 rounded"
                   >
-                    <button
-                      onClick={() =>
-                        router.push(
-                          `/mantenimientos/${mantenimiento.idMantenimiento}`,
-                        )
-                      }
-                      className="border px-4 py-2 rounded"
-                    >
-                      Editar
-                    </button>
-                  </RoleGuard>
-                  <RoleGuard
-                    roles={["superadministrador", "ingenierobiomedico"]}
+                    Editar
+                  </button>
+                  <button
+                    onClick={() =>
+                      handleEliminar(mantenimiento.idMantenimiento)
+                    }
+                    className="px-6 py-3 rounded text-base"
                   >
-                    <button
-                      onClick={() =>
-                        handleEliminar(mantenimiento.idMantenimiento)
-                      }
-                      className="px-6 py-3 rounded text-base"
-                    >
-                      Eliminar
-                    </button>
-                  </RoleGuard>
+                    Eliminar
+                  </button>
                 </td>
               </tr>
             ))}

@@ -1,9 +1,10 @@
+import ProtectedRoute from "@/app/components/ProtectedRoute";
 import FormularioRegistroCertificado from "../components/FormularioCertificado";
 
 export default function RegistroCertificado() {
   return (
-    <div>
+    <ProtectedRoute roles={["superadministrador", "ingenierobiomedico"]}>
       <FormularioRegistroCertificado />
-    </div>
+    </ProtectedRoute>
   );
 }

@@ -1,7 +1,6 @@
 "use client";
 
 import { registrarEquipo } from "@/app/api/equipos/equipo";
-import RoleGuard from "@/app/components/RoleGuard";
 import { ROUTES } from "@/app/routes/routes";
 import { tieneRol } from "@/app/utils/auth";
 import { useRouter } from "next/navigation";
@@ -143,31 +142,15 @@ export default function FormularioRegistroEquipo() {
               placeholder="ubicacion:"
               value={equipoData.ubicacion}
             />
-            <RoleGuard
-              roles={[
-                "superadministrador",
-                "administrador",
-                "ingenierobiomedico",
-              ]}
+            <button
+              className="col-span-2 mx-auto mt-4 border border-gray-400 px-6 py-2 rounded-full hover:bg-gray-100"
+              onClick={() => router.push(ROUTES.ubicaciones.UBICACION_CREAR)}
             >
-              <button
-                className="col-span-2 mx-auto mt-4 border border-gray-400 px-6 py-2 rounded-full hover:bg-gray-100"
-                onClick={() => router.push(ROUTES.ubicaciones.UBICACION_CREAR)}
-              >
-                Actualizar Ubicacion
-              </button>
-            </RoleGuard>
-            <RoleGuard
-              roles={[
-                "superadministrador",
-                "administrador",
-                "ingenierobiomedico",
-              ]}
-            >
-              <button className="border border-gray-400 px-8 py-3 rounded-full hover:bg-gray-100 font-medium">
-                Guardar Equipo
-              </button>
-            </RoleGuard>
+              Actualizar Ubicacion
+            </button>
+            <button className="border border-gray-400 px-8 py-3 rounded-full hover:bg-gray-100 font-medium">
+              Guardar Equipo
+            </button>
             <button
               className="border border-gray-400 px-8 py-3 rounded-full hover:bg-gray-100 font-medium"
               onClick={handleCancelar}
