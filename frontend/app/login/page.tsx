@@ -30,15 +30,19 @@ export default function LoginPage() {
 
       console.log(response);
 
-      localStorage.setItem("token", response.data);
+      localStorage.setItem("access", response.access);
+      localStorage.setItem("refresh", response.refresh);
       localStorage.setItem("rol", response.rol);
       localStorage.setItem("usuario", response.usuario);
+
+      document.cookie = `access=${response.access}; path=/`;
+      document.cookie = `rol=${response.rol} path=/`;
 
       alert("Inicio de sesión exitoso");
 
       router.push(ROUTES.dashboard.DASHBOARD);
-    } catch (error) {
-      console.error("Error al iniciar sesión: ", error);
+    } catch (error: any) {
+      console.error("Error al iniciar sesión: ", error.response?.data);
       alert("Credenciales incorrectas");
     }
   };
@@ -69,6 +73,11 @@ export default function LoginPage() {
           Iniciar Sesión
         </button>
       </form>
+      <a href={ROUTES.register.REGISTER}>¿No tienes cuenta?</a>
+      <a href={ROUTES.recoverypassword.RECOVERYPASSWORD}>
+        Olvidaste tu contraseña?
+      </a>
+      <a href={ROUTES.recoryaccount.RECOVERYACCOUNT}>¿Olvidaste tu correo?</a>
     </div>
   );
 }

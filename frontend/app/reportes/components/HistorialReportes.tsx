@@ -18,22 +18,29 @@ export default function ReporteDashboard() {
   if (!reporte) return <p>Cargando reporte...</p>;
 
   return (
-    <div>
-      <div>
-        <h3>Total Equipos</h3>
-        <p>{reporte.totalEquipos}</p>
-      </div>
-      <div>
-        <h3>Total Mantenimientos</h3>
-        <p>{reporte.totalMantenimientos}</p>
-      </div>
-      <div>
-        <h3>Mantenimientos Pendientes</h3>
-        <p>{reporte.mantenimientosPendientes}</p>
-      </div>
-      <div>
-        <h3>Ordenes Ejecutadas</h3>
-        <p>{reporte.ordenesEjecutadas}</p>
+    <div className="min-h-screen bg-gray-100 flex items-center justify-center p-10 border-[10px] border-red-600">
+      <div className="bg-white w-full w-[1600px] shadow-md  border border-gray-300 p-10">
+        <div className="mb-6">
+          <h1 className="text-lg font-semibold">Consultar Reporte General</h1>
+        </div>
+        <div className="border border-gray-300 overflow-x-auto">
+          <table className="w-full min-w-[1200px] text-base">
+            <thead className="border-b bg-gray-100">
+              <tr>
+                <th className="p-4 text-left">TOTAL EQUIPOS</th>
+                <th className="p-4 text-left">TOTAL MANTENIMIENTOS</th>
+                <th className="p-4 text-left">MANTENIMIENTOS</th>
+                <th className="p-4 text-left">ORDENES EJECUTADAS</th>
+              </tr>
+            </thead>
+            <tbody>
+              <td>{reporte.totalEquipos}</td>
+              <td>{reporte.totalMantenimientos}</td>
+              <td>{reporte.mantenimientosPendientes}</td>
+              <td>{reporte.ordenesEjecutadas}</td>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );

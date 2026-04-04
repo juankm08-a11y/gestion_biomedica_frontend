@@ -49,43 +49,45 @@ export default function FormularioRegistroProgramacion() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>Equipo</label>
-      <select
-        name="equipo"
-        onChange={handleChange}
-        value={programacionData.equipo}
-      >
-        <option value="">Seleccionar equipo</option>
+    <div className="min-h-screen bg-gray-100 flex items-center justify-center p-10 border-[10px] border-red-600">
+      <form onSubmit={handleSubmit}>
+        <label>Equipo</label>
+        <select
+          name="equipo"
+          onChange={handleChange}
+          value={programacionData.equipo}
+        >
+          <option value="">Seleccionar equipo</option>
 
-        {equipos.map((equipo) => (
-          <option key={equipo.idEquipo} value={equipo.idEquipo}>
-            {equipo.nombre}
-          </option>
-        ))}
-      </select>
+          {equipos.map((equipo) => (
+            <option key={equipo.idEquipo} value={equipo.idEquipo}>
+              {equipo.nombre}
+            </option>
+          ))}
+        </select>
 
-      <label>Frecuencia Mantenimiento</label>
-      <input
-        type="text"
-        name="frecuenciaMantenimiento"
-        onChange={handleChange}
-        value={programacionData.frecuenciaMantenimiento}
-      />
-      <label>Frecuencia Calibración</label>
-      <input
-        type="text"
-        name="frecuenciaCalibracion"
-        onChange={handleChange}
-        value={programacionData.frecuenciaCalibracion}
-      />
+        <label>Frecuencia Mantenimiento</label>
+        <input
+          type="text"
+          name="frecuenciaMantenimiento"
+          onChange={handleChange}
+          value={programacionData.frecuenciaMantenimiento}
+        />
+        <label>Frecuencia Calibración</label>
+        <input
+          type="text"
+          name="frecuenciaCalibracion"
+          onChange={handleChange}
+          value={programacionData.frecuenciaCalibracion}
+        />
 
-      <select name="unidadFrecuencia" onChange={handleChange}>
-        <option value="dias">Dias</option>
-        <option value="meses">Meses</option>
-        <option value="anios">Años</option>
-      </select>
-      <button>Registrar Programacion</button>
-    </form>
+        <select name="unidadFrecuencia" onChange={handleChange}>
+          <option value="dias">Dias</option>
+          <option value="meses">Meses</option>
+          <option value="anios">Años</option>
+        </select>
+        <button>Registrar Programacion</button>
+      </form>
+    </div>
   );
 }

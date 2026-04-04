@@ -1,7 +1,9 @@
 "use client";
 
 import { consultarEquipo, eliminarEquipo } from "@/app/api/equipos/equipo";
+import RoleGuard from "@/app/components/RoleGuard";
 import { ROUTES } from "@/app/routes/routes";
+import { tieneRol } from "@/app/utils/auth";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -41,9 +43,9 @@ export default function ListaEquipos() {
 
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center p-10 border-[10px] border-red-600">
-      <div className="bg-white w-full w-[1600px] shadow-md border border border-gray-300 p-10">
+      <div className="bg-white w-full w-[1600px] shadow-md  border border-gray-300 p-10">
         <div className="mb-6">
-          <h1 className="text-lg font-semibold">Lista de Equipos</h1>
+          <h1 className="text-lg font-semibold">Consultar Estado Equipos</h1>
         </div>
         <div className="flex gap-4 mb-6">
           <input
@@ -58,7 +60,7 @@ export default function ListaEquipos() {
 
         <div className="border border-gray-300 overflow-x-auto">
           <table className="w-full min-w-[1200px] text-base">
-            <thead className="bg-gray-100 border-b">
+            <thead className="border-b bg-gray-100">
               <tr>
                 <th className="p-4 text-left">NOMBRE</th>
                 <th className="p-4 text-left">MARCA</th>
@@ -74,18 +76,36 @@ export default function ListaEquipos() {
               {equiposFiltrados.map((equipo) => (
                 <tr key={equipo.idEquipo} className="border-b">
                   <td className="p-4 flex gap-2">
-                    <button
-                      onClick={() => router.push(`/equipos/${equipo.idEquipo}`)}
-                      className="px-6 py-3 rounded text-base"
+                    <RoleGuard
+                      roles={[
+                        "superadministrador",
+                        "administrador",
+                        "ingenierobiomedico",
+                      ]}
                     >
-                      Editar
-                    </button>
-                    <button
-                      onClick={() => handleEliminar(equipo.idEquipo)}
-                      className="px-6 py-3 rounded text-base"
+                      <button
+                        onClick={() =>
+                          router.push(`/equipos/${equipo.idEquipo}`)
+                        }
+                        className="px-6 py-3 rounded text-base"
+                      >
+                        Editar
+                      </button>
+                    </RoleGuard>
+                    <RoleGuard
+                      roles={[
+                        "superadministrador",
+                        "administrador",
+                        "ingenierobiomedico",
+                      ]}
                     >
-                      Eliminar
-                    </button>
+                      <button
+                        onClick={() => handleEliminar(equipo.idEquipo)}
+                        className="px-6 py-3 rounded text-base"
+                      >
+                        Eliminar
+                      </button>
+                    </RoleGuard>
                     <button
                       onClick={() =>
                         router.push(`/codigos-qr/${equipo.idEquipo}`)

@@ -1,9 +1,11 @@
 "use client";
 
 import { registrarEquipo } from "@/app/api/equipos/equipo";
+import RoleGuard from "@/app/components/RoleGuard";
 import { ROUTES } from "@/app/routes/routes";
+import { tieneRol } from "@/app/utils/auth";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function FormularioRegistroEquipo() {
   const [equipoData, setEquipoData] = useState({
@@ -17,6 +19,14 @@ export default function FormularioRegistroEquipo() {
   });
 
   const router = useRouter();
+
+  useEffect(() => {
+    if (
+      !tieneRol(["superadministrador", "administrador", "ingenierobiomedico"])
+    ) {
+      router.push(ROUTES.dashboard.DASHBOARD);
+    }
+  });
 
   const handleSubmit = async (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -37,7 +47,7 @@ export default function FormularioRegistroEquipo() {
         ubicacion: "",
       });
 
-      router.push(ROUTES.equipos.EQUIPOS_VER);
+      router.push(ROUTES.equipos.EQUIPO_VER);
     } catch (error) {
       console.error(error);
     }
@@ -61,13 +71,10 @@ export default function FormularioRegistroEquipo() {
       <div className="bg-white w-[900px] shadow-md border border border-gray-300 p-10">
         <div className="mb-6">
           <h1 className="text-2xl font-bold text-gray-800">
-            REGISTRO DE HOJAS DE VIDA DE EQUIPOS BIOMEDICOS
+            CREAR HOJA DE VIDA DE EQUIPOS
           </h1>
         </div>
         <div className="border border-gray-300 p-8">
-          <h2 className="text-center font-semibold mb-6">
-            FORMULARIO DE REGISTRO
-          </h2>
           <form
             onSubmit={handleSubmit}
             className="grid grid-cols-2 gap-x-10 gap-y-6 items-center max-w-xl mx-auto"
@@ -136,16 +143,31 @@ export default function FormularioRegistroEquipo() {
               placeholder="ubicacion:"
               value={equipoData.ubicacion}
             />
-            <button
-              className="col-span-2 mx-auto mt-4 border border-gray-400 px-6 py-2 rounded-full hover:bg-gray-100"
-              onClick={() => router.push(ROUTES.ubicaciones.UBICACION_CREAR)}
+            <RoleGuard
+              roles={[
+                "superadministrador",
+                "administrador",
+                "ingenierobiomedico",
+              ]}
             >
-              Actualizar Ubicacion
-            </button>
-
-            <button className="border border-gray-400 px-8 py-3 rounded-full hover:bg-gray-100 font-medium">
-              Guardar Equipo
-            </button>
+              <button
+                className="col-span-2 mx-auto mt-4 border border-gray-400 px-6 py-2 rounded-full hover:bg-gray-100"
+                onClick={() => router.push(ROUTES.ubicaciones.UBICACION_CREAR)}
+              >
+                Actualizar Ubicacion
+              </button>
+            </RoleGuard>
+            <RoleGuard
+              roles={[
+                "superadministrador",
+                "administrador",
+                "ingenierobiomedico",
+              ]}
+            >
+              <button className="border border-gray-400 px-8 py-3 rounded-full hover:bg-gray-100 font-medium">
+                Guardar Equipo
+              </button>
+            </RoleGuard>
             <button
               className="border border-gray-400 px-8 py-3 rounded-full hover:bg-gray-100 font-medium"
               onClick={handleCancelar}

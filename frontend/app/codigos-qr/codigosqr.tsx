@@ -34,7 +34,7 @@ export default function GenerarCodigoQRPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 border-[10px] border-red-600">
+    <div className="min-h-screen bg-gray-100 flex items-center justify-center p-10 border-[10px] border-red-600">
       <div className="bg-white p-10 border border-gray-300 max-w-xl mx-auto">
         <h1 className="text-2xl font-bold mb-6 text-center">
           Generar código QR de Equipo

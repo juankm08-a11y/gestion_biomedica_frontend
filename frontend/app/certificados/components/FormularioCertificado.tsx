@@ -45,32 +45,35 @@ export default function FormularioRegistroCertificado() {
 
     alert("Certificado registrado correctamente");
 
-    router.push(ROUTES.certificados.CERTIFICADOS);
+    router.push(ROUTES.dashboard.DASHBOARD);
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>Numero Certificado</label>
-      <input
-        type="number"
-        name="numeroCertificado"
-        value={data.numeroCertificado || ""}
-        onChange={handleChange}
-      />
-      <label>Responsable</label>
-      <select
-        name="responsable"
-        onChange={handleChange}
-        value={data.responsable || ""}
-      >
-        <option value="">Seleccionar responsable</option>
+    <div className="min-h-screen bg-gray-100 flex items-center justify-center p-10 border-[10px] border-red-600">
+      7
+      <form onSubmit={handleSubmit}>
+        <label>Numero Certificado</label>
+        <input
+          type="number"
+          name="numeroCertificado"
+          value={data.numeroCertificado || ""}
+          onChange={handleChange}
+        />
+        <label>Responsable</label>
+        <select
+          name="responsable"
+          onChange={handleChange}
+          value={data.responsable || ""}
+        >
+          <option value="">Seleccionar responsable</option>
 
-        {usuarios.map((usuario) => (
-          <option key={usuario.idUsuario} value={usuario.idUsuario}>
-            {usuario.nombre}
-          </option>
-        ))}
-      </select>
-    </form>
+          {usuarios.map((usuario) => (
+            <option key={usuario.idUsuario} value={usuario.idUsuario}>
+              {usuario.nombre}
+            </option>
+          ))}
+        </select>
+      </form>
+    </div>
   );
 }

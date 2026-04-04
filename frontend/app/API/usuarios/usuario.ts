@@ -10,8 +10,10 @@ export const inciarSesion = async (data: any) => {
   return response.data;
 };
 
-export const cerrarSesion = async () => {
-  const response = await api.post("/usuarios/logout/");
+export const cerrarSesion = async (refresh: any) => {
+  const response = await api.post("/usuarios/logout/", {
+    refresh: refresh,
+  });
   return response.data;
 };
 
@@ -20,8 +22,8 @@ export const recuperarCuenta = async () => {
   return response.data;
 };
 
-export const recuperarContraseña = async () => {
-  const response = await api.put("/usuarios/recuperar-contraseña/");
+export const recuperarContraseña = async (data: any) => {
+  const response = await api.put("/usuarios/recuperar-contraseña/", data);
   return response.data;
 };
 

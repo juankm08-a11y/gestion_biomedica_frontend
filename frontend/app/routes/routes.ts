@@ -4,8 +4,7 @@ export const ROUTES = {
   },
 
   equipos: {
-    EQUIPOS: "/equipos",
-    EQUIPOS_VER: "/equipos/consulta-equipos",
+    EQUIPO_VER: "/equipos/consulta-equipos",
     EQUIPO_CREAR: "/equipos/registro-equipos",
     EQUIPO_ACTUALIZAR: "/equipos/[id]",
   },
@@ -36,14 +35,12 @@ export const ROUTES = {
   },
 
   ordenServicio: {
-    ORDENSERVICIO: "/orden-servicio",
     ORDENSERVICIO_CREAR: "/orden-servicio/registro-orden",
     ORDENSERVICIO_CONSULTAR: "/orden-servicio/consulta-orden",
     ORDENSERVICIO_ACTUALIZAR: "/orden-servicio/[id]",
   },
 
   certificados: {
-    CERTIFICADOS: "/certificados",
     CERTIFICADOS_CREAR: "/certificados/registro-certificado",
     CERTIFICADOS_CONSULTAR: "/certificados/consulta-certificado",
   },

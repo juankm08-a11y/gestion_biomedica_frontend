@@ -1,3 +1,4 @@
+"use client";
 import { useState } from "react";
 import { recuperarContraseña } from "../api/usuarios/usuario";
 
@@ -20,7 +21,7 @@ export default function RecuperarPasswordPage() {
     e.preventDefault();
 
     try {
-      await recuperarContraseña();
+      await recuperarContraseña(data);
 
       alert("Contraseña actualizada correctamente");
     } catch (error) {

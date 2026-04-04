@@ -95,7 +95,7 @@ export default function FormularioActualizarMantenimiento({ id }: any) {
   };
 
   return (
-    <div>
+    <div className="min-h-screen bg-gray-100 flex items-center justify-center p-10 border-[10px] border-red-600">
       <div>
         <div>
           <h1></h1>

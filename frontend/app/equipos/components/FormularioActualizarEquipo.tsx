@@ -3,6 +3,7 @@ import { actualizarEquipo, consultarEquipos } from "@/app/api/equipos/equipo";
 import { ROUTES } from "@/app/routes/routes";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import RoleGuard from "../../components/RoleGuard";
 export default function FormularioActualizarEquipo({ id }: any) {
   if (!id || isNaN(id)) {
     return <p>Cargando equipo...</p>;
@@ -44,7 +45,7 @@ export default function FormularioActualizarEquipo({ id }: any) {
         tipoTecnologia: "",
         ubicacion: "",
       });
-      router.push(ROUTES.equipos.EQUIPOS_VER);
+      router.push(ROUTES.dashboard.DASHBOARD);
     } catch (error) {
       console.error("Error el actualizar el equipo:", error);
     }
@@ -54,7 +55,7 @@ export default function FormularioActualizarEquipo({ id }: any) {
     setEquipoData({ ...equipoData, [name]: value });
   };
   const handleCancelar = () => {
-    router.push(ROUTES.equipos.EQUIPOS_VER);
+    router.push(ROUTES.dashboard.DASHBOARD);
   };
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center p-10 border-[10px] border-red-600">
@@ -150,13 +151,23 @@ export default function FormularioActualizarEquipo({ id }: any) {
               Cancelar
             </button>
           </form>
-          <button
-            type="button"
-            className="col-span-2 mx-auto mt-4 border border-gray-400 px-6 py-2 rounded-full hover:bg-gray-100"
-            onClick={() => router.push(ROUTES.ubicaciones.UBICACION_ACTUALIZAR)}
+          <RoleGuard
+            roles={[
+              "superadministrador",
+              "administrador",
+              "ingenierobiomedico",
+            ]}
           >
-            Actualizar Ubicacion
-          </button>
+            <button
+              type="button"
+              className="col-span-2 mx-auto mt-4 border border-gray-400 px-6 py-2 rounded-full hover:bg-gray-100"
+              onClick={() =>
+                router.push(ROUTES.ubicaciones.UBICACION_ACTUALIZAR)
+              }
+            >
+              Actualizar Ubicacion
+            </button>
+          </RoleGuard>
           <button
             className="border border-gray-400 px-8 py-3 rounded-full hover:bg-gray-100 font-medium"
             onClick={() => router.push(ROUTES.dashboard.DASHBOARD)}
