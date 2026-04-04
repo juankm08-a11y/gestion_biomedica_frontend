@@ -34,10 +34,12 @@ export default function ReporteDashboard() {
               </tr>
             </thead>
             <tbody>
-              <td>{reporte.totalEquipos}</td>
-              <td>{reporte.totalMantenimientos}</td>
-              <td>{reporte.mantenimientosPendientes}</td>
-              <td>{reporte.ordenesEjecutadas}</td>
+              <tr>
+                <td>{reporte.totalEquipos}</td>
+                <td>{reporte.totalMantenimientos}</td>
+                <td>{reporte.mantenimientosPendientes}</td>
+                <td>{reporte.ordenesEjecutadas}</td>
+              </tr>
             </tbody>
           </table>
         </div>

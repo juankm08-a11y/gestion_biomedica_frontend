@@ -12,7 +12,7 @@ export default function ActualizarEquipo() {
     <ProtectedRoute
       roles={["superadministrador", "administrador", "ingenierobiomedico"]}
     >
-      <FormularioActualizarEquipo />
+      <FormularioActualizarEquipo id={id} />
     </ProtectedRoute>
   );
 }

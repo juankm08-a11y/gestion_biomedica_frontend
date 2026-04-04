@@ -43,11 +43,6 @@ export default function Dashboard() {
               Consultar Equipo
             </button>
             <button
-              onClick={() => router.push(ROUTES.equipos.EQUIPO_ACTUALIZAR)}
-            >
-              Actualizar Equipo
-            </button>
-            <button
               onClick={() =>
                 router.push(ROUTES.mantenimientos.MANTENIMIENTO_CREAR)
               }
@@ -60,13 +55,6 @@ export default function Dashboard() {
               }
             >
               Consultar Mantenimiento
-            </button>
-            <button
-              onClick={() =>
-                router.push(ROUTES.mantenimientos.MANTENIMIENTO_ACTUALIZAR)
-              }
-            >
-              Actualizar Mantenimiento
             </button>
           </div>
           <div className="flex justify-between mt-8">
@@ -89,16 +77,6 @@ export default function Dashboard() {
               }
             >
               Consultar Programacion
-            </button>
-            <button
-              onClick={() =>
-                router.push(
-                  ROUTES.programacionMantenimiento
-                    .PROGRAMACIONMANTENIMIENTO_CONSULTAR,
-                )
-              }
-            >
-              Actualizar Programacion
             </button>
             <button
               onClick={() =>
@@ -141,13 +119,6 @@ export default function Dashboard() {
               }
             >
               Consultar Orden
-            </button>
-            <button
-              onClick={() =>
-                router.push(ROUTES.ordenServicio.ORDENSERVICIO_ACTUALIZAR)
-              }
-            >
-              Actualizar Orden
             </button>
             <button onClick={handleLogOut}>Cerrar Sesion</button>
           </div>
