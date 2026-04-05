@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
+import { middleware } from "./middleware";
 
 const rutasPublicas = [
   "/login",
@@ -10,18 +11,16 @@ const rutasPublicas = [
 
 const permisosPorRuta: Record<string, string[]> = {
   "/equipos": ["superadministrador", "administrador", "ingenierobiomedico"],
-
   "/mantenimientos": ["superadministrador", "ingenierobiomedico"],
-
   "/programacion-mantenimiento": ["superadministrador", "tecnicobiomedico"],
   "/orden-servicio": ["superadministrador", "tecnicobiomedico"],
-  "/certificados": ["superadministrador", "ingenierobiomedico"],
+  "/certificados": ["superadministrador", "tecnicobiomedico"],
   "/notificaciones": ["superadministrador", "administrador"],
   "/reportes": ["superadministrador", "administrador"],
-  "/supervisar-mantenimiento": ["superadministrador", "coordinador"],
+  "/super-mantenimiento": ["superadministrador", "coordinador"],
 };
 
-export function middleware(request: NextRequest) {
+export default function middleware(request: NextRequest) {
   const token = request.cookies.get("access")?.value;
   const rol = request.cookies.get("rol")?.value;
   const { pathname } = request.nextUrl;
@@ -43,13 +42,14 @@ export function middleware(request: NextRequest) {
       }
     }
   }
+  return NextResponse.next();
 }
 
 export const config = {
   matcher: [
     "/dashboard/:path*",
     "/equipos/:path*",
-    "/mantenimientos/:path*",
+    "/mantenimientos/path",
     "/programacion-mantenimiento/:path*",
     "/orden-servicio/:path*",
     "/certificados/:path*",
