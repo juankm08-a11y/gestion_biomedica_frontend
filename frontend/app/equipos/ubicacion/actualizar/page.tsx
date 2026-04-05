@@ -1,18 +1,17 @@
+import FormularioActualizarUbicacion from "@/app/components/equipos/FormularioActualizarUbicacion1";
 import ProtectedRoute from "@/app/components/equipos/ProtectedRoute";
-import Dashboard from "../components/Dashboard";
 
-export default function DashboardPage() {
+export default function RegistroUbicacion() {
   return (
     <ProtectedRoute
       roles={[
-        "superadministrdor",
+        "superadministrador",
         "administrador",
         "ingenierobiomedico",
         "tecnicobiomedico",
-        "coordinador",
       ]}
     >
-      <Dashboard />
+      <FormularioActualizarUbicacion />
     </ProtectedRoute>
   );
 }

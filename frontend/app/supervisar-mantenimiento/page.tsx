@@ -1,4 +1,4 @@
-import ProtectedRoute from "../components/ProtectedRoute";
+import ProtectedRoute from "../components/equipos/ProtectedRoute";
 import SupervisarMantenimiento from "./components/SupervisarMantenimiento";
 
 export default function ListaReportes() {

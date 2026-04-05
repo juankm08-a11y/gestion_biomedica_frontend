@@ -1,4 +1,4 @@
-import ProtectedRoute from "@/app/components/ProtectedRoute";
+import ProtectedRoute from "@/app/components/equipos/ProtectedRoute";
 import HistorialNotificaciones from "../components/HistorialNotificaciones";
 
 export default function ConsultaNotificacion() {

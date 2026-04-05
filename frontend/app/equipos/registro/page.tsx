@@ -1,18 +1,17 @@
+import FormularioRegistroEquipo from "@/app/components/equipos/FormularioRegistroEquipo";
 import ProtectedRoute from "@/app/components/equipos/ProtectedRoute";
-import Dashboard from "../components/Dashboard";
 
-export default function DashboardPage() {
+export default function RegistroPage() {
   return (
     <ProtectedRoute
       roles={[
-        "superadministrdor",
+        "superadministrador",
         "administrador",
         "ingenierobiomedico",
         "tecnicobiomedico",
-        "coordinador",
       ]}
     >
-      <Dashboard />
+      <FormularioRegistroEquipo />
     </ProtectedRoute>
   );
 }

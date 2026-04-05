@@ -26,7 +26,7 @@ export default function Dashboard() {
     document.cookie = "access=;path=/;expires=Thu, 01 Jan 1970 00:00:00 GMT";
     document.cookie = "rol=;path=/;";
 
-    router.push(ROUTES.login.LOGIN);
+    router.push(ROUTES.login);
   };
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center p-10 border-[10px] border-red-600">
@@ -36,91 +36,35 @@ export default function Dashboard() {
         </div>
         <div className="mb-6">
           <div className="flex justify-between mt-8">
-            <button onClick={() => router.push(ROUTES.equipos.EQUIPO_CREAR)}>
+            <button onClick={() => router.push(ROUTES.equipos.CREAR)}>
               Registrar Equipo
             </button>
-            <button onClick={() => router.push(ROUTES.equipos.EQUIPO_VER)}>
+            <button onClick={() => router.push(ROUTES.equipos.LISTA)}>
               Consultar Equipo
             </button>
-            <button
-              onClick={() =>
-                router.push(ROUTES.mantenimientos.MANTENIMIENTO_CREAR)
-              }
-            >
+            <button onClick={() => router.push(ROUTES.mantenimietos.CREAR)}>
               Registrar Mantenimiento
             </button>
-            <button
-              onClick={() =>
-                router.push(ROUTES.mantenimientos.MANTENIMIENTOS_CONSULTAR)
-              }
-            >
+            <button onClick={() => router.push(ROUTES.mantenimietos.LISTA)}>
               Consultar Mantenimiento
             </button>
           </div>
           <div className="flex justify-between mt-8">
-            <button
-              onClick={() =>
-                router.push(
-                  ROUTES.programacionMantenimiento
-                    .PROGRAMACIONMANTENIMIENTO_CREAR,
-                )
-              }
-            >
+            <button onClick={() => router.push(ROUTES.programacion.CREAR)}>
               Registrar Programacion
             </button>
-            <button
-              onClick={() =>
-                router.push(
-                  ROUTES.programacionMantenimiento
-                    .PROGRAMACIONMANTENIMIENTO_CONSULTAR,
-                )
-              }
-            >
+            <button onClick={() => router.push(ROUTES.programacion.LISTA)}>
               Consultar Programacion
             </button>
-            <button
-              onClick={() =>
-                router.push(ROUTES.certificados.CERTIFICADOS_CREAR)
-              }
-            >
+            <button onClick={() => router.push(ROUTES.certificados.CREAR)}>
               Registrar Certificado
             </button>
-            <button
-              onClick={() =>
-                router.push(ROUTES.certificados.CERTIFICADOS_CONSULTAR)
-              }
-            >
+            <button onClick={() => router.push(ROUTES.certificados.LISTA)}>
               Consultar Certificado
             </button>
-            <button onClick={() => router.push(ROUTES.reportes.REPORTES)}>
+            <button onClick={() => router.push(ROUTES.reportes)}>
               Consultar Reporte general
             </button>
-          </div>
-          <div className="flex justify-between mt-8">
-            <button
-              onClick={() =>
-                router.push(
-                  ROUTES.supervisarMantenimiento.SUPERVISAR_MANTENIMIENTO,
-                )
-              }
-            >
-              Supervisar Mantenimiento
-            </button>
-            <button
-              onClick={() =>
-                router.push(ROUTES.ordenServicio.ORDENSERVICIO_CREAR)
-              }
-            >
-              Registrar Orden
-            </button>
-            <button
-              onClick={() =>
-                router.push(ROUTES.ordenServicio.ORDENSERVICIO_CONSULTAR)
-              }
-            >
-              Consultar Orden
-            </button>
-            <button onClick={handleLogOut}>Cerrar Sesion</button>
           </div>
         </div>
       </div>

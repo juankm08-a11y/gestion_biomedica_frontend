@@ -1,4 +1,4 @@
-import ProtectedRoute from "../components/ProtectedRoute";
+import ProtectedRoute from "../components/equipos/ProtectedRoute";
 import HistorialReportes from "./components/HistorialReportes";
 
 export default function ListaReportes() {

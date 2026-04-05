@@ -40,7 +40,7 @@ export default function LoginPage() {
 
       alert("Inicio de sesión exitoso");
 
-      router.push(ROUTES.dashboard.DASHBOARD);
+      router.push(ROUTES.dashboard);
     } catch (error: any) {
       console.error("Error al iniciar sesión: ", error.response?.data);
       alert("Credenciales incorrectas");
@@ -83,13 +83,9 @@ export default function LoginPage() {
           </button>
         </form>
         <div>
-          <a href={ROUTES.register.REGISTER}>¿No tienes cuenta?</a>
-          <a href={ROUTES.recoverypassword.RECOVERYPASSWORD}>
-            Olvidaste tu contraseña?
-          </a>
-          <a href={ROUTES.recoryaccount.RECOVERYACCOUNT}>
-            ¿Olvidaste tu correo?
-          </a>
+          <a href={ROUTES.register}>¿No tienes cuenta?</a>
+          <a href={ROUTES.recuperarpassword}>Olvidaste tu contraseña?</a>
+          <a href={ROUTES.recuperarCuenta}>¿Olvidaste tu correo?</a>
         </div>
       </div>
     </div>

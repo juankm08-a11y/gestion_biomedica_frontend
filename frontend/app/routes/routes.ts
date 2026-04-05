@@ -1,7 +1,5 @@
 export const ROUTES = {
-  dashboard: {
-    DASHBOARD: "/dashboard",
-  },
+  dashboard: "/dashboard",
 
   equipos: {
     LISTA: "/equipos",
@@ -39,6 +37,6 @@ export const ROUTES = {
 
   login: "/login",
   register: "/register",
-  recuperarassword: "/recuperar-password",
+  recuperarpassword: "/recuperar-password",
   recuperarCuenta: "recuperar-cuenta",
 };
