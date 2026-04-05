@@ -6,7 +6,7 @@ import FormularioRegistroProgramacion from "../components/FormularioRegistro";
 export default function RegistroProgramacion() {
   return (
     <ProtectedRoute roles={["superadministrador", "tecnicobiomedico"]}>
-      <RegistroProgramacion />
+      <FormularioRegistroProgramacion />
     </ProtectedRoute>
   );
 }
