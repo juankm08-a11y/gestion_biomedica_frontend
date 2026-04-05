@@ -1271,6 +1271,7 @@ Account{name=..., path=..., type=PREDICT}
 2026-04-05 06:08:38.089 [pool-3-thread-1] INFO  com.rs.mv.mvvs.client.account.AccountManager - [client:40010105]load account manager finish
 2026-04-05 06:08:38.092 [pool-3-thread-1] INFO  com.rs.mv.mvvs.instance.userspace.UserspaceManager - [framework:30010402]config file(C:\Users\Juan C/.rmv/config) watcher launch successful
 2026-04-05 06:09:23.444 [pool-3-thread-1] INFO  com.rs.mv.mvvs.client.catalog.from.scan.CurrentPathScanner - [client:400205]scan file in current open file directory(D:/software_gestion_equipos_biomedicos/gestion_biomedica_frontend/frontend)
+<<<<<<< HEAD
 2026-04-05 06:21:54.554 [pool-3-thread-1] INFO  com.rs.mv.mvvs.client.catalog.from.scan.CurrentPathScanner - [client:400205]scan file in current open file directory(D:/software_gestion_equipos_biomedicos/gestion_biomedica_frontend/frontend)
 2026-04-05 06:39:50.022 [pool-3-thread-1] INFO  com.rs.mv.mvvs.client.catalog.from.scan.CurrentPathScanner - [client:400205]scan file in current open file directory(D:/software_gestion_equipos_biomedicos/gestion_biomedica_frontend/frontend/app/programacion-mantenimiento/registro-programacion)
 2026-04-05 12:59:51.639 [pool-3-thread-1] INFO  com.rs.mv.mvvs.client.catalog.from.scan.CurrentPathScanner - [client:400205]scan file in current open file directory(D:/software_gestion_equipos_biomedicos/gestion_biomedica_frontend/frontend/app/components)
@@ -1317,3 +1318,5 @@ Account{name=..., path=..., type=PREDICT}
 2026-04-05 14:13:45.807 [pool-3-thread-1] INFO  com.rs.mv.mvvs.client.catalog.from.scan.CurrentPathScanner - [client:400205]scan file in current open file directory(D:/software_gestion_equipos_biomedicos/gestion_biomedica_frontend/frontend/app/api/equipos)
 2026-04-05 14:13:47.394 [pool-3-thread-1] INFO  com.rs.mv.mvvs.client.catalog.from.scan.CurrentPathScanner - [client:400205]scan file in current open file directory(D:/software_gestion_equipos_biomedicos/gestion_biomedica_frontend/frontend/services)
 2026-04-05 14:16:55.022 [pool-3-thread-1] INFO  com.rs.mv.mvvs.client.catalog.from.scan.CurrentPathScanner - [client:400205]scan file in current open file directory(D:/software_gestion_equipos_biomedicos/gestion_biomedica_frontend/frontend/app/equipos)
+=======
+>>>>>>> 6646764642054073a62257a2530f88de332b01b4

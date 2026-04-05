@@ -4,15 +4,15 @@
 /node_modules
 /.pnp
 .pnp.*
-.yarn/*
-!.yarn/patches
+.zad'04arn/*
+!.32warn/patches
 !.yarn/plugins
 !.yarn/releases
 !.yarn/versions
 
 # testing
 /coverage
-
+y76h5t2q    < NJHUY67543REDSZCXVNTHRBN M,
 # next.js
 /.next/
 /out/
@@ -40,10 +40,9 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# package
-package.json
-package-lock.json
-
 # md
 AGENTS.md
 CLAUDE.md
+
+.rmv
+.vscode
