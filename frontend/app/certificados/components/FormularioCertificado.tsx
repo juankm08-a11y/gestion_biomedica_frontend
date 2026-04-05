@@ -3,7 +3,7 @@
 import { registrarCertificado } from "@/app/api/certificados/certificado";
 import { consultarUsuarios } from "@/app/api/usuarios/usuario";
 import { ROUTES } from "@/app/routes/routes";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function FormularioRegistroCertificado() {
