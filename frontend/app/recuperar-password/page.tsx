@@ -1,11 +1,11 @@
 "use client";
+import { recuperarContraseña } from "@/services/usuario.service";
 import { useState } from "react";
-import { recuperarContraseña } from "../../services/usuario.service.js";
-import PageContainer from "../components/layout/PageContainer.js";
-import FormularioBase from "../components/form/FormularioBase.js";
-import InputField from "../components/ui/InputField.js";
-import ButtonGrid from "../components/layout/ButtonGrid.js";
-import PrimaryButton from "../components/layout/PrimaryButton.js";
+import PageContainer from "../components/layout/PageContainer";
+import FormularioBase from "../components/form/FormularioBase";
+import InputField from "../components/ui/InputField";
+import ButtonGrid from "../components/layout/ButtonGrid";
+import PrimaryButton from "../components/layout/PrimaryButton";
 
 export default function RecuperarPasswordPage() {
   const [data, setData] = useState({
