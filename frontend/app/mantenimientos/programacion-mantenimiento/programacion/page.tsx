@@ -1,7 +1,7 @@
 "use client";
 
 import ProtectedRoute from "@/app/components/equipos/ProtectedRoute";
-import FormularioRegistroProgramacion from "../../../components/mantenimientos/programacion-mantenimiento/FormularioRegistro";
+import FormularioRegistroProgramacion from "@/app/components/mantenimientos/programacion-mantenimiento/FormularioRegistro";
 
 export default function RegistroProgramacion() {
   return (

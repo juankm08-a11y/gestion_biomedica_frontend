@@ -1,4 +1,4 @@
-import { Mantenimiento } from "@/types/Mantenimiento";
+import { Mantenimiento } from "@/types/Mantenimiento.type";
 import { api } from "../app/api/api";
 
 export const registrarMantenimiento = async (data: Mantenimiento) => {

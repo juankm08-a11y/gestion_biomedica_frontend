@@ -1,5 +1,4 @@
 "use client";
-
 import { listarEquipos } from "@/services/equipos.service";
 import { actualizarProgramacion } from "@/services/programacionMantenimiento.service";
 import { useRouter } from "next/navigation";
@@ -8,11 +7,12 @@ import PageContainer from "../../layout/PageContainer";
 import FormularioBase from "../../form/FormularioBase";
 import SelectField from "../../ui/SelectField";
 import InputField from "../../ui/InputField";
-import { ROUTES } from "@/app/routes/routes";
 import ButtonGrid from "../../layout/ButtonGrid";
+import { ROUTES } from "@/app/routes/routes";
 
-export default function FormularioRegistroProgramacion({ id }: any) {
+export default function FormularioActualizarProgramacion({ id }: any) {
   const [equipos, setEquipos] = useState<any[]>([]);
+
   const [programacionData, setProgramacionData] = useState({
     idProgramacion: 0,
     equipo: 0,
@@ -35,7 +35,6 @@ export default function FormularioRegistroProgramacion({ id }: any) {
 
   const handleChange = (e: any) => {
     const { name, value } = e.target;
-
     setProgramacionData({ ...programacionData, [name]: value });
   };
 
@@ -45,24 +44,30 @@ export default function FormularioRegistroProgramacion({ id }: any) {
     try {
       await actualizarProgramacion(id, programacionData);
       alert("Programación actualizada correctamente");
-      router.push(ROUTES.mantenimientos.PROGRAMACION);
     } catch (error) {
       console.error("Error al actualizar la programación", error);
     }
   };
 
   return (
-    <PageContainer title="Registrar Programacion">
-      <FormularioBase titulo="Registrar Programacion" onSubmit={handleSubmit}>
+    <PageContainer title="Actualizar Programación">
+      <FormularioBase titulo="Actualizar Programación" onSubmit={handleSubmit}>
         <SelectField
           label="Equipo"
-          onChange={handleChange}
-          value={programacionData.equipo.toString()}
           name="equipo"
+          value={programacionData.equipo.toString()}
+          onChange={handleChange}
           options={equipos.map((equipo) => ({
             value: equipo.idEquipo.toString(),
             label: equipo.nombre,
           }))}
+        />
+        <InputField
+          label="Frecuencia Mantenimiento"
+          name="frecuenciaMantenimiento"
+          value={programacionData.frecuenciaMantenimiento.toString()}
+          onChange={handleChange}
+          type="number"
         />
         <InputField
           label="Frecuencia Calibración"
@@ -71,41 +76,34 @@ export default function FormularioRegistroProgramacion({ id }: any) {
           onChange={handleChange}
           type="number"
         />
-        <InputField
-          label="Frecuencia Mantenimiento"
-          name="frecuenciaMantenimiento"
-          onChange={handleChange}
-          value={programacionData.frecuenciaMantenimiento.toString()}
-          type="number"
-        />
         <SelectField
           label="Unidad de Frecuencia"
           name="unidadFrecuencia"
-          value={programacionData.unidadFrecuencia.toString()}
+          value={programacionData.unidadFrecuencia}
           onChange={handleChange}
           options={[
-            { value: "dias", label: "Dias" },
+            { value: "dias", label: "Días" },
             { value: "meses", label: "Meses" },
-            { value: "anios", label: "Anios" },
+            { value: "anios", label: "Años" },
           ]}
         />
         <InputField
           label="Proximo Mantenimiento"
           name="proximoMantenimiento"
-          onChange={handleChange}
           value={programacionData.proximoMantenimiento.toString()}
+          onChange={handleChange}
           type="number"
         />
         <InputField
-          label="Proximo Calibracion"
+          label="Proximo Calibración"
           name="proximoCalibracion"
-          onChange={handleChange}
           value={programacionData.proximoCalibracion.toString()}
+          onChange={handleChange}
           type="number"
         />
         <ButtonGrid>
           <button className="border border-gray-400 px-6 py-2 rounded-full">
-            Registrar Programacion
+            Actualizar Programacion
           </button>
           <button
             onClick={() => router.push(ROUTES.dashboard)}

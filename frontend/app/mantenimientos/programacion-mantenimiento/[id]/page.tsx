@@ -1,7 +1,7 @@
 "use client";
 
 import { useParams } from "next/navigation";
-import ActualizarProgramacion from "../../../components/mantenimientos/programacion-mantenimiento/ActualizarProgramacion";
+import ActualizarProgramacion from "../../../components/mantenimientos/programacion-mantenimiento/FormularioActualizarProgramacion";
 
 export default function ActualizarProgramacionMantenimientoPage() {
   const params = useParams();

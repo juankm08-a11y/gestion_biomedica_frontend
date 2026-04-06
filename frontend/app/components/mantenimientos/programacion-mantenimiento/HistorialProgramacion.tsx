@@ -2,9 +2,9 @@
 
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { consultarProgramacion } from "../../../../services/programacionMantenimiento.service";
 import PageContainer from "../../layout/PageContainer";
 import Table from "../../ui/Table";
+import { consultarProgramacionMantenimiento } from "@/services/programacionMantenimiento.service";
 
 export default function HistorialProgramacion() {
   const [programaciones, setProgramaciones] = useState<any[]>([]);
@@ -13,7 +13,7 @@ export default function HistorialProgramacion() {
 
   useEffect(() => {
     const cargarProgramaciones = async () => {
-      const data = await consultarProgramacion();
+      const data = await consultarProgramacionMantenimiento();
       setProgramaciones(Array.isArray(data) ? data : []);
     };
     cargarProgramaciones();

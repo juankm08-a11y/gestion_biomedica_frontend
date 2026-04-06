@@ -1,4 +1,4 @@
-export interface OrdenServicio {
+export interface Orden {
   idOrdenServicio: number;
   tipoServicio: string;
   fechaInicio: string;

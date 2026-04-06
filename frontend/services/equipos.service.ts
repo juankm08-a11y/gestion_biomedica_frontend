@@ -1,5 +1,5 @@
 import { api } from "@/app/api/api";
-import { Equipo } from "@/types/Equipo";
+import { Equipo } from "@/types/Equipo.type";
 
 export const crearEquipo = async (data: Equipo) => {
   const res = await api.post("/equipos/", data);

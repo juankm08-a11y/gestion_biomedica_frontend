@@ -1,4 +1,4 @@
-import FormularioActualizarUbicacion from "@/app/components/equipos/FormularioActualizarUbicacion1";
+import FormularioActualizarUbicacion from "@/app/components/equipos/FormularioActualizarUbicacion";
 import ProtectedRoute from "@/app/components/equipos/ProtectedRoute";
 
 export default function RegistroUbicacion() {

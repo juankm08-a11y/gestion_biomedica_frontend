@@ -178,7 +178,7 @@ export default function FormularioActualizarMantenimiento({
           <button
             className="border px-6 py-2 rounded"
             type="button"
-            onClick={() => router.push(ROUTES.dashboard)}
+            onClick={() => router.push(ROUTES.mantenimientos.LISTA)}
           >
             Cancelar
           </button>

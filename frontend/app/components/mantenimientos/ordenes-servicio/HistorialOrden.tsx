@@ -2,22 +2,23 @@
 
 import {
   cerrarOrden,
-  consultarOrden,
+  consultarOrdenes,
 } from "@/services/ordenesServicio.service";
-import { ROUTES } from "@/app/routes/routes";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import PageContainer from "../../layout/PageContainer";
+import Table from "../../ui/Table";
 
 export default function HistorialOrdenes() {
   const [ordenes, setOrdenes] = useState<any[]>([]);
+
   const router = useRouter();
 
-  const cargarOrdenes = async () => {
-    const response = await consultarOrden();
-    setOrdenes(Array.isArray(response) ? response : []);
-  };
-
   useEffect(() => {
+    const cargarOrdenes = async () => {
+      const response = await consultarOrdenes();
+      setOrdenes(Array.isArray(response) ? response : []);
+    };
     cargarOrdenes();
   }, []);
 
@@ -27,65 +28,37 @@ export default function HistorialOrdenes() {
     await cerrarOrden(id);
   };
 
-  const handleCancelar = (e: any) => {
-    router.push(ROUTES.dashboard.DASHBOARD);
-  };
+  const headers = [
+    "ID",
+    "Mantenimiento",
+    "Tipo Servicio",
+    "Fecha Inicio",
+    "Fecha Fin",
+    "Estado",
+    "Acciones",
+  ];
+
+  const rows = ordenes.map((orden) => [
+    orden.idOrden,
+    orden.mantenimiento,
+    orden.tipoServicio,
+    orden.fechaInicio,
+    orden.fechaFin,
+    orden.estado,
+    <div>
+      <button
+        onClick={() => router.push(`/ordenes/${orden.idOrden}`)}
+        className="px-6 py-3 rounded-full bg-blue-500 text-white"
+      >
+        Editar
+      </button>
+      <button onClick={() => handleCerrar(orden.idOrden)}>Cerrar</button>
+    </div>,
+  ]);
 
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center p-10 border-[10px] border-red-600">
-      <div className="bg-white w-full w-[1600px] shadow-md  border border-gray-300 p-10">
-        <div className="mb-6">
-          <h1 className="text-lg font-semibold">Consultar Orden</h1>
-        </div>
-      </div>
-      <div className="border border-gray-300 overflow-x-auto">
-        <table className="w-full min-w-[1200px] text-base">
-          <thead className="order-b bg-gray-100">
-            <tr>
-              <th className="p-4 text-left">ID</th>
-              <th className="p-4 text-left">Mantenimiento</th>
-              <th className="p-4 text-left">Tipo Servicio</th>
-              <th className="p-4 text-left">Fecha Inicio</th>
-              <th className="p-4 text-left">Fecha Fin</th>
-              <th className="p-4 text-left">Estado</th>
-              <th className="p-4 text-left">Accciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            {ordenes.map((orden) => (
-              <tr key={orden.idOrden} className="border-b">
-                <td className="p-3">{orden.idOrden}</td>
-                <td className="p-3">{orden.mantenimiento}</td>
-                <td className="p-3">{orden.tipoServicio}</td>
-                <td className="p-3">{orden.fechaInicio}</td>
-                <td className="p-3">{orden.fechaFin}</td>
-                <td className="p-3">{orden.estado}</td>
-
-                <td>
-                  <button
-                    className="border-8 px-8 py-3 rounded-full"
-                    onClick={() => router.push(`/ordenes/${orden.idOrden}`)}
-                  >
-                    Editar
-                  </button>
-                  <button
-                    className="border-8 px-8 py-3 rounded-full"
-                    onClick={() => handleCerrar(orden.idOrden)}
-                  >
-                    Cerrar
-                  </button>
-                  <button
-                    onClick={() => ROUTES.dashboard.DASHBOARD}
-                    className="border-8 px-8 py-3 rounded-full"
-                  >
-                    Regresar a Dashboard
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </div>
+    <PageContainer title="Consultar Ordenes">
+      <Table headers={headers} rows={rows} />
+    </PageContainer>
   );
 }

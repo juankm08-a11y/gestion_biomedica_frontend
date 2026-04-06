@@ -8,10 +8,11 @@ import FormularioBase from "../form/FormularioBase";
 import InputField from "../ui/InputField";
 import ButtonGrid from "../layout/ButtonGrid";
 
-export default function ActualizarUbicacion({ id }: any) {
+export default function ActualizarUbicacion({ idUbicacion }: any) {
   const router = useRouter();
 
   const [ubicacionData, setUbicacionData] = useState({
+    idUbicacion: 0,
     sede: "",
     departamento: "",
     ciudad: "",
@@ -31,7 +32,7 @@ export default function ActualizarUbicacion({ id }: any) {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
 
-    await actualizarUbicacion(id, ubicacionData);
+    await actualizarUbicacion(idUbicacion, ubicacionData);
 
     alert("Ubicación actualizada");
 

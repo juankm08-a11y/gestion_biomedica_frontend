@@ -9,6 +9,8 @@ import FormularioBase from "../form/FormularioBase";
 import InputField from "../ui/InputField";
 import SelectField from "../ui/SelectField";
 import { listarEquipos } from "@/services/equipos.service";
+import { ROUTES } from "@/app/routes/routes";
+import ButtonGrid from "../layout/ButtonGrid";
 
 interface Props {
   equipoId?: number;
@@ -64,6 +66,8 @@ export default function FormularioRegistro({ equipoId }: Props) {
     try {
       await registrarMantenimiento(mantenimientoData);
       alert("Mantenimiento registrado correctamente");
+
+      router.push(ROUTES.mantenimientos.LISTA);
     } catch (error) {
       console.error("Error al registrar el mantenimiento", error);
     }
@@ -131,9 +135,17 @@ export default function FormularioRegistro({ equipoId }: Props) {
             label: usuario.nombre,
           }))}
         />
-        <button className="border border-gray-400 px-6 py-2 rounded-full">
-          Guard mantenimiento
-        </button>
+        <ButtonGrid>
+          <button className="border border-gray-400 px-6 py-2 rounded-full">
+            Guard mantenimiento
+          </button>
+          <button
+            className="border border-gray-400 px-6 py-2 rounded-full"
+            onClick={() => router.push(ROUTES.mantenimientos.LISTA)}
+          >
+            Registrar Mantenimiento
+          </button>
+        </ButtonGrid>
       </FormularioBase>
     </PageContainer>
   );

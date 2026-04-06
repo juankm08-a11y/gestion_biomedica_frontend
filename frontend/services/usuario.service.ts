@@ -1,12 +1,11 @@
-import { Usuario } from "@/types/Usuario.type";
 import { api } from "../app/api/api";
 
-export const registrarSesion = async (data: Usuario) => {
+export const registrarSesion = async (data: any) => {
   const response = await api.post("/usuarios/registro/", data);
   return response.data;
 };
 
-export const inciarSesion = async (data: Usuario) => {
+export const inciarSesion = async (data: any) => {
   const response = await api.post("/usuarios/login/", data);
   return response.data;
 };
@@ -23,7 +22,7 @@ export const recuperarCuenta = async () => {
   return response.data;
 };
 
-export const recuperarContraseña = async (data: Usuario) => {
+export const recuperarContraseña = async (data: any) => {
   const response = await api.put("/usuarios/recuperar-contraseña/", data);
   return response.data;
 };

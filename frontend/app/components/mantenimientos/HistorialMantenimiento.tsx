@@ -81,6 +81,34 @@ export default function HistorialMantenimiento() {
       >
         Eliminar
       </button>
+      <button
+        className="border px-4 py-2 rounded bg-green-500 text-white"
+        onClick={() =>
+          router.push(
+            `/mantenimientos/orden-servicio/registro?mantenimientoId=${mantenimiento.idMantenimiento}`,
+          )
+        }
+      >
+        Crear Orden
+      </button>
+      <button
+        onClick={() =>
+          router.push(
+            `/mantenimientos/programacion?mantenimientoId=${mantenimiento.idMantenimiento}`,
+          )
+        }
+      >
+        Programar Mantenimiento
+      </button>
+      <button
+        onClick={() =>
+          router.push(
+            `/mantenimientos/supervisionId=${mantenimiento.idMantenimiento}`,
+          )
+        }
+      >
+        Supervisar Mantenimiento
+      </button>
     </div>,
   ]);
   return (
