@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { recuperarContraseña } from "../api/usuarios/usuario";
+import { recuperarContraseña } from "../../services/usuario.service.js";
 
 export default function RecuperarPasswordPage() {
   const [data, setData] = useState({

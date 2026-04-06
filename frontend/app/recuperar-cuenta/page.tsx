@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { recuperarCuenta } from "../api/usuarios/usuario";
+import { recuperarCuenta } from "../../services/usuario.service.js";
 import { ROUTES } from "../routes/routes";
 import { useRouter } from "next/navigation";
 

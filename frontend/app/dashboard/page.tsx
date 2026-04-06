@@ -21,7 +21,7 @@ export default function Dashboard() {
         ></PrimaryButton>
         <PrimaryButton
           text="Registrar Mantenimiento"
-          onClick={() => router.push(ROUTES.mantenimietos.CREAR)}
+          onClick={() => router.push(ROUTES.mantenimientos.CREAR)}
         ></PrimaryButton>
       </ButtonGrid>
     </PageContainer>

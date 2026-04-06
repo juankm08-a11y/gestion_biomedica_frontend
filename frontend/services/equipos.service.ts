@@ -1,15 +1,5 @@
 import { api } from "@/app/api/api";
-
-export interface Equipo {
-  idEquipo: number;
-  nombre: string;
-  marca: string;
-  modelo: string;
-  serie: string;
-  fabricante: string;
-  tipoTecnologia: string;
-  ubicacion: number;
-}
+import { Equipo } from "@/types/Equipo";
 
 export const crearEquipo = async (data: Equipo) => {
   const res = await api.post("/equipos/", data);

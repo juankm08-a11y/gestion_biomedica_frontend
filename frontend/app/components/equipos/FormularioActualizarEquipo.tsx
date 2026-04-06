@@ -72,43 +72,43 @@ export default function FormularioActualizarEquipo({ id }: any) {
         <InputField
           label="Nombre"
           name="nombre"
-          value={equipoData.nombre}
+          value={equipoData.nombre || ""}
           onChange={handleChange}
         />
         <InputField
           label="Marca"
           name="marca"
-          value={equipoData.marca}
+          value={equipoData.marca || ""}
           onChange={handleChange}
         />
         <InputField
           label="Modelo"
           name="modelo"
-          value={equipoData.modelo}
+          value={equipoData.modelo || ""}
           onChange={handleChange}
         />
         <InputField
           label="Serie"
           name="serie"
-          value={equipoData.serie}
+          value={equipoData.serie || ""}
           onChange={handleChange}
         />
         <InputField
           label="Fabricante"
           name="fabricante"
-          value={equipoData.fabricante}
+          value={equipoData.fabricante || ""}
           onChange={handleChange}
         />
         <InputField
           label="Tipo Tecnología"
           name="tipoTecnologia"
-          value={equipoData.tipoTecnologia}
+          value={equipoData.tipoTecnologia || ""}
           onChange={handleChange}
         />
         <InputField
           label="Ubicación"
           name="ubicación"
-          value={equipoData.ubicacion}
+          value={equipoData.ubicacion || ""}
           onChange={handleChange}
         />
         <ButtonGrid>

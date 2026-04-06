@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { registrarSesion } from "../api/usuarios/usuario";
+import { registrarSesion } from "../../services/usuario.service.js";
 
 export default function RegisterUsuarioPage() {
   const [data, setData] = useState({

@@ -1,6 +1,6 @@
 "use client";
 
-import { consultarCertificados } from "@/app/api/certificados/certificado";
+import { consultarCertificados } from "@/services/certificados.service";
 import { useEffect, useState } from "react";
 
 export default function HistorialCertificados() {

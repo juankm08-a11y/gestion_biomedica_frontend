@@ -12,6 +12,7 @@ export default function RegistroUbicacion() {
   const router = useRouter();
 
   const [ubicacionData, setUbicacionData] = useState({
+    idUbicacion: 0,
     sede: "",
     departamento: "",
     ciudad: "",
@@ -44,31 +45,31 @@ export default function RegistroUbicacion() {
           <InputField
             label="Sede"
             name="Sede"
-            value={ubicacionData.sede}
+            value={ubicacionData.sede || ""}
             onChange={handleChange}
           />
           <InputField
-            label="Sede"
-            name="Sede"
-            value={ubicacionData.sede}
+            label="Departamento"
+            name="departamento"
+            value={ubicacionData.departamento || ""}
             onChange={handleChange}
           />
           <InputField
             label="Ciudad"
             name="iciudad"
-            value={ubicacionData.ciudad}
+            value={ubicacionData.ciudad || ""}
             onChange={handleChange}
           />
           <InputField
             label="Área"
             name="area"
-            value={ubicacionData.area}
+            value={ubicacionData.area || ""}
             onChange={handleChange}
           />
           <InputField
             label="Detalle"
             name="detalle"
-            value={ubicacionData.detalle}
+            value={ubicacionData.detalle || ""}
             onChange={handleChange}
           />
           <ButtonGrid>

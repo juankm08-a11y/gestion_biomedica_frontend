@@ -7,7 +7,7 @@ export default function Navbar() {
     <nav className="bg-white shadow p-4 flex gap-6">
       <Link href={ROUTES.dashboard}>Dashboard</Link>
       <Link href={ROUTES.equipos.LISTA}>Equipos</Link>
-      <Link href={ROUTES.mantenimietos.LISTA}>Mantenimientos</Link>
+      <Link href={ROUTES.mantenimientos.LISTA}>Mantenimientos</Link>
       <Link href={ROUTES.reportes}>Reportes</Link>
     </nav>
   );

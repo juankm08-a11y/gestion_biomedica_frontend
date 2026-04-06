@@ -21,7 +21,7 @@ export default function InputField({
         className="w-full border border-gray-700 px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-blue-500"
         type={type}
         name={name}
-        value={value}
+        value={value ?? ""}
         onChange={onChange}
       />
     </>

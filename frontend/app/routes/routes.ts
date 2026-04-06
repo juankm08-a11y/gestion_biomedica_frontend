@@ -16,23 +16,26 @@ export const ROUTES = {
     CREAR: "/equipos/ubicacion/registro",
     LISTA: "/equipos/ubicacion/[id]/actualizar",
   },
-  mantenimietos: {
+  mantenimientos: {
     CREAR: "/mantenimientos/registro",
     LISTA: "/mantenimientos",
     ACTUALIZAR: "/mantenimientos/[id]",
+    SUPERVISAR: "/mantenimientos/supervisar",
+    PROGRAMACION: "/mantenimientos/programacion",
+    ACTUALIZAR_PROGRAMACION: "/mantenimientos/programacion/[id]/actualizar",
+    CONSULTAR_PROGRAMACION: "/mantenimientos/programacion/consulta",
   },
-  programacion: {
-    CREAR: "/programacion-mantenimiento/registro",
-    LISTA: "/programacion-mantenimiento",
+  ordenSerivicio: {
+    LISTA: "/mantenimientos/orden-servicio",
+    CREAR: "/mantenimientos/orden-servicio/registro",
+    DETALLE: "/mantenimientos/orden-servicio/[id]",
   },
-  ordenServicio: {
-    CREAR: "/orden-servicio/registro",
-    LISTA: "/orden-servicio",
-  },
+
   certificados: {
-    CREAR: "/certificados/registro",
     LISTA: "/certificados",
+    GENERAR: "/certificado/generar",
   },
+
   reportes: "/reportes",
 
   login: "/login",

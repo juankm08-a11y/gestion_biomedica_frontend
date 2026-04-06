@@ -1,9 +1,5 @@
 "use client";
-import {
-  eliminarEquipo,
-  Equipo,
-  listarEquipos,
-} from "@/services/equipos.service";
+import { eliminarEquipo, listarEquipos } from "@/services/equipos.service";
 import { useEffect, useState } from "react";
 import ProtectedRoute from "../components/equipos/ProtectedRoute";
 import { useRouter } from "next/navigation";
@@ -12,7 +8,8 @@ import Table from "../components/ui/Table";
 export const dynamic = "force-dynamic";
 
 export default function EquiposPage() {
-  const [equipos, setEquipos] = useState<Equipo[]>([]);
+  const [equipos, setEquipos] = useState<any[]>([]);
+  const [mantenimientoData, setMantenimientoData] = useState({});
 
   const router = useRouter();
 

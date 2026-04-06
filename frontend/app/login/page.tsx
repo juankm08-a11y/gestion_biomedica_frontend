@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { inciarSesion } from "../api/usuarios/usuario";
+import { inciarSesion } from "../../services/usuario.service.js";
 import { ROUTES } from "../routes/routes";
 
 export default function LoginPage() {

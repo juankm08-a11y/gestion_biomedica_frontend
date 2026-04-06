@@ -1,7 +1,7 @@
 "use client";
 
 import { useParams } from "next/navigation";
-import FormularioActualizarMantenimiento from "../components/FormularioActualizarMantenimiento";
+import FormularioActualizarMantenimiento from "../../components/mantenimientos/FormularioActualizarMantenimiento";
 
 export default function ActualizarMantenimiento() {
   const params = useParams();

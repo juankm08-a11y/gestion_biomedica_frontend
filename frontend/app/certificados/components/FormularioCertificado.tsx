@@ -1,7 +1,7 @@
 "use client";
 
-import { registrarCertificado } from "@/app/api/certificados/certificado";
-import { consultarUsuarios } from "@/app/api/usuarios/usuario";
+import { registrarCertificado } from "@/services/certificados.service";
+import { consultarUsuarios } from "@/services/usuario";
 import { ROUTES } from "@/app/routes/routes";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";

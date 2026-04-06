@@ -3,6 +3,7 @@ import { subirArchivo } from "@/services/archivos.service";
 import { useState } from "react";
 import PageContainer from "../layout/PageContainer";
 import FormularioBase from "../form/FormularioBase";
+import ButtonGrid from "../layout/ButtonGrid";
 
 export default function SubirArchivo({ equipoId }: { equipoId: number }) {
   const [archivo, setArchivo] = useState<File | null>(null);
@@ -26,7 +27,9 @@ export default function SubirArchivo({ equipoId }: { equipoId: number }) {
           type="file"
           onChange={(e: any) => setArchivo(e.target.files[0])}
         />
-        <button className="border px-6 py-2 rounded">subir</button>
+        <ButtonGrid>
+          <button className="border px-6 py-2 rounded">Subir</button>
+        </ButtonGrid>
       </FormularioBase>
     </PageContainer>
   );
