@@ -4,8 +4,8 @@ import { crearEquipo } from "@/services/equipos.service";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import FormularioBase from "../form/FormularioBase";
-import InputField from "../form/InputField";
 import { ROUTES } from "../../routes/routes";
+import InputField from "../ui/InputField";
 
 export default function FormularioRegistroEquipo() {
   const router = useRouter();

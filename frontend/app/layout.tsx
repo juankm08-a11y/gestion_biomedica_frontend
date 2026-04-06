@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Navbar from "./components/form/layout";
+import Navbar from "./components/layout/Navbar";
 
 export const metadata: Metadata = {
   title: "Software de gestion de equipos biomedicos",
@@ -18,7 +17,11 @@ export default function RootLayout({
     <html>
       <body>
         <Navbar />
-        {children}
+        <div className="flex justify-center p-10">
+          <div className="w-[1400px] min-h-[700px] bg-white border-4 border-red-600 p-8">
+            {children}
+          </div>
+        </div>
       </body>
     </html>
   );

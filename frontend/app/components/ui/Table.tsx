@@ -4,7 +4,7 @@ import { FC } from "react";
 
 interface TableProps {
   headers: String[];
-  rows: (string | number)[][];
+  rows: React.ReactNode[][];
   actions?: React.ReactNode;
 }
 

@@ -1,5 +1,6 @@
 import FormularioRegistroEquipo from "@/app/components/equipos/FormularioRegistroEquipo";
 import ProtectedRoute from "@/app/components/equipos/ProtectedRoute";
+import PageContainer from "@/app/components/layout/PageContainer";
 
 export default function RegistroPage() {
   return (
@@ -11,7 +12,9 @@ export default function RegistroPage() {
         "tecnicobiomedico",
       ]}
     >
-      <FormularioRegistroEquipo />
+      <PageContainer title="Registro de Equipo">
+        <FormularioRegistroEquipo />
+      </PageContainer>
     </ProtectedRoute>
   );
 }
