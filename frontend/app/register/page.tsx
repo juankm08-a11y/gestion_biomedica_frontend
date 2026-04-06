@@ -1,3 +1,5 @@
+"use client"
+
 import { registrarSesion } from "@/services/usuario.service";
 import { useState } from "react";
 import PageContainer from "../components/layout/PageContainer";
