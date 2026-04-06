@@ -1,82 +1,45 @@
 export const ROUTES = {
-  dashboard: {
-    DASHBOARD: "/dashboard",
-  },
+  dashboard: "/dashboard",
 
   equipos: {
-    EQUIPO_VER: "/equipos/consulta-equipos",
-    EQUIPO_CREAR: "/equipos/registro-equipos",
-    EQUIPO_ACTUALIZAR: "/equipos/[id]",
+    LISTA: "/equipos",
+    CREAR: "/equipos/registro",
+    DETALLE: "/equipos/[id]",
+    ACTUALIZAR: "/equipos/[id]/actualizar",
+    QR: "/equipos/[id]/qr",
   },
-
+  archivos: {
+    SUBIR: "/equipos/[id]/archivos/subir",
+    HISTORIAL: "/equipos/[id]/archivos/historial",
+  },
   ubicaciones: {
-    UBICACION_CREAR: "/equipos/ubicacion-equipo",
-    UBICACION_ACTUALIZAR: "/equipos/ubicacion-equipo/[id]",
+    CREAR: "/equipos/ubicacion/registro",
+    LISTA: "/equipos/ubicacion/[id]/actualizar",
   },
-
   mantenimientos: {
-    MANTENIMIENTO_CREAR: "/mantenimientos/registro",
-    MANTENIMIENTOS_CONSULTAR: "/mantenimientos/consultar",
-    MANTENIMIENTO_ACTUALIZAR: "/mantenimientos/[id]",
+    CREAR: "/mantenimientos/registro",
+    LISTA: "/mantenimientos",
+    ACTUALIZAR: "/mantenimientos/[id]",
+    SUPERVISAR: "/mantenimientos/supervisar",
+    PROGRAMACION: "/mantenimientos/programacion",
+    ACTUALIZAR_PROGRAMACION: "/mantenimientos/programacion/[id]/actualizar",
+    CONSULTAR_PROGRAMACION: "/mantenimientos/programacion/consulta",
   },
-
-  notificaciones: {
-    NOTIFICACIONES: "/notificaciones",
-    NOTIFICACIONES_CREAR: "/notificaciones/registro-notificacion",
-    NOTIFICACIONES_CONSULTAR: "/notificaciones/consulta-notificacion",
-  },
-
-  programacionMantenimiento: {
-    PROGRAMACIONMANTENIMIENTO_CONSULTAR:
-      "/programacion-mantenimiento/consulta-programacion",
-    PROGRAMACIONMANTENIMIENTO_CREAR:
-      "/programacion-mantenimiento/registro-programacion",
-    PROGRAMACIONMANTENIMIENTO_ACTUALIZAR: "/programacion-mantenimiento/[id]",
-  },
-
-  ordenServicio: {
-    ORDENSERVICIO_CREAR: "/orden-servicio/registro-orden",
-    ORDENSERVICIO_CONSULTAR: "/orden-servicio/consulta-orden",
-    ORDENSERVICIO_ACTUALIZAR: "/orden-servicio/[id]",
+  ordenSerivicio: {
+    LISTA: "/mantenimientos/orden-servicio",
+    CREAR: "/mantenimientos/orden-servicio/registro",
+    DETALLE: "/mantenimientos/orden-servicio/[id]",
   },
 
   certificados: {
-    CERTIFICADOS_CREAR: "/certificados/registro-certificado",
-    CERTIFICADOS_CONSULTAR: "/certificados/consulta-certificado",
+    LISTA: "/certificados",
+    GENERAR: "/certificado/generar",
   },
 
-  login: {
-    LOGIN: "/login",
-  },
+  reportes: "/reportes",
 
-  register: {
-    REGISTER: "/register",
-  },
-
-  recoverypassword: {
-    RECOVERYPASSWORD: "/recuperar-password",
-  },
-
-  recoryaccount: {
-    RECOVERYACCOUNT: "/recuperar-cuenta",
-  },
-
-  codigosQr: {
-    CODIGOQR_CONSULTAR: "/codigos-qr/[equipoId]",
-  },
-  reportes: {
-    REPORTES: "/reportes",
-  },
-
-  archivosAdjuntos: {
-    ARCHIVOSADJUNTOS: "/equipos/archivosadjuntos",
-    ARCHIVOSADJUNTOS_CARGA:
-      "/equipos/archivosadjuntos/carga-archivo/[equipoId]",
-    ARCHIVOSADJUNTOS_CONSULTA:
-      "/equipos/archivosadjuntos/consulta-archivo/[equipoId]",
-  },
-
-  supervisarMantenimiento: {
-    SUPERVISAR_MANTENIMIENTO: "/supervisar-mantenimiento",
-  },
+  login: "/login",
+  register: "/register",
+  recuperarpassword: "/recuperar-password",
+  recuperarCuenta: "recuperar-cuenta",
 };

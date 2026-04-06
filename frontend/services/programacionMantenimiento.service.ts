@@ -1,0 +1,27 @@
+import { ProgramacionMantenimiento } from "@/types/ProgramacionMantenimiento.type";
+import { api } from "../app/api/api";
+
+export const crearProgramacionMantenimiento = async (
+  data: ProgramacionMantenimiento,
+) => {
+  const response = await api.post(
+    "/mantenimientos/programacion_mantenimiento/",
+    data,
+  );
+  return response.data;
+};
+
+export const consultarProgramacionMantenimiento = async () => {
+  const response = await api.get("/mantenimientos/programacion_mantenimiento/");
+  return response.data;
+};
+
+export const actualizarProgramacion = async (
+  id: number,
+  data: ProgramacionMantenimiento,
+) => {
+  const response = await api.put(
+    `/mantenimientos/programacion_mantenimiento/${id}/`,
+  );
+  return response.data;
+};
