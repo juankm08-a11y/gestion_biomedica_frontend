@@ -1,5 +1,5 @@
+import { api } from "@/app/api/api";
 import { ProgramacionMantenimiento } from "@/types/ProgramacionMantenimiento.type";
-import { api } from "../app/api/api";
 
 export const crearProgramacionMantenimiento = async (
   data: ProgramacionMantenimiento,

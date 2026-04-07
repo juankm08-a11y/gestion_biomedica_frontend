@@ -1,5 +1,5 @@
+import { api } from "@/app/api/api";
 import { Notificacion } from "@/types/Notificacion.type";
-import { api } from "../app/api/api";
 
 export const consultarNotificaciones = async () => {
   const response = await api.get("/mantenimientos/notificacion/");

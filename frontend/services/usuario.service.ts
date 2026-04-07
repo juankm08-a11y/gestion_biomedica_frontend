@@ -1,4 +1,4 @@
-import { api } from "../app/api/api";
+import { api } from "@/app/api/api";
 
 export const registrarSesion = async (data: any) => {
   const response = await api.post("/usuarios/registro/", data);
