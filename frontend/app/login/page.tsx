@@ -4,13 +4,22 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { ROUTES } from "../routes/routes";
 import { inciarSesion } from "@/services/usuario.service";
+import PageContainer from "../components/layout/PageContainer";
+import FormularioBase from "../components/form/FormularioBase";
+import InputField from "../components/ui/InputField";
+import SelectField from "../components/ui/SelectField";
+import ButtonGrid from "../components/layout/ButtonGrid";
+import PrimaryButton from "../components/layout/PrimaryButton";
 
 export default function Login() {
   const router = useRouter();
 
   const [loginData, setLoginData] = useState({
+    nombre: "",
     correo: "",
+    estado: "activo",
     password: "",
+    rol: "",
   });
 
   const handleChange = (e: any) => {
@@ -46,4 +55,51 @@ export default function Login() {
       alert("Credenciales incorrectas");
     }
   };
+
+  const roles = [
+    { value: "ingenierobiomedico", label: "Ingeniero Biomédico" },
+    { value: "tecnicobiomedico", label: "Tecnico Biomédico" },
+    { value: "coordinador", label: "Coordinador" },
+    { value: "administrador", label: "Administrador" },
+    { value: "superadministrador", label: "SuperAdministrador" },
+  ];
+
+  return (
+    <PageContainer title="Login">
+      <FormularioBase titulo="Iniciar Sesion" onSubmit={handleSubmit}>
+        <InputField
+          label="Nombre"
+          name="nombre"
+          value={loginData.nombre}
+          onChange={handleChange}
+        />
+        <InputField
+          label="Contraseña"
+          name="password"
+          value={loginData.password}
+          onChange={handleChange}
+        />
+        <SelectField
+          label="Estado"
+          name="estado"
+          onChange={handleChange}
+          value={loginData.estado}
+          options={[
+            { value: "activo", label: "Activo" },
+            { value: "inactivo", label: "Inactivo" },
+          ]}
+        />
+        <SelectField
+          label="Rol"
+          name="rol"
+          value={loginData.rol}
+          onChange={handleChange}
+          options={roles}
+        />
+        <ButtonGrid>
+          <PrimaryButton text="Registrar" />
+        </ButtonGrid>
+      </FormularioBase>
+    </PageContainer>
+  );
 }

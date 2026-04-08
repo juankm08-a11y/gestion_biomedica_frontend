@@ -1,15 +1,10 @@
-"use client";
+import ProtectedRoute from "@/app/components/equipos/ProtectedRoute";
+import VerQR from "@/app/components/equipos/VerQR";
 
-interface Props {
-  params: { id: string };
-}
-
-export default function QRPage({ params }: Props) {
+export default function QRPage({ equipoId }: any) {
   return (
-    <div style={{ padding: "20px" }}>
-      <h1>QR del equipo</h1>
-      <p>ID del equipo: {params.id}</p>
-      <p>Aquí se mostrará el código QR del equipo.</p>
-    </div>
+    <ProtectedRoute>
+      <VerQR equipoId={equipoId}></VerQR>
+    </ProtectedRoute>
   );
 }

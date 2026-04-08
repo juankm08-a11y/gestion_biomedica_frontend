@@ -1,7 +1,61 @@
-export default function EquipoDetalle() {
+"use client";
+import PageContainer from "@/app/components/layout/PageContainer";
+import { obtenerEquipo } from "@/services/equipos.service";
+import { Equipo } from "@/types/Equipo.type";
+import { useEffect, useState } from "react";
+
+export default function EquipoDetalle({ params }: { params: { id: string } }) {
+  const [equipo, setEquipo] = useState<Equipo | null>(null);
+
+  useEffect(() => {
+    const cargarEquipo = async () => {
+      try {
+        const data = await obtenerEquipo(Number(params.id));
+        setEquipo(data);
+      } catch (error) {
+        console.error("Error cargando equipo", error);
+      }
+    };
+    cargarEquipo();
+  }, [params.id]);
+
+  if (!equipo) {
+    return <div>Cargando equipo...</div>;
+  }
+
   return (
-    <div>
-      <h1>Detalle del equipo</h1>
-    </div>
+    <PageContainer title="Ver detalle de equipo">
+      <p>
+        <strong>ID:</strong>
+        {equipo.idEquipo}
+      </p>
+      <p>
+        <strong>Nombre:</strong>
+        {equipo.nombre}
+      </p>
+      <p>
+        <strong>Modelo:</strong>
+        {equipo.modelo}
+      </p>
+      <p>
+        <strong>Marca:</strong>
+        {equipo.marca}
+      </p>
+      <p>
+        <strong>Serie:</strong>
+        {equipo.serie}
+      </p>
+      <p>
+        <strong>Fabricante:</strong>
+        {equipo.fabricante}
+      </p>
+      <p>
+        <strong>Ubicacion:</strong>
+        {equipo.ubicacion}
+      </p>
+      <p>
+        <strong>Tipo Tecnologia:</strong>
+      </p>
+    </PageContainer>
   );
 }

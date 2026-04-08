@@ -11,7 +11,7 @@ export const listarEquipos = async () => {
   return res.data;
 };
 
-export const obtenerEquipos = async (id: number) => {
+export const obtenerEquipo = async (id: number) => {
   const res = await api.get(`/equipos/${id}/`);
   return res.data;
 };
