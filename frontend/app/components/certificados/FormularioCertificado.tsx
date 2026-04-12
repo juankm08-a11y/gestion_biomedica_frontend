@@ -46,7 +46,7 @@ export default function FormularioRegistroCertificado() {
       responsable: Number(certificadoData.responsable),
     };
 
-    await registrarCertificado;
+    await registrarCertificado(payload);
 
     alert("Certificado registrado correctamente");
 

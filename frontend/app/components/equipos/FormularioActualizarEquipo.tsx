@@ -1,7 +1,7 @@
 "use client";
 
 import { ROUTES } from "@/app/routes/routes";
-import { actualizarEquipo, obtenerEquipos } from "@/services/equipos.service";
+import { actualizarEquipo, listarEquipos } from "@/services/equipos.service";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import PageContainer from "../layout/PageContainer";
@@ -28,7 +28,7 @@ export default function FormularioActualizarEquipo({ id }: any) {
 
     const cargarEquipo = async () => {
       try {
-        const response = await obtenerEquipos(id);
+        const response = await listarEquipos();
         setEquipoData(response);
       } catch (error) {
         console.error(error);

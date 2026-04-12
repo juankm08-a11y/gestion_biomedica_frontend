@@ -17,7 +17,7 @@ export const obtenerEquipo = async (id: number) => {
 };
 
 export const actualizarEquipo = async (id: number, data: Equipo) => {
-  const res = await api.put(`/equipos/${id}/`, data);
+  const res = await api.put(`/equipos/${id}/actualizar`, data);
   return res.data;
 };
 

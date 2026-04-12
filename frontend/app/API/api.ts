@@ -50,7 +50,7 @@ api.interceptors.response.use(
       }
 
       try {
-        const response = await axios.post(`${BASE_URL}/token/refresh`, {
+        const response = await axios.post(`${BASE_URL}/auth/token/refresh`, {
           refresh: refresh,
         });
 
