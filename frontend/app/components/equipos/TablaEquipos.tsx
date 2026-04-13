@@ -1,11 +1,9 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
-import { eliminarEquipo, listarEquipos } from "@/services/equipos.service";
-import { ROUTES } from "../../routes/routes";
 import { useEquipos } from "@/hooks/useEquipo";
 import { useSearch } from "@/hooks/useSearch";
+import { ROUTES } from "@/app/routes/routes";
 
 export const dynamic = "force-dynamic";
 
@@ -25,13 +23,19 @@ export default function TablaEquipos() {
   return (
     <div>
       <input value={search} onChange={(e) => setSearch(e.target.value)} />
+
       {filtered.map((equipo) => (
         <div key={equipo.idEquipo}>
           {equipo.nombre}
 
-          <button onClick={() => router.push(`/equipos/${equipo.idEquipo}`)}>
+          <button
+            onClick={() => {
+              router.push(ROUTES.equipos.ACTUALIZAR(equipo.idEquipo));
+            }}
+          >
             Editar
           </button>
+
           <button onClick={() => handleEliminar(equipo.idEquipo)}>
             Eliminar
           </button>

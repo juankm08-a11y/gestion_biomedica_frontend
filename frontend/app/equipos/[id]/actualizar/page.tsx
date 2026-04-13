@@ -1,18 +1,22 @@
 "use client";
-
-import { useParams } from "next/navigation";
 import ProtectedRoute from "@/app/components/equipos/ProtectedRoute";
 import FormularioActualizarEquipo from "@/app/components/equipos/FormularioActualizarEquipo";
+import { useParams } from "next/navigation";
 
 export default function ActualizarEquipo() {
   const params = useParams();
-  const id = Number(Array.isArray(params.id) ? params.id[0] : params.id);
+  const idParam = params.id;
+  const idEquipo = Number(Array.isArray(idParam) ? idParam[0] : idParam);
+
+  if (!idParam || isNaN(idEquipo)) {
+    return <div>Cargando equipo...</div>;
+  }
 
   return (
     <ProtectedRoute
       roles={["superadministrador", "administrador", "ingenierobiomedico"]}
     >
-      <FormularioActualizarEquipo id={id} />
+      <FormularioActualizarEquipo idEquipo={idEquipo} />
     </ProtectedRoute>
   );
 }

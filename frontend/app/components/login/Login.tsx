@@ -79,6 +79,12 @@ export default function Login() {
           value={loginData.password}
           onChange={handleChange}
         />
+        <InputField
+          label="Correo"
+          name="correo"
+          value={loginData.correo}
+          onChange={handleChange}
+        />
         <SelectField
           label="Estado"
           name="estado"

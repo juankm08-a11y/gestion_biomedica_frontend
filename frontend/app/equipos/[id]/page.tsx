@@ -1,61 +1,17 @@
 "use client";
-import PageContainer from "@/app/components/layout/PageContainer";
-import { obtenerEquipo } from "@/services/equipos.service";
-import { Equipo } from "@/types/Equipo.type";
-import { useEffect, useState } from "react";
 
-export default function EquipoDetalle({ params }: { params: { id: string } }) {
-  const [equipo, setEquipo] = useState<Equipo | null>(null);
+import EquipoDetalle from "@/app/components/equipos/EquipoDetalle";
+import { useParams } from "next/navigation";
 
-  useEffect(() => {
-    const cargarEquipo = async () => {
-      try {
-        const data = await obtenerEquipo(Number(params.id));
-        setEquipo(data);
-      } catch (error) {
-        console.error("Error cargando equipo", error);
-      }
-    };
-    cargarEquipo();
-  }, [params.id]);
+export default function Page() {
+  const params = useParams();
+  const idParam = params.id;
 
-  if (!equipo) {
+  const idEquipo = Number(Array.isArray(idParam) ? idParam[0] : idParam);
+
+  if (!idParam || isNaN(idEquipo)) {
     return <div>Cargando equipo...</div>;
   }
 
-  return (
-    <PageContainer title="Ver detalle de equipo">
-      <p>
-        <strong>ID:</strong>
-        {equipo.idEquipo}
-      </p>
-      <p>
-        <strong>Nombre:</strong>
-        {equipo.nombre}
-      </p>
-      <p>
-        <strong>Modelo:</strong>
-        {equipo.modelo}
-      </p>
-      <p>
-        <strong>Marca:</strong>
-        {equipo.marca}
-      </p>
-      <p>
-        <strong>Serie:</strong>
-        {equipo.serie}
-      </p>
-      <p>
-        <strong>Fabricante:</strong>
-        {equipo.fabricante}
-      </p>
-      <p>
-        <strong>Ubicacion:</strong>
-        {equipo.ubicacion}
-      </p>
-      <p>
-        <strong>Tipo Tecnologia:</strong>
-      </p>
-    </PageContainer>
-  );
+  return <EquipoDetalle idEquipo={idEquipo} />;
 }
