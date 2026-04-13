@@ -65,7 +65,7 @@ export default function EquiposPage() {
         Ver
       </button>
       <button
-        onClick={() => router.push(`/equipos/{${equipo.idEquipo}/actualizar`)}
+        onClick={() => router.push(`/equipos/${equipo.idEquipo}/actualizar`)}
         className="px-2 py-1 bg-blue-500 text-white text-xs"
       >
         Editar

@@ -1,5 +1,4 @@
 import { eliminarEquipo, listarEquipos } from "@/services/equipos.service";
-import { useFetch } from "./useFetch";
 import { useEffect, useState } from "react";
 import { Equipo } from "@/types/Equipo.type";
 
@@ -10,9 +9,10 @@ export function useEquipos() {
   const cargarEquipos = async () => {
     const response = await listarEquipos();
 
-    setEquipos(Array.isArray(response.data) ? response.data : []);
+    setEquipos(response.data);
 
     setLoading(false);
+    console.log("Equipos:", equipos);
   };
 
   useEffect(() => {

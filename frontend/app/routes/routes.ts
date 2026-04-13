@@ -4,13 +4,13 @@ export const ROUTES = {
   equipos: {
     LISTA: "/equipos",
     CREAR: "/equipos/registro",
-    DETALLE: "/equipos/[id]",
-    ACTUALIZAR: "/equipos/[id]/actualizar",
+    DETALLE: (id: number) => `/equipos/${id}`,
+    ACTUALIZAR: (id: number) => `/equipos/${id}/actualizar`,
     QR: "/equipos/[id]/qr",
   },
   archivos: {
-    SUBIR: "/equipos/[id]/archivos/subir",
-    HISTORIAL: "/equipos/[id]/archivos/historial",
+    SUBIR: (id: number) => `/equipos/${id}/archivos/subir`,
+    HISTORIAL: (id: number) => `/equipos/${id}/archivos/historial`,
   },
   ubicaciones: {
     CREAR: "/equipos/ubicacion/registro",
@@ -19,7 +19,7 @@ export const ROUTES = {
   mantenimientos: {
     CREAR: "/mantenimientos/registro",
     LISTA: "/mantenimientos",
-    ACTUALIZAR: "/mantenimientos/[id]",
+    ACTUALIZAR: (id: number) => `mantenimientos/${id}/actualizar`,
     SUPERVISAR: "/mantenimientos/supervisar",
     PROGRAMACION: "/mantenimientos/programacion",
     ACTUALIZAR_PROGRAMACION: "/mantenimientos/programacion/[id]/actualizar",
@@ -28,7 +28,7 @@ export const ROUTES = {
   ordenSerivicio: {
     LISTA: "/mantenimientos/orden-servicio",
     CREAR: "/mantenimientos/orden-servicio/registro",
-    DETALLE: "/mantenimientos/orden-servicio/[id]",
+    DETALLE: (id: number) => `/mantenimientos/orden-servicio/${id}`,
   },
 
   certificados: {

@@ -1,7 +1,11 @@
 "use client";
 
 import { ROUTES } from "@/app/routes/routes";
-import { actualizarEquipo, listarEquipos } from "@/services/equipos.service";
+import {
+  actualizarEquipo,
+  listarEquipos,
+  obtenerEquipo,
+} from "@/services/equipos.service";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import PageContainer from "../layout/PageContainer";
@@ -9,7 +13,11 @@ import FormularioBase from "../form/FormularioBase";
 import InputField from "../ui/InputField";
 import ButtonGrid from "../layout/ButtonGrid";
 
-export default function FormularioActualizarEquipo({ id }: any) {
+export default function FormularioActualizarEquipo({
+  idEquipo,
+}: {
+  idEquipo: number;
+}) {
   const router = useRouter();
 
   const [equipoData, setEquipoData] = useState({
@@ -24,22 +32,19 @@ export default function FormularioActualizarEquipo({ id }: any) {
   });
 
   useEffect(() => {
-    if (!id || isNaN(id)) return;
+    if (isNaN(idEquipo)) return;
 
     const cargarEquipo = async () => {
       try {
-        const response = await listarEquipos();
-        setEquipoData(response);
+        const response = await obtenerEquipo(idEquipo);
+        console.log(response.data);
+        setEquipoData(response.data);
       } catch (error) {
         console.error(error);
       }
     };
     cargarEquipo();
-  }, [id]);
-
-  if (!id || isNaN(id)) {
-    return <p>Cargando equipo...</p>;
-  }
+  }, [idEquipo]);
 
   const handleChange = (e: any) => {
     const { name, value } = e.target;
@@ -54,13 +59,14 @@ export default function FormularioActualizarEquipo({ id }: any) {
     e.preventDefault();
 
     try {
-      await actualizarEquipo(id, equipoData);
+      await actualizarEquipo(idEquipo, equipoData);
 
       alert("Equipo actualizado correctmente");
 
       router.push(ROUTES.dashboard);
     } catch (error) {
       console.error("Error al actualizar equipo: ", error);
+      console.log(error);
     }
   };
   return (
@@ -106,8 +112,8 @@ export default function FormularioActualizarEquipo({ id }: any) {
           onChange={handleChange}
         />
         <InputField
-          label="Ubicación"
-          name="ubicación"
+          label="Ubicacion"
+          name="ubicacion"
           value={equipoData.ubicacion || ""}
           onChange={handleChange}
         />

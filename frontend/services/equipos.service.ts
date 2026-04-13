@@ -11,17 +11,17 @@ export const listarEquipos = async () => {
   return res.data;
 };
 
-export const obtenerEquipo = async (id: number) => {
-  const res = await api.get(`/equipos/${id}/`);
+export const obtenerEquipo = async (idEquipo: number) => {
+  const res = await api.get(`/equipos/${idEquipo}/`);
   return res.data;
 };
 
-export const actualizarEquipo = async (id: number, data: Equipo) => {
-  const res = await api.put(`/equipos/${id}/actualizar`, data);
+export const actualizarEquipo = async (idEquipo: number, data: Equipo) => {
+  const res = await api.put(`/equipos/${idEquipo}/`, data);
   return res.data;
 };
 
-export const eliminarEquipo = async (id: number) => {
-  const res = await api.delete(`/equipos/${id}/`);
+export const eliminarEquipo = async (idEquipo: number) => {
+  const res = await api.delete(`/equipos/${idEquipo}/`);
   return res.data;
 };
