@@ -18,6 +18,7 @@ export interface RegistroUsuarioRequest {
     | "coordinador"
     | "ingenierobiomedico"
     | "tecnicobiomedico";
+  estado: "activo" | "inactivo";
 }
 
 export interface RecuperarCuentaRequest {

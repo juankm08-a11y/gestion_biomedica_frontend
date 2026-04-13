@@ -7,14 +7,15 @@ import InputField from "../components/ui/InputField";
 import SelectField from "../components/ui/SelectField";
 import ButtonGrid from "../components/layout/ButtonGrid";
 import PrimaryButton from "../components/layout/PrimaryButton";
+import { RegistroUsuarioRequest } from "@/types/auth.type";
 
 export default function Register() {
-  const [data, setData] = useState({
+  const [data, setData] = useState<RegistroUsuarioRequest>({
     nombre: "",
     correo: "",
     estado: "activo",
     password: "",
-    rol: "",
+    rol: "administrador",
   });
 
   const handleChange = (e: any) => {
