@@ -1,27 +1,29 @@
 "use client";
 
-import { useState } from "react";
-import FormularioRegistro from "../equipos/registro/page";
 import { useRouter } from "next/navigation";
+import PageContainer from "../components/layout/PageContainer";
+import ButtonGrid from "../components/layout/ButtonGrid";
+import PrimaryButton from "../components/layout/PrimaryButton";
 import { ROUTES } from "../routes/routes";
 
 export default function Dashboard() {
   const router = useRouter();
   return (
-    <div>
-      <button onClick={() => router.push(ROUTES.equipos.EQUIPO_CREAR)}>
-        Registrar Equipo
-      </button>
-
-      <button onClick={() => router.push(ROUTES.equipos.EQUIPOS_VER)}>
-        Ver Lista de Equipos
-      </button>
-
-      <button
-        onClick={() => router.push(ROUTES.mantenimientos.MANTENIMIENTO_CREAR)}
-      >
-        Registrar Mantenimiento
-      </button>
-    </div>
+    <PageContainer title="Dashboard">
+      <ButtonGrid>
+        <PrimaryButton
+          text="Registrar Equipo"
+          onClick={() => router.push(ROUTES.equipos.CREAR)}
+        ></PrimaryButton>
+        <PrimaryButton
+          text="Consultar Equipos"
+          onClick={() => router.push(ROUTES.equipos.LISTA)}
+        ></PrimaryButton>
+        <PrimaryButton
+          text="Registrar Mantenimiento"
+          onClick={() => router.push(ROUTES.mantenimientos.CREAR)}
+        ></PrimaryButton>
+      </ButtonGrid>
+    </PageContainer>
   );
 }
