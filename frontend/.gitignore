@@ -44,5 +44,9 @@ next-env.d.ts
 AGENTS.md
 CLAUDE.md
 
-.rmv
-.vscode
+.rmv/
+.vscode/
+*.log
+.next/
+node_modules/
+.env
