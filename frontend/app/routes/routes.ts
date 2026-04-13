@@ -1,31 +1,45 @@
 export const ROUTES = {
-  dashboard: {
-    DASHBOARD: "/dashboard",
-  },
+  dashboard: "/dashboard",
 
   equipos: {
-    EQUIPOS: "/equipos",
-    EQUIPOS_VER: "/equipos/consultar",
-    EQUIPO_CREAR: "/equipos/registro",
-    EQUIPO_ACTUALIZAR: "/equipos/[id]",
-    EQUIPO_DETALLE: (id: number) => `/equipos/${id}`,
+    LISTA: "/equipos",
+    CREAR: "/equipos/registro",
+    DETALLE: (id: number) => `/equipos/${id}`,
+    ACTUALIZAR: (id: number) => `/equipos/${id}/actualizar`,
+    QR: "/equipos/[id]/qr",
   },
-
+  archivos: {
+    SUBIR: (id: number) => `/equipos/${id}/archivos/subir`,
+    HISTORIAL: (id: number) => `/equipos/${id}/archivos/historial`,
+  },
   ubicaciones: {
-    UBICACION_CREAR: "/equipos/ubicaciones",
+    CREAR: "/equipos/ubicacion/registro",
+    LISTA: "/equipos/ubicacion/[id]/actualizar",
+  },
+  mantenimientos: {
+    CREAR: "/mantenimientos/registro",
+    LISTA: "/mantenimientos",
+    ACTUALIZAR: (id: number) => `mantenimientos/${id}/actualizar`,
+    SUPERVISAR: "/mantenimientos/supervisar",
+    PROGRAMACION: "/mantenimientos/programacion",
+    ACTUALIZAR_PROGRAMACION: "/mantenimientos/programacion/[id]/actualizar",
+    CONSULTAR_PROGRAMACION: "/mantenimientos/programacion/consulta",
+  },
+  ordenSerivicio: {
+    LISTA: "/mantenimientos/orden-servicio",
+    CREAR: "/mantenimientos/orden-servicio/registro",
+    DETALLE: (id: number) => `/mantenimientos/orden-servicio/${id}`,
   },
 
-  mantenimientos: {
-    MANTENIMIENTO_CREAR: "/mantenimientos/registro",
+  certificados: {
+    LISTA: "/certificados",
+    GENERAR: "/certificado/generar",
   },
-  codigosQr: {
-    CODIGOQR_GENERAR: "/codigos-qr",
-  },
-  reportes: {
-    REPORTE_REGISTRAR: "/reportes/registro",
-  },
-  usuarios: {
-    USUARIO_REGISTRAR: "/usuarios/registro",
-    USUARIO_AUTENTICAR: "/usuarios/login",
-  },
+
+  reportes: "/reportes",
+
+  login: "/login",
+  register: "/register",
+  recuperarpassword: "/recuperar-password",
+  recuperarCuenta: "recuperar-cuenta",
 };
