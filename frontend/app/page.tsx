@@ -8,9 +8,7 @@ export default function Home() {
   return (
     <main>
       <div>SOFTWARE DE GESTION DE EQUIPOS BIOMEDICOS</div>
-      <button onClick={() => router.push(ROUTES.dashboard.DASHBOARD)}>
-        Dashboard
-      </button>
+      <button onClick={() => router.push(ROUTES.dashboard)}>Dashboard</button>
     </main>
   );
 }

@@ -40,13 +40,13 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# package
-package.json
-package-lock.json
-
 # md
 AGENTS.md
 CLAUDE.md
 
-.rmv
-.vscode
+.rmv/
+.vscode/
+*.log
+.next/
+node_modules/
+.env

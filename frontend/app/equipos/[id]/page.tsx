@@ -1,15 +1,17 @@
 "use client";
 
+import EquipoDetalle from "@/app/components/equipos/EquipoDetalle";
 import { useParams } from "next/navigation";
-import FormularioActualizarEquipo from "./components/FormularioActualizarEquipo";
 
-export default function ActualizarEquipo() {
+export default function Page() {
   const params = useParams();
-  const id = Number(Array.isArray(params.id) ? params.id[0] : params.id);
+  const idParam = params.id;
 
-  return (
-    <div>
-      <FormularioActualizarEquipo id={id} />
-    </div>
-  );
+  const idEquipo = Number(Array.isArray(idParam) ? idParam[0] : idParam);
+
+  if (!idParam || isNaN(idEquipo)) {
+    return <div>Cargando equipo...</div>;
+  }
+
+  return <EquipoDetalle idEquipo={idEquipo} />;
 }
