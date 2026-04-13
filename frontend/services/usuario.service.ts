@@ -11,19 +11,19 @@ import { Usuario } from "@/types/Usuario.type";
 export const registrarSesion = async (
   data: RegistroUsuarioRequest,
 ): Promise<Usuario> => {
-  const response = await api.post("/usuarios/registro/", data);
+  const response = await api.post("/registro/", data);
   return response.data;
 };
 
 export const inciarSesion = async (
   data: LoginRequest,
 ): Promise<LoginResponse> => {
-  const response = await api.post("/usuarios/login/", data);
+  const response = await api.post("/auth/login/", data);
   return response.data;
 };
 
 export const cerrarSesion = async (refresh: string): Promise<void> => {
-  const response = await api.post("/usuarios/logout/", {
+  const response = await api.post("/auth/logout/", {
     refresh: refresh,
   });
   return response.data;
@@ -32,18 +32,18 @@ export const cerrarSesion = async (refresh: string): Promise<void> => {
 export const recuperarCuenta = async (
   data: RecuperarCuentaRequest,
 ): Promise<void> => {
-  const response = await api.post("/usuarios/recuperar-cuenta/", data);
+  const response = await api.post("/auth/recuperar-cuenta/", data);
   return response.data;
 };
 
 export const recuperarContraseña = async (
   data: ResetPasswordRequest,
 ): Promise<void> => {
-  const response = await api.put("/usuarios/recuperar-contraseña/", data);
+  const response = await api.put("/auth/recuperar-contraseña/", data);
   return response.data;
 };
 
 export const consultarUsuarios = async (): Promise<Usuario[]> => {
-  const response = await api.get("/usuarios/ver-usuarios/");
+  const response = await api.get("/usuarios/");
   return response.data;
 };
