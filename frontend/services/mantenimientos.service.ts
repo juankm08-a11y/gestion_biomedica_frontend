@@ -28,3 +28,8 @@ export const eliminarMantenimiento = async (id: number) => {
   const response = await api.delete(`/mantenimientos/${id}/`);
   return response.data;
 };
+
+export const supervisarMantenimiento = async () => {
+  const response = await api.get("/programaciones/");
+  return response.data;
+};

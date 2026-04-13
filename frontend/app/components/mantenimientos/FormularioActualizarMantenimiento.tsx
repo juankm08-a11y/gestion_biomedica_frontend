@@ -50,9 +50,7 @@ export default function FormularioActualizarMantenimiento({
         setEquipos(
           Array.isArray(equiposResponse.data) ? equiposResponse.data : [],
         );
-        setUsuarios(
-          Array.isArray(usuariosResponse.data) ? usuariosResponse.data : [],
-        );
+        setUsuarios(Array.isArray(usuariosResponse) ? usuariosResponse : []);
       } catch (error) {
         console.error("Error al cargar los datos");
       }

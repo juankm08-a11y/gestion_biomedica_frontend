@@ -1,8 +1,8 @@
 "use client";
 
-import { supervisarMantenimiento } from "@/services/supervisarMantenimiento.service";
 import { useEffect, useState } from "react";
 import Table from "../../ui/Table";
+import { supervisarMantenimiento } from "@/services/mantenimientos.service";
 
 export default function SupervisarMantenimiento() {
   const [programaciones, setProgramaciones] = useState<any[]>([]);

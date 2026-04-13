@@ -6,6 +6,8 @@ export interface LoginRequest {
 export interface LoginResponse {
   access: string;
   refresh: string;
+  rol: string;
+  usuario: string;
 }
 
 export interface RegistroUsuarioRequest {
