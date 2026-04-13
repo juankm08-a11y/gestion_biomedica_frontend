@@ -1,14 +1,18 @@
+import { ReactNode } from "react";
+
 interface Props {
-  text: string;
+  text?: string;
+  icon?: ReactNode;
   onClick?: () => void;
 }
 
-export default function PrimaryButton({ text, onClick }: Props) {
+export default function PrimaryButton({ text, onClick, icon }: Props) {
   return (
     <button
       onClick={onClick}
-      className="border border-gray-400 px-5 py-2 text-sm font-medium hover:bg-gray-100 transition"
+      className="flex items-center gap-2 border border-gray-400 px-3 py-2 text-center-sm font-medium hover:bg-gray-100 transitiion"
     >
+      {icon}
       {text}
     </button>
   );

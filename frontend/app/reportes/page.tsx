@@ -1,10 +1,10 @@
 import ProtectedRoute from "../components/equipos/ProtectedRoute";
-import HistorialReportes from "../components/reportes/HistorialReportes";
+import ReporteDashboard from "../components/reportes/HistorialReportes";
 
 export default function ListaReportes() {
   return (
     <ProtectedRoute roles={["superadministrador", "administrador"]}>
-      <HistorialReportes />
+      <ReporteDashboard />
     </ProtectedRoute>
   );
 }

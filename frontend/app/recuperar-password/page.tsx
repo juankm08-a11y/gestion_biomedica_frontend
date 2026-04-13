@@ -1,17 +1,31 @@
 "use client";
-import { useState } from "react";
-import { recuperarContraseña } from "../../services/usuario.service";
+import { recuperarContraseña } from "@/services/usuario.service";
+import { useEffect, useState } from "react";
 import PageContainer from "../components/layout/PageContainer";
 import FormularioBase from "../components/form/FormularioBase";
 import InputField from "../components/ui/InputField";
 import ButtonGrid from "../components/layout/ButtonGrid";
 import PrimaryButton from "../components/layout/PrimaryButton";
+import { ResetPasswordRequest } from "@/types/auth.type";
+import { useSearchParams } from "next/navigation";
 
 export default function RecuperarPasswordPage() {
-  const [data, setData] = useState({
+  const [data, setData] = useState<ResetPasswordRequest>({
     correo: "",
-    password: "",
-    confirmarPassword: "",
+    nuevaPassword: "",
+    token: "",
+  });
+
+  const params = useSearchParams();
+  const token = params.get("token");
+
+  useEffect(() => {
+    if (token) {
+      setData((prev) => ({
+        ...prev,
+        token,
+      }));
+    }
   });
 
   const handleChange = (e: any) => {
@@ -26,7 +40,7 @@ export default function RecuperarPasswordPage() {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
 
-    if (data.password !== data.confirmarPassword) {
+    if (data.nuevaPassword !== data.nuevaPassword) {
       alert("Las contraseñas no coinciden");
       return;
     }
@@ -34,7 +48,8 @@ export default function RecuperarPasswordPage() {
     try {
       await recuperarContraseña({
         correo: data.correo,
-        password: data.password,
+        nuevaPassword: data.nuevaPassword,
+        token: data.token,
       });
 
       alert("Contraseña actualizada correctamente");
@@ -55,17 +70,17 @@ export default function RecuperarPasswordPage() {
         />
         <InputField
           label="Nueva contraseña"
-          name="password"
-          value={data.password}
+          name="nuevaPassword"
+          value={data.nuevaPassword}
           onChange={handleChange}
           type="password"
         />
         <InputField
-          label="Confirmar contraseña"
-          name="confirmarPassword"
+          label="Token"
+          name="confirmarToken"
           onChange={handleChange}
-          type="password"
-          value={data.confirmarPassword}
+          type="token"
+          value={data.token}
         />
         <ButtonGrid>
           <PrimaryButton text="Actualizar Contraseña" />

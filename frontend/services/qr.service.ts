@@ -1,6 +1,6 @@
 import { api } from "@/app/api/api";
 
-export const consultarQR = async (equipoId: number) => {
-  const response = await api.get(`/codigos/qr/${equipoId}/`);
+export const obtenerQrEquipo = async (equipoId: number) => {
+  const response = await api.get(`/qr/${equipoId}/`);
   return response.data;
 };

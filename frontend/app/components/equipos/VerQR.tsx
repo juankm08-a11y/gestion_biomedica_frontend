@@ -1,21 +1,15 @@
 "use client";
 
-import { consultarQR } from "@/services/qr.service";
 import { useEffect, useState } from "react";
 import PageContainer from "../layout/PageContainer";
 import Image from "next/image";
+import { obtenerQrEquipo } from "@/services/qr.service";
+import { useQr } from "@/hooks/useQr";
 
 export default function VerQR({ equipoId }: { equipoId: number }) {
-  const [qr, setQr] = useState<any>(null);
+  const { qr, loading } = useQr(equipoId);
 
-  useEffect(() => {
-    cargarQR();
-  }, []);
-
-  const cargarQR = async () => {
-    const res = await consultarQR(equipoId);
-    setQr(res);
-  };
+  if (loading) return <p>Cargando QR...</p>;
 
   if (!qr) return <p>Cargando QR...</p>;
   return (

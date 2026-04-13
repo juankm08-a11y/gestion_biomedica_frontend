@@ -45,6 +45,8 @@ AGENTS.md
 CLAUDE.md
 
 .rmv/
-.vscode
+.vscode/
 *.log
-logs/
+.next/
+node_modules/
+.env
