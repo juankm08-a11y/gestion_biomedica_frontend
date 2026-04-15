@@ -1,5 +1,8 @@
 import { api } from "@/app/api/api";
-import { Mantenimiento } from "@/types/Mantenimiento.type";
+import {
+  Mantenimiento,
+  MantenimientoRequest,
+} from "@/types/Mantenimiento.type";
 
 export const registrarMantenimiento = async (data: Mantenimiento) => {
   const response = await api.post("/mantenimientos/", data);
@@ -18,7 +21,7 @@ export const consultarMantenimiento = async (idMantenimiento: number) => {
 
 export const actualizarMantenimiento = async (
   idMantenimiento: number,
-  data: Mantenimiento,
+  data: MantenimientoRequest,
 ) => {
   const response = await api.put(`/mantenimientos/${idMantenimiento}/`, data);
   return response.data;

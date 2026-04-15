@@ -14,6 +14,11 @@ import FormularioBase from "../ui/form/FormularioBase";
 import SelectField from "../ui/input/SelectField";
 import InputField from "../ui/input/InputField";
 import ButtonGrid from "../ui/layout/ButtonGrid";
+import { useError } from "@/hooks/useError";
+import { useFetch } from "@/hooks/useFetch";
+import { UseForm } from "@/hooks/useForm";
+import { MantenimientoRequest } from "@/types/Mantenimiento.type";
+import { mantenimientoToForm } from "@/mappers/mantenimiento.mapper";
 
 interface Props {
   idEquipo?: number;
@@ -24,95 +29,47 @@ export default function FormularioActualizarMantenimiento({
   idEquipo,
   idMantenimiento,
 }: any) {
-  const [equipos, setEquipos] = useState<any[]>([]);
-  const [usuarios, setUsuarios] = useState<any[]>([]);
-  const [mantenimientoData, setMantenimientoData] = useState({
-    idMantenimiento: 0,
-    equipo: idEquipo ?? 0,
-    tipo: "mantenimiento" as
-      | "mantenimiento"
-      | "calibracion"
-      | "falla"
-      | "sistema",
-    estado: "pendiente" as "aprobado" | "pendiente" | "ejecutado",
-    fechaInicio: "",
-    fechaFin: "",
-    responsable: 0,
-  });
-
   const router = useRouter();
 
-  useEffect(() => {
-    const cargarDatos = async () => {
-      try {
-        const equiposResponse = await listarEquipos();
-        const usuariosResponse = await consultarUsuarios();
+  const { handleError } = useError();
 
-        setEquipos(
-          Array.isArray(equiposResponse.data) ? equiposResponse.data : [],
-        );
-        setUsuarios(Array.isArray(usuariosResponse) ? usuariosResponse : []);
-      } catch (error) {
-        console.error("Error al cargar los datos");
-      }
-    };
-    cargarDatos();
-  }, []);
+  const { data: equipos } = useFetch(listarEquipos, []);
+
+  const { data: usuarios } = useFetch(consultarUsuarios, []);
+
+  const { formData, setFormData, handleChange, resetForm } =
+    UseForm<MantenimientoRequest>(mantenimientoToForm({} as any, idEquipo));
 
   useEffect(() => {
-    if (!idMantenimiento || isNaN(idMantenimiento)) return;
+    if (!idMantenimiento) return;
 
-    const cargarMantenimiento = async () => {
+    const cargar = async () => {
       try {
-        const response = await consultarMantenimiento(idMantenimiento);
-        setMantenimientoData(response.data);
+        const data = await consultarMantenimiento(idMantenimiento);
+        setFormData(mantenimientoToForm(data, idEquipo));
       } catch (error) {
-        console.error(error);
+        handleError(error);
       }
     };
-    cargarMantenimiento();
+
+    cargar();
   }, [idMantenimiento]);
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
 
     try {
-      const response = await actualizarMantenimiento(
-        idMantenimiento,
-        mantenimientoData,
-      );
+      await actualizarMantenimiento(idMantenimiento, formData);
+
       alert("Mantenimiento actualizado correctamente");
 
-      console.log(response);
-      setMantenimientoData({
-        idMantenimiento: 0,
-        equipo: idEquipo ?? 0,
-        tipo: "mantenimiento" as
-          | "mantenimiento"
-          | "calibracion"
-          | "falla"
-          | "sistema",
-        estado: "pendiente" as "aprobado" | "pendiente" | "ejecutado",
-        fechaInicio: "",
-        fechaFin: "",
-        responsable: 0,
-      });
+      resetForm();
+
       router.push(ROUTES.mantenimientos.LISTA);
     } catch (error) {
-      console.error("Error al actualizar el mantenimiento", error);
+      handleError(error);
     }
   };
-
-  const handleChange = (e: any) => {
-    const { name, value } = e.target;
-
-    setMantenimientoData({
-      ...mantenimientoData,
-      [name]:
-        name === "equipo" || name === "responsable" ? Number(value) : value,
-    });
-  };
-
   return (
     <PageContainer>
       <FormularioBase titulo="Actualizar Mantenimiento" onSubmit={handleSubmit}>
@@ -120,8 +77,8 @@ export default function FormularioActualizarMantenimiento({
           label="Equipo"
           name="equipo"
           onChange={handleChange}
-          value={mantenimientoData?.equipo?.toString() || ""}
-          options={equipos.map((equipo) => ({
+          value={formData.equipo?.toString() || ""}
+          options={(equipos ?? []).map((equipo: any) => ({
             value: equipo.idEquipo.toString(),
             label: equipo.nombre,
           }))}
@@ -130,7 +87,7 @@ export default function FormularioActualizarMantenimiento({
         <SelectField
           label="Tipo"
           name="tipo"
-          value={mantenimientoData?.tipo || ""}
+          value={formData.tipo || ""}
           onChange={handleChange}
           options={[
             { value: "mantenimiento", label: "Mantenimiento" },
@@ -143,7 +100,7 @@ export default function FormularioActualizarMantenimiento({
         <SelectField
           label="Estado"
           name="estado"
-          value={mantenimientoData?.estado || ""}
+          value={formData.estado || ""}
           onChange={handleChange}
           options={[
             { value: "pendiente", label: "Pendiente" },
@@ -155,22 +112,22 @@ export default function FormularioActualizarMantenimiento({
           label="Fecha Inicio"
           name="fechaInicio"
           type="date"
-          value={mantenimientoData?.fechaInicio || ""}
+          value={formData.fechaInicio || ""}
           onChange={handleChange}
         />
         <InputField
           label="Fecha Fin"
           name="fechaFin"
           type="date"
-          value={mantenimientoData?.fechaFin || ""}
+          value={formData.fechaFin || ""}
           onChange={handleChange}
         />
         <SelectField
           label="Responsable"
           name="responsable"
-          value={mantenimientoData?.responsable?.toString()}
+          value={formData.responsable?.toString()}
           onChange={handleChange}
-          options={usuarios.map((usuario) => ({
+          options={(usuarios ?? []).map((usuario: any) => ({
             value: usuario.idUsuario.toString(),
             label: usuario.nombre,
           }))}
