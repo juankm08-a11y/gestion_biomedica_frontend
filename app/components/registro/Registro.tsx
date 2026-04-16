@@ -1,9 +1,6 @@
 "use client";
 import { registrarSesion } from "@/services/usuario.service";
-import { useState } from "react";
 import { RegistroUsuarioRequest } from "@/types/Auth.type";
-import PageContainer from "../ui/layout/PageContainer";
-import FormularioBase from "../ui/form/FormularioBase";
 import InputField from "../ui/input/InputField";
 import SelectField from "../ui/input/SelectField";
 import ButtonGrid from "../ui/layout/ButtonGrid";
@@ -13,6 +10,8 @@ import { ROUTES } from "@/app/routes/routes";
 import { UseForm } from "@/hooks/useForm";
 import { useAction } from "@/hooks/useAction";
 import { useHandle } from "@/hooks/useHandle";
+import AuthLayout from "../ui/layout/AuthLayout";
+import AuthForm from "../ui/form/AuthForm";
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -44,8 +43,8 @@ export default function RegisterPage() {
 
 
   return (
-    <PageContainer>
-      <FormularioBase titulo="Registro Usuario" onSubmit={handleSubmit}>
+    <AuthLayout>
+      <AuthForm title="Crear cuenta" subtitle="Registrar un nuevo usuario en el sistema" onSubmit={handleSubmit}>
         <InputField
           label="Nombre"
           name="nombre"
@@ -92,7 +91,7 @@ export default function RegisterPage() {
         <ButtonGrid>
           <PrimaryButton text={loading ? "Registrando...":"Registrar"} />
         </ButtonGrid>
-      </FormularioBase>
-    </PageContainer>
+      </AuthForm>
+    </AuthLayout>
   );
 }

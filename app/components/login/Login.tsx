@@ -2,8 +2,6 @@
 
 import { useRouter } from "next/navigation";
 import { ROUTES } from "@/app/routes/routes";
-import PageContainer from "../ui/layout/PageContainer";
-import FormularioBase from "../ui/form/FormularioBase";
 import InputField from "../ui/input/InputField";
 import ButtonGrid from "../ui/layout/ButtonGrid";
 import PrimaryButton from "../ui/buttons/PrimaryButton";
@@ -13,7 +11,8 @@ import { useAction } from "@/hooks/useAction";
 import { useHandle } from "@/hooks/useHandle";
 import { useError } from "@/hooks/useError";
 import { iniciarSesion } from "@/services/usuario.service";
-import Card from "../ui/cards/Card";
+import AuthForm from "../ui/form/AuthForm";
+import AuthLayout from "../ui/layout/AuthLayout";
 
 export default function Login() {
   const router = useRouter();
@@ -24,7 +23,7 @@ export default function Login() {
     password:"",
   })
 
-  const {execute:login, loading} = useAction(iniciarSesion);
+  const {execute:login} = useAction(iniciarSesion);
 
   const {handle} = useHandle()
 
@@ -44,9 +43,13 @@ export default function Login() {
   }
 
   return (
-    <PageContainer>
-     <Card variant="form">
-       <FormularioBase titulo="Iniciar Sesion" onSubmit={handleSubmit}>
+    <AuthLayout>
+      <AuthForm title="Bienvenido" subtitle="Ingresa tus credenciales" onSubmit={handleSubmit}>
+        {error && (
+          <p className="text-red-500">
+            {error}
+          </p>
+        )}
         <InputField
           label="Contraseña"
           name="password"
@@ -86,8 +89,8 @@ export default function Login() {
             No puedes acceder a tu cuenta?
           </button>
         </div>
-      </FormularioBase>
-     </Card>
-    </PageContainer>
+      </AuthForm>
+     
+    </AuthLayout>
   );
 }
