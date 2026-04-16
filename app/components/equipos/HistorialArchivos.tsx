@@ -1,36 +1,40 @@
-export default function HistorialArchivos() {
-  return <div>Hola desde Archivos</div>;
+"use client";
+
+import { listarArchivos } from "@/services/archivos.service";
+import PageContainer from "../ui/layout/PageContainer";
+import DataTable, { Column } from "../ui/table/DataTable";
+import { useFetch } from "@/hooks/useFetch";
+import { ArchivoAdjuntoResponse } from "@/types/ArchivoAdjunto.type";
+
+export default function HistorialArchivo({ equipoId }: { equipoId: number }) {
+  const { data: archivos } = useFetch<ArchivoAdjuntoResponse[]>(
+    () => listarArchivos(equipoId),
+    [equipoId],
+  );
+
+  const columns: Column<ArchivoAdjuntoResponse>[] = [
+    {
+      key: "nombre",
+      label: "Nombre",
+    },
+    {
+      key: "archivo",
+      label: "Archivo",
+      render: (archivo) => (
+        <a
+          href={archivo.archivo}
+          target="_blank"
+          className="text-blue-600 underline"
+        >
+          Ver
+        </a>
+      ),
+    },
+  ];
+
+  return (
+    <PageContainer>
+      <DataTable data={archivos ?? []} columns={columns} />
+    </PageContainer>
+  );
 }
-
-// "use client";
-
-// import { listarArchivos } from "@/services/archivos.service";
-// import { useEffect, useState } from "react";
-// import PageContainer from "../ui/layout/PageContainer";
-// import Table from "../ui/table/DataTable";
-
-// export default function HistorialArchivo({ equipoId }: { equipoId: number }) {
-//   const [archivos, setArchivos] = useState<any[]>([]);
-
-//   useEffect(() => {
-//     cargarArchivos();
-//   }, []);
-
-//   const cargarArchivos = async () => {
-//     const res = await listarArchivos(equipoId);
-//     setArchivos(res);
-//   };
-
-//   const headers = ["Nombre", "Archivo"];
-
-//   const rows = archivos.map((archivo) => [
-//     archivo.nombre,
-//     <a href={archivo.archivo}>Ver</a>,
-//   ]);
-
-//   return (
-//     <PageContainer>
-//       <Table headers={headers} rows={rows} />
-//     </PageContainer>
-//   );
-// }

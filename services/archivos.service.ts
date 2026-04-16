@@ -1,4 +1,5 @@
 import { api } from "@/app/api/api";
+import { ArchivoAdjuntoResponse } from "@/types/ArchivoAdjunto.type";
 
 export const subirArchivo = async (equipoId: number, archivo: File) => {
   const formData = new FormData();
@@ -13,7 +14,9 @@ export const subirArchivo = async (equipoId: number, archivo: File) => {
   return response.data;
 };
 
-export const listarArchivos = async (equipoId: number) => {
+export const listarArchivos = async (
+  equipoId: number,
+): Promise<ArchivoAdjuntoResponse[]> => {
   const response = await api.get(`/archivos/${equipoId}/`);
   return response.data;
 };

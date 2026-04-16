@@ -1,5 +1,5 @@
-import ProtectedRoute from "../components/equipos/ProtectedRoute";
-import TablaEquipos from "../components/equipos/TablaEquipos";
+import ProtectedRoute from "../auth/ProtectedRoute";
+import TablaEquipos from "../components/equipos/HistorialEquipos";
 
 export default function EquiposPage() {
   return (

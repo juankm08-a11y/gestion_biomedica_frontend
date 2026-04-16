@@ -1,32 +1,39 @@
 "use client";
 
 import { consultarCertificados } from "@/services/certificados.service";
-import { useEffect, useState } from "react";
 import PageContainer from "../ui/layout/PageContainer";
-import Table from "../ui/table/DataTable";
+import { useFetch } from "@/hooks/useFetch";
+import { CertificadoMetrologicoResponse } from "@/types/Certificado.type";
+import DataTable, { Column } from '../ui/table/DataTable';
 
 export default function HistorialCertificados() {
-  const [certificados, setCertificados] = useState<any[]>([]);
+   const {data:certificados} = useFetch<CertificadoMetrologicoResponse[]>(
+    consultarCertificados,
+    []
+   )
 
-  const cargar = async () => {
-    const response = await consultarCertificados();
-    setCertificados(response.data || []);
-  };
-
-  useEffect(() => {
-    cargar();
-  }, []);
-
-  const headers = ["ID", "Numero Certificado", "Fecha", "Responsable"];
-  const rows = certificados.map((cert) => [
-    cert.idCertificado,
-    cert.numeroCertificado,
-    cert.responsable,
-  ]);
+   const columns: Column<CertificadoMetrologicoResponse>[] = [
+    {
+      key:"idCertificado",
+      label:"ID",
+    },
+    {
+      key:"numeroCertificado",
+      label:"Numero Certificado",
+    },
+    {
+      key:"fecha",
+      label:"Fecha",
+    },
+    {
+      key:"responsable",
+      label:"Responsable",
+    }
+   ]
 
   return (
-    <PageContainer title="Consultar Certificados">
-      <Table headers={headers} rows={rows} />
+    <PageContainer>
+      <DataTable data={certificados ?? []}columns={columns} />
     </PageContainer>
   );
 }

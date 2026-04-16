@@ -1,5 +1,5 @@
 import HistorialArchivos from "@/app/components/equipos/HistorialArchivos";
-import ProtectedRoute from "@/app/components/equipos/ProtectedRoute";
+import ProtectedRoute from "@/app/auth/ProtectedRoute";
 
 export default async function HistorialEquiposPage({
   params,

@@ -1,6 +1,6 @@
 "use client";
 import { useParams } from "next/navigation";
-import ProtectedRoute from "../../../components/equipos/ProtectedRoute";
+import ProtectedRoute from "../../../auth/ProtectedRoute";
 import SupervisarMantenimiento from "../../../components/mantenimientos/supervisar-mantenimiento/SupervisarMantenimiento";
 
 export default function ListaReportes() {

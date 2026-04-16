@@ -1,4 +1,4 @@
-import ProtectedRoute from "@/app/components/equipos/ProtectedRoute";
+import ProtectedRoute from "@/app/auth/ProtectedRoute";
 import SubirArchivo from "../../../../components/equipos/SubirArchivo";
 
 export default async function CargarArchivoPage({

@@ -5,17 +5,17 @@ import {
   RecuperarCuentaRequest,
   RegistroUsuarioRequest,
   ResetPasswordRequest,
-} from "@/types/auth.type";
-import { Usuario } from "@/types/Usuario.type";
+} from "@/types/Auth.type";
+import { UsuarioResponse } from "@/types/Usuario.type";
 
 export const registrarSesion = async (
   data: RegistroUsuarioRequest,
-): Promise<Usuario> => {
+): Promise<UsuarioResponse> => {
   const response = await api.post("/registro/", data);
   return response.data;
 };
 
-export const inciarSesion = async (
+export const iniciarSesion = async (
   data: LoginRequest,
 ): Promise<LoginResponse> => {
   const response = await api.post("/auth/login/", data);
@@ -43,7 +43,7 @@ export const recuperarContraseña = async (
   return response.data;
 };
 
-export const consultarUsuarios = async (): Promise<Usuario[]> => {
+export const consultarUsuarios = async (): Promise<UsuarioResponse[]> => {
   const response = await api.get("/usuarios/");
   return response.data;
 };

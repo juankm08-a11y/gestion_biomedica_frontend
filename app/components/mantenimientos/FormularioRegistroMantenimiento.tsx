@@ -11,79 +11,50 @@ import SelectField from "../ui/input/SelectField";
 import { listarEquipos } from "@/services/equipos.service";
 import { ROUTES } from "@/app/routes/routes";
 import ButtonGrid from "../ui/layout/ButtonGrid";
+import { useHandle } from "@/hooks/useHandle";
+import { useList } from "@/hooks/useList";
+import { UsuarioResponse } from "@/types/Usuario.type";
+import { EquipoResponse } from "@/types/Equipo.type";
+import { UseForm } from "@/hooks/useForm";
+import { MantenimientoRequest } from "@/types/Mantenimiento.type";
+import { mantenimientoToForm } from "@/mappers/mantenimiento.mapper";
+import { useAction } from "@/hooks/useAction";
 
-interface Props {
-  equipoId?: number;
-}
 
-export default function FormularioRegistro({ equipoId }: Props) {
+export default function FormularioRegistro() {
   const router = useRouter();
 
-  const [mantenimientoData, setMantenimientoData] = useState({
-    idMantenimiento: 0,
-    equipo: equipoId ?? 0,
-    tipo: "mantenimiento" as
-      | "mantenimiento"
-      | "calibracion"
-      | "falla"
-      | "sistema",
-    estado: "pendiente" as "aprobado" | "pendiente" | "ejecutado",
-    fechaInicio: "",
-    fechaFin: "",
-    responsable: 0,
-  });
+  const {handle} = useHandle();
 
-  const [usuarios, setUsuarios] = useState<any[]>([]);
-  const [equipos, setEquipos] = useState<any[]>([]);
+  const {data: usuarios } = useList<UsuarioResponse>(consultarUsuarios);
 
-  useEffect(() => {
-    const cargarDatos = async () => {
-      try {
-        const usuariosResponse = await consultarUsuarios();
-        const equiposResponse = await listarEquipos();
+  const {data:equipos} = useList<EquipoResponse>(listarEquipos);
 
-        setUsuarios(Array.isArray(usuariosResponse) ? usuariosResponse : []);
-        setEquipos(
-          Array.isArray(equiposResponse.data) ? equiposResponse.data : [],
-        );
-      } catch (error) {
-        console.error("Error cargando datos", error);
-      }
-    };
+  const {formData,handleChange} = UseForm<MantenimientoRequest>(mantenimientoToForm())
 
-    cargarDatos();
-  }, []);
+  const {execute: crearMantenimiento,loading} = 
+  useAction(registrarMantenimiento)
+  
+  const handleSubmit = (e:any) => {
+    e.preventDefault()
 
-  const handleChange = (e: any) => {
-    const { name, value } = e.target;
+    handle(async () => {
+      await crearMantenimiento(formData)
 
-    setMantenimientoData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+      alert("Mantenimiento registrado correctamente")
 
-    try {
-      await registrarMantenimiento(mantenimientoData);
-      alert("Mantenimiento registrado correctamente");
-
-      router.push(ROUTES.mantenimientos.LISTA);
-    } catch (error) {
-      console.error("Error al registrar el mantenimiento", error);
-    }
-  };
-
+      router.push(ROUTES.mantenimientos.LISTA)
+    })
+  }
   return (
-    <PageContainer title="Mantenimientos">
+    <PageContainer>
       <FormularioBase titulo="Registrar Mantenimiento" onSubmit={handleSubmit}>
         <SelectField
           label="Equipo"
           name="equipo"
-          value={mantenimientoData.equipo.toString()}
+          value={formData.equipo.toString()}
           onChange={handleChange}
-          options={equipos.map((equipo) => ({
+          options={(equipos ?? []).map((equipo) => ({
             value: equipo.idEquipo.toString(),
             label: equipo.nombre,
           }))}
@@ -92,7 +63,7 @@ export default function FormularioRegistro({ equipoId }: Props) {
         <SelectField
           label="Tipo"
           name="tipo"
-          value={mantenimientoData.tipo}
+          value={formData.tipo}
           onChange={handleChange}
           options={[
             { value: "mantenimiento", label: "Mantenimiento" },
@@ -105,7 +76,7 @@ export default function FormularioRegistro({ equipoId }: Props) {
         <SelectField
           label="Estado"
           name="estado"
-          value={mantenimientoData.estado}
+          value={formData.estado}
           onChange={handleChange}
           options={[
             { value: "pendiente", label: "Pendiente" },
@@ -117,23 +88,23 @@ export default function FormularioRegistro({ equipoId }: Props) {
           label="Fecha Inicio"
           name="fechaInicio"
           type="date"
-          value={mantenimientoData.fechaInicio}
+          value={formData.fechaInicio}
           onChange={handleChange}
         />
         <InputField
           label="Fecha Fin"
           name="fechaFin"
           type="date"
-          value={mantenimientoData.fechaFin}
+          value={formData.fechaFin}
           onChange={handleChange}
         />
         <SelectField
           label="Responsable"
           name="responsable"
-          value={mantenimientoData.responsable.toString()}
+          value={formData.responsable.toString()}
           onChange={handleChange}
-          options={usuarios.map((usuario) => ({
-            value: usuario.idUsuario.toString(),
+          options={(usuarios ?? []).map((usuario) => ({
+            value: usuario.id.toString(),
             label: usuario.nombre,
           }))}
         />

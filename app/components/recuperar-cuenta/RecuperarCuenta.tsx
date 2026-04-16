@@ -1,38 +1,29 @@
 "use client";
 
 import { recuperarCuenta } from "@/services/usuario.service";
-import { useState } from "react";
 import PageContainer from "../ui/layout/PageContainer";
 import FormularioBase from "../ui/form/FormularioBase";
 import InputField from "../ui/input/InputField";
 import ButtonGrid from "../ui/layout/ButtonGrid";
 import PrimaryButton from "../ui/buttons/PrimaryButton";
+import { UseForm } from "@/hooks/useForm";
+import { useAction } from "@/hooks/useAction";
+import { useHandle } from "@/hooks/useHandle";
 
 export default function RecoveryAccount() {
-  const [data, setData] = useState({
-    correo: "",
-  });
+  const {formData,handleChange} = 
+  UseForm({correo:""})
 
-  const handleChange = (e: any) => {
-    const { name, value } = e.target;
+  const {execute: recover} = 
+  useAction(recuperarCuenta)
 
-    setData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
+  const {handle} = useHandle();
 
-  const handleSubmit = async (e: any) => {
-    e.preventDefault();
+  const handleSubmit = (e:any) => {
+    e.preventDefault()
 
-    try {
-      await recuperarCuenta(data);
-      alert("Correo recuperado correctamente");
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
+    handle(() => recover(formData))
+  }
   return (
     <PageContainer>
       <FormularioBase titulo="Recuperar Cuenta" onSubmit={handleSubmit}>
@@ -40,7 +31,7 @@ export default function RecoveryAccount() {
           label="Correo"
           name="correo"
           onChange={handleChange}
-          value={data.correo}
+          value={formData.correo}
         />
         <ButtonGrid>
           <PrimaryButton text="Recuperar Cuenta" />

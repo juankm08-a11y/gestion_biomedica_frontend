@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect } from "react";
-import { isAuthenticated, tieneRol } from "../../utils/auth";
+import { isAuthenticated, tieneRol } from "../utils/auth";
 import { useRouter } from "next/navigation";
 
 interface Props {

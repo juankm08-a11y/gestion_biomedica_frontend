@@ -1,4 +1,4 @@
-import ProtectedRoute from "@/app/components/equipos/ProtectedRoute";
+import ProtectedRoute from "@/app/auth/ProtectedRoute";
 import FormularioRegistroMantenimiento from "../../components/mantenimientos/FormularioRegistroMantenimiento";
 
 export default function RegistroMantenimientoPage() {

@@ -1,10 +1,10 @@
 import { api } from "@/app/api/api";
 import {
-  Mantenimiento,
   MantenimientoRequest,
+  MantenimientoResponse,
 } from "@/types/Mantenimiento.type";
 
-export const registrarMantenimiento = async (data: Mantenimiento) => {
+export const registrarMantenimiento = async (data: MantenimientoResponse) => {
   const response = await api.post("/mantenimientos/", data);
   return response.data;
 };

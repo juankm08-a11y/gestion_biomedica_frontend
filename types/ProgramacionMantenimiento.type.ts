@@ -9,8 +9,9 @@ export interface ProgramacionMantenimientoRequest {
 
 export interface ProgramacionMantenimientoResponse {
   idProgramacion: number;
+  equipo:number;
   unidadFrecuencia: string;
-  frecuenciaMantenimiento: string;
+  frecuenciaMantenimiento: number;
   frecuenciaCalibracion: number;
   proximoMantenimiento: string;
   proximoCalibracion: string;

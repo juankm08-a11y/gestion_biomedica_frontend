@@ -1,4 +1,4 @@
-import ProtectedRoute from "@/app/components/equipos/ProtectedRoute";
+import ProtectedRoute from "@/app/auth/ProtectedRoute";
 import HistorialOrdenes from "../../components/mantenimientos/ordenes-servicio/HistorialOrden";
 
 export default function VerOrdenPage() {

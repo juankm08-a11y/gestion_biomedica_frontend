@@ -1,4 +1,4 @@
-import ProtectedRoute from "@/app/components/equipos/ProtectedRoute";
+import ProtectedRoute from "@/app/auth/ProtectedRoute";
 import FormularioRegistroCertificado from "../../components/certificados/FormularioCertificado";
 
 export default function RegistroCertificado() {

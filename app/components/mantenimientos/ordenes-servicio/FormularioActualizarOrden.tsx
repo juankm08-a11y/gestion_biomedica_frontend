@@ -17,6 +17,14 @@ import {
   consultarMantenimiento,
   consultarMantenimientos,
 } from "@/services/mantenimientos.service";
+import { useHandle } from "@/hooks/useHandle";
+import { useFetch } from "@/hooks/useFetch";
+import { OrdenRequest, OrdenResponse } from "@/types/OrdenServicio.type";
+import { useList } from "@/hooks/useList";
+import { MantenimientoResponse } from "@/types/Mantenimiento.type";
+import { UseForm } from "@/hooks/useForm";
+import { ordenToForm } from "@/mappers/orden.mapper";
+import { useAction } from "@/hooks/useAction";
 
 export default function FormularioActualizarOrden({
   idOrden,
@@ -25,64 +33,48 @@ export default function FormularioActualizarOrden({
 }) {
   const router = useRouter();
 
-  const [mantenimientos, setMantenimientos] = useState<any[]>([]);
-  const [ordenData, setOrdenData] = useState({
-    idOrden: 0,
-    mantenimiento: 0,
-    tipoServicio: "",
-    descripcion: "",
-    fechaInicio: "",
-    fechaFin: "",
-    estado: "pendiente" as "aprobado" | "pendiente" | "ejecutado",
-  });
+  const {handle} = useHandle();
 
-  useEffect(() => {
-    if (!idOrden || isNaN(idOrden)) return;
+  const {data:orden} = useFetch<OrdenResponse>(
+    () => consultarOrden(idOrden),
+    [idOrden]
+  )
 
-    const cargarDatos = async () => {
-      try {
-        const orden = await consultarOrden(idOrden);
+  const {data:mantenimientos} =
+  useList<MantenimientoResponse>(consultarMantenimientos)
 
-        const mantenimientosData = await consultarMantenimientos();
+  const {formData,handleChange,setFormData} = 
+  UseForm<OrdenRequest>(ordenToForm())
 
-        setOrdenData(orden);
-        setMantenimientos(mantenimientosData);
-      } catch (error) {
-        console.error("Error al cargar los datos", error);
-      }
-    };
-    cargarDatos();
-  }, [idOrden]);
+  const {execute: updateOrden,loading} = 
+  useAction(actualizarOrden)
 
-  const handleChange = (e: any) => {
-    const { name, value } = e.target;
+  if (orden && formData.mantenimiento === 0) {
+    setFormData(ordenToForm(orden))
+  }
 
-    setOrdenData({ ...ordenData, [name]: value });
-  };
+  const handleSubmit = (e:any) => {
+    e.preventDefault()
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+    handle(async () => {
+      await updateOrden(idOrden, formData);
 
-    try {
-      await actualizarOrden(idOrden, ordenData);
+      alert("Orden actualizada correctamente")
 
-      alert("Orden actualizada correctamente");
-      router.push(ROUTES.ordenSerivicio.LISTA);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+      router.push(ROUTES.ordenSerivicio.LISTA)
+    })
+  }
 
   return (
-    <PageContainer title="Actualizar Ordende Servicio">
+    <PageContainer>
       <FormularioBase titulo="Actualizar Orden" onSubmit={handleSubmit}>
         <SelectField
           label="Mantenimientos"
           name="mantenimiento"
-          value={ordenData.mantenimiento.toString()}
+          value={formData.mantenimiento.toString()}
           onChange={handleChange}
-          options={mantenimientos.map((m) => ({
-            value: m.idMantenimiento,
+          options={(mantenimientos ?? []).map((m) => ({
+            value: m.idMantenimiento.toString(),
             label: `Mantenimiento ${m.idMantenimiento}`,
           }))}
         />{" "}
@@ -90,31 +82,31 @@ export default function FormularioActualizarOrden({
           label="Tipo Servicio"
           name="tipoServicio"
           onChange={handleChange}
-          value={ordenData.tipoServicio}
+          value={formData.tipoServicio}
         />
         <InputField
           label="Descripción"
           name="descripcion"
           onChange={handleChange}
-          value={ordenData.descripcion}
+          value={formData.descripcion}
         />
         <InputField
           label="Fecha Inicio"
           name="fechaInicio"
           onChange={handleChange}
-          value={ordenData.fechaInicio}
+          value={formData.fechaInicio}
         />
         <InputField
           label="Fecha Fin"
           name="fechaFin"
           onChange={handleChange}
-          value={ordenData.fechaFin}
+          value={formData.fechaFin}
         />
         <SelectField
           label="Estado"
           name="estado"
           onChange={handleChange}
-          value={ordenData.estado}
+          value={formData.estado}
           options={[
             { value: "pendiente", label: "Pendiente" },
             { value: "aprobado", label: "Aprobado" },

@@ -1,6 +1,6 @@
 "use client";
 
-import ProtectedRoute from "@/app/components/equipos/ProtectedRoute";
+import ProtectedRoute from "@/app/auth/ProtectedRoute";
 import FormularioActualizarProgramacion from "@/app/components/mantenimientos/programacion-mantenimiento/FormularioActualizarProgramacion";
 import { useParams } from "next/navigation";
 

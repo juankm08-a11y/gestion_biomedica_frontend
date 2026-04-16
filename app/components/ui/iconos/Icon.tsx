@@ -12,6 +12,7 @@ import {
   Printer,
   Download,
   ArrowLeft,
+  Settings
 } from "lucide-react";
 
 import { FaUserMd, FaHospital } from "react-icons/fa";
@@ -34,6 +35,7 @@ const icons = {
   medico: FaUserMd,
   hospital: FaHospital,
 
+  configuracion: Settings,
   alerta: IconAlertTriangle,
   escanear: IconScan,
 };

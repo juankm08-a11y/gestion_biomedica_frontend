@@ -1,5 +1,5 @@
 import FormularioRegistroEquipo from "@/app/components/equipos/FormularioRegistroEquipo";
-import ProtectedRoute from "@/app/components/equipos/ProtectedRoute";
+import ProtectedRoute from "@/app/auth/ProtectedRoute";
 import PageContainer from "@/app/components/ui/layout/PageContainer";
 
 export default function RegistroEquipoPage() {

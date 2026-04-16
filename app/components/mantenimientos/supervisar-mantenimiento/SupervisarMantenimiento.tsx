@@ -1,41 +1,43 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Table from "../../ui/table/DataTable";
+import Table, { Column } from "../../ui/table/DataTable";
 import { supervisarMantenimiento } from "@/services/mantenimientos.service";
+import { useList } from "@/hooks/useList";
+import { ProgramacionMantenimientoResponse } from "@/types/ProgramacionMantenimiento.type";
+import PageContainer from "../../ui/layout/PageContainer";
+import Card from "../../ui/cards/Card";
+import DataTable from "../../ui/table/DataTable";
 
 export default function SupervisarMantenimiento({
   idMantenimiento,
 }: {
   idMantenimiento: number;
 }) {
-  const [programaciones, setProgramaciones] = useState<any[]>([]);
+  const {data:programaciones} = useList<ProgramacionMantenimientoResponse>(() => 
+  supervisarMantenimiento(idMantenimiento))
 
-  const cargarProgramaciones = async () => {
-    const response = await supervisarMantenimiento(idMantenimiento);
-
-    setProgramaciones(response.data);
-  };
-
-  useEffect(() => {
-    cargarProgramaciones();
-  }, [idMantenimiento]);
-
-  const headers = ["Equipo", "Próximo Mantenimiento", "Próxima Calibración"];
-  const rows = programaciones?.map((p) => [
-    p.equipo,
-    p.proximoMantenimiento,
-    p.proximoCalibracion,
-  ]);
-
+  const columns: Column<ProgramacionMantenimientoResponse>[] = [
+    {
+      key:"equipo",
+      label:"Equipo",
+    },
+    {
+      key:"proximoMantenimiento",
+      label:"Proximo Mantenimiento"
+    },
+    {
+      key:"proximoCalibracion",
+      label:"Próxima Calibración"
+    }
+  ]
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col items-center p-10">
-      <div className="bg-white w-full max-w-[1200px] shadow-md border border-gray-300 rounded-sm p-8">
-        <h2 className="bg-white w-full max-w-[1200px] shadow-md border border-gray-300 rounded-sm p-8">
-          Supervisión Mantenimiento
-        </h2>
-        <Table headers={headers} rows={rows} />
-      </div>
-    </div>
+    <PageContainer>
+      <Card variant="table">
+        <DataTable title="Supervisión de Mantenimiento"
+        data={programaciones ?? []}
+        columns={columns} />
+      </Card>
+    </PageContainer>
   );
 }

@@ -1,80 +1,62 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useState } from "react";
-import { inciarSesion } from "@/services/usuario.service";
 import { ROUTES } from "@/app/routes/routes";
 import PageContainer from "../ui/layout/PageContainer";
 import FormularioBase from "../ui/form/FormularioBase";
 import InputField from "../ui/input/InputField";
-import SelectField from "../ui/input/SelectField";
 import ButtonGrid from "../ui/layout/ButtonGrid";
 import PrimaryButton from "../ui/buttons/PrimaryButton";
-import { LoginRequest } from "@/types/auth.type";
+import { LoginRequest } from "@/types/Auth.type";
+import { UseForm } from "@/hooks/useForm";
+import { useAction } from "@/hooks/useAction";
+import { useHandle } from "@/hooks/useHandle";
+import { useError } from "@/hooks/useError";
+import { iniciarSesion } from "@/services/usuario.service";
+import Card from "../ui/cards/Card";
 
 export default function Login() {
   const router = useRouter();
 
-  const [loginData, setLoginData] = useState<LoginRequest>({
-    correo: "",
-    password: "",
-  });
+  const {formData,handleChange} = 
+  UseForm<LoginRequest>({
+    correo:"",
+    password:"",
+  })
 
-  const handleChange = (e: any) => {
-    const { name, value } = e.target;
+  const {execute:login, loading} = useAction(iniciarSesion);
 
-    setLoginData({
-      ...loginData,
-      [name]: value,
-    });
-  };
+  const {handle} = useHandle()
 
-  const handleSubmit = async (e: any) => {
-    e.preventDefault();
+  const {error} = useError()
 
-    try {
-      const response = await inciarSesion(loginData);
+  const handleSubmit = (e:any) => {
+    e.preventDefault()
 
-      console.log(response);
+    handle(async () => {
+      const response = await login(formData)
 
-      localStorage.setItem("access", response.access);
-      localStorage.setItem("refresh", response.refresh);
-      localStorage.setItem("rol", response.rol);
-      localStorage.setItem("usuario", response.usuario);
-
-      document.cookie = `access=${response.access}; path=/`;
-      document.cookie = `rol=${response.rol} path=/`;
-
-      alert("Inicio de sesión exitoso");
-
-      router.push(ROUTES.dashboard);
-    } catch (error: any) {
-      console.error("Error al iniciar sesión: ", error.response?.data);
-      alert("Credenciales incorrectas");
-    }
-  };
-
-  const roles = [
-    { value: "ingenierobiomedico", label: "Ingeniero Biomédico" },
-    { value: "tecnicobiomedico", label: "Tecnico Biomédico" },
-    { value: "coordinador", label: "Coordinador" },
-    { value: "administrador", label: "Administrador" },
-    { value: "superadministrador", label: "SuperAdministrador" },
-  ];
+      localStorage.setItem("access",response.access)
+      localStorage.setItem("refresh",response.refresh)
+      localStorage.setItem("rol",response.rol)
+      localStorage.setItem("usuario",response.usuario)
+    })
+  }
 
   return (
-    <PageContainer title="Login">
-      <FormularioBase titulo="Iniciar Sesion" onSubmit={handleSubmit}>
+    <PageContainer>
+     <Card variant="form">
+       <FormularioBase titulo="Iniciar Sesion" onSubmit={handleSubmit}>
         <InputField
           label="Contraseña"
           name="password"
-          value={loginData.password}
+          value={formData.password}
           onChange={handleChange}
         />
         <InputField
           label="Correo"
           name="correo"
-          value={loginData.correo}
+          value={formData.correo}
           onChange={handleChange}
         />
 
@@ -105,6 +87,7 @@ export default function Login() {
           </button>
         </div>
       </FormularioBase>
+     </Card>
     </PageContainer>
   );
 }

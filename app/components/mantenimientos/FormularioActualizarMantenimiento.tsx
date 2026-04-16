@@ -17,8 +17,13 @@ import ButtonGrid from "../ui/layout/ButtonGrid";
 import { useError } from "@/hooks/useError";
 import { useFetch } from "@/hooks/useFetch";
 import { UseForm } from "@/hooks/useForm";
-import { MantenimientoRequest } from "@/types/Mantenimiento.type";
+import { MantenimientoRequest, MantenimientoResponse } from "@/types/Mantenimiento.type";
 import { mantenimientoToForm } from "@/mappers/mantenimiento.mapper";
+import { UsuarioResponse } from "@/types/Usuario.type";
+import { EquipoResponse } from "@/types/Equipo.type";
+import { useHandle } from "@/hooks/useHandle";
+import { useAction } from "@/hooks/useAction";
+import Card from "../ui/cards/Card";
 
 interface Props {
   idEquipo?: number;
@@ -31,48 +36,48 @@ export default function FormularioActualizarMantenimiento({
 }: any) {
   const router = useRouter();
 
-  const { handleError } = useError();
+  const { error } = useError();
 
-  const { data: equipos } = useFetch(listarEquipos, []);
+  const {handle} = useHandle()
 
-  const { data: usuarios } = useFetch(consultarUsuarios, []);
+  const {execute: updateMantenimiento,loading} = 
+  useAction(actualizarMantenimiento)
 
-  const { formData, setFormData, handleChange, resetForm } =
-    UseForm<MantenimientoRequest>(mantenimientoToForm({} as any, idEquipo));
+  const { data: equipos } = useFetch<EquipoResponse[]>(listarEquipos);
+
+  const { data: usuarios } = useFetch<UsuarioResponse[]>(consultarUsuarios);
+
+  const {data:mantenimiento} = useFetch<MantenimientoResponse>(
+    () => consultarMantenimiento(idMantenimiento),
+    [idMantenimiento]
+  )
+
+  const {formData,setFormData,handleChange} = 
+  UseForm<MantenimientoRequest>(
+    mantenimientoToForm(undefined,idEquipo)
+  )
 
   useEffect(() => {
-    if (!idMantenimiento) return;
+    if (mantenimiento) {
+      setFormData(mantenimientoToForm(mantenimiento,idEquipo))
+    } 
+  },[mantenimiento])
 
-    const cargar = async () => {
-      try {
-        const data = await consultarMantenimiento(idMantenimiento);
-        setFormData(mantenimientoToForm(data, idEquipo));
-      } catch (error) {
-        handleError(error);
-      }
-    };
+  const handleSubmit = (e:any) => {
+    e.preventDefault()
 
-    cargar();
-  }, [idMantenimiento]);
-
-  const handleSubmit = async (e: any) => {
-    e.preventDefault();
-
-    try {
-      await actualizarMantenimiento(idMantenimiento, formData);
+    handle(async () => {
+      await updateMantenimiento(idMantenimiento,formData);
 
       alert("Mantenimiento actualizado correctamente");
 
-      resetForm();
-
-      router.push(ROUTES.mantenimientos.LISTA);
-    } catch (error) {
-      handleError(error);
-    }
-  };
+      router.push(ROUTES.mantenimientos.LISTA)
+    })
+  }
   return (
     <PageContainer>
-      <FormularioBase titulo="Actualizar Mantenimiento" onSubmit={handleSubmit}>
+   <Card variant="form">
+       <FormularioBase titulo="Actualizar Mantenimiento" onSubmit={handleSubmit}>
         <SelectField
           label="Equipo"
           name="equipo"
@@ -146,6 +151,7 @@ export default function FormularioActualizarMantenimiento({
           </button>
         </ButtonGrid>
       </FormularioBase>
+   </Card>
     </PageContainer>
   );
 }

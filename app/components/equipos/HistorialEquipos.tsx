@@ -18,7 +18,7 @@ import DataTable, { Column } from "../ui/table/DataTable";
 
 export const dynamic = "force-dynamic";
 
-export default function TablaEquipos() {
+export default function HistorialEquipos() {
   const router = useRouter();
 
   const { data: equipos, reload } = useList<EquipoResponse>(listarEquipos);

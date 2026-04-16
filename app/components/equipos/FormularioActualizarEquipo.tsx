@@ -18,6 +18,9 @@ import { UseForm } from "@/hooks/useForm";
 import { EquipoRequest, EquipoResponse } from "@/types/Equipo.type";
 import { useAction } from "@/hooks/useAction";
 import Card from "../ui/cards/Card";
+import { equipoToForm } from "@/mappers/equipo.mapper";
+import { useFetch } from "@/hooks/useFetch";
+import { useHandle } from "@/hooks/useHandle";
 
 export default function FormularioActualizarEquipo({
   idEquipo,
@@ -30,54 +33,33 @@ export default function FormularioActualizarEquipo({
   const { error, handleError } = useError();
 
   const { formData, handleChange, setFormData, setField } =
-    UseForm<EquipoRequest>({
-      nombre: "",
-      marca: "",
-      modelo: "",
-      serie: "",
-      fabricante: "",
-      tipoTecnologia: "",
-      ubicacion: 0,
-    });
+    UseForm<EquipoRequest>(equipoToForm());
 
   const { execute: updateEquipo, loading } = useAction(actualizarEquipo);
 
+  const {handle} = useHandle();
+
+  const {data} = useFetch<EquipoResponse>(
+    () => obtenerEquipo(idEquipo),
+    [idEquipo]
+  );
+
   useEffect(() => {
-    const cargarEquipo = async () => {
-      try {
-        const data: EquipoResponse = await obtenerEquipo(idEquipo);
-
-        setFormData({
-          nombre: data.nombre,
-          marca: data.marca,
-          modelo: data.modelo,
-          serie: data.serie,
-          fabricante: data.fabricante,
-          tipoTecnologia: data.tipoTecnologia,
-          ubicacion: data.ubicacion,
-        });
-      } catch (err) {
-        handleError(err);
-      }
-    };
-
-    if (!isNaN(idEquipo)) {
-      cargarEquipo();
+    if (data) {
+      setFormData(equipoToForm(data));
     }
-  }, [idEquipo]);
+  },[data])
 
-  const handleSubmit = async (e: any) => {
+  const handleSubmit =  (e: any) => {
     e.preventDefault();
 
-    try {
-      await updateEquipo(idEquipo, formData);
+    handle(async () => {
+      await updateEquipo(idEquipo,formData);
 
       alert("Equipo actualizado correctamente");
 
-      router.push(ROUTES.equipos.LISTA);
-    } catch (err) {
-      handleError(err);
-    }
+      router.push(ROUTES.equipos.LISTA)
+    })
   };
   return (
     <PageContainer>

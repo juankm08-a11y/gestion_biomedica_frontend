@@ -13,6 +13,9 @@ import { UseForm } from "@/hooks/useForm";
 import { useAction } from "@/hooks/useAction";
 import { EquipoRequest } from "@/types/Equipo.type";
 import Card from "../ui/cards/Card";
+import { equipoToForm } from "@/mappers/equipo.mapper";
+import { useHandle } from "@/hooks/useHandle";
+import { useError } from "@/hooks/useError";
 
 export default function FormularioRegistroEquipo() {
   const router = useRouter();
@@ -22,23 +25,18 @@ export default function FormularioRegistroEquipo() {
     formData: equipoData,
     handleChange,
     setField,
-  } = UseForm<EquipoRequest>({
-    nombre: "",
-    marca: "",
-    modelo: "",
-    serie: "",
-    fabricante: "",
-    tipoTecnologia: "",
-    ubicacion: 0,
-  });
+  } = UseForm<EquipoRequest>(equipoToForm());
+
+  const {error} = useError();
 
   const { execute: crear, loading } = useAction(crearEquipo);
 
-  const handleSubmit = async (e: any) => {
-    e.preventDefault();
+  const {handle} = useHandle();
 
-    await crear(equipoData);
-  };
+  const handleSubmit = (e:any) => {
+    e.preventDefault();
+    handle(() => crear(equipoData))
+  }
 
   return (
     <PageContainer>
@@ -47,6 +45,11 @@ export default function FormularioRegistroEquipo() {
           titulo="CREAR HOJA DE VIDA DE EQUIPO"
           onSubmit={handleSubmit}
         >
+          {error && (
+            <p className="text-red-500 mb-4">
+              {error}
+            </p>
+          )}
           <InputField
             label="Nombre"
             name="nombre"

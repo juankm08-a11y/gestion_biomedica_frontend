@@ -2,7 +2,7 @@
 
 import { recuperarContraseña } from "@/services/usuario.service";
 import { useEffect, useState } from "react";
-import { ResetPasswordRequest } from "@/types/auth.type";
+import { ResetPasswordRequest } from "@/types/Auth.type";
 import PageContainer from "../ui/layout/PageContainer";
 import FormularioBase from "../ui/form/FormularioBase";
 import InputField from "../ui/input/InputField";
@@ -10,54 +10,34 @@ import ButtonGrid from "../ui/layout/ButtonGrid";
 import PrimaryButton from "../ui/buttons/PrimaryButton";
 import { useRouter, useSearchParams } from "next/navigation";
 import { ROUTES } from "@/app/routes/routes";
+import { UseForm } from "@/hooks/useForm";
+import { useAction } from "@/hooks/useAction";
+import { useHandle } from "@/hooks/useHandle";
 
 export default function RecuperarPasswordPage() {
   const searchParams = useSearchParams();
   const router = useRouter();
-  const [data, setData] = useState<ResetPasswordRequest>({
-    uid: "",
-    nuevaPassword: "",
-    token: "",
-  });
+ const {formData,handleChange, setFormData} = 
+ UseForm<ResetPasswordRequest>({
+  uid:"",
+  nuevaPassword:"",
+  token:"",
+ })
 
-  useEffect(() => {
-    const uid = searchParams.get("uid");
-    const token = searchParams.get("token");
-    if (uid && token) {
-      setData((prev) => ({
-        ...prev,
-        token,
-        uid,
-      }));
-    }
-  }, [searchParams]);
+ const {execute:reset} = 
+ useAction(recuperarContraseña)
 
-  const handleChange = (e: any) => {
-    const { name, value } = e.target;
+ const {handle} = useHandle()
 
-    setData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
+ const handleSubmit = (e:any) => {
+  e.preventDefault()
 
-  const handleSubmit = async (e: any) => {
-    e.preventDefault();
+  handle(async () => {
+    await reset(formData)
 
-    try {
-      await recuperarContraseña({
-        uid: data.uid,
-        nuevaPassword: data.nuevaPassword,
-        token: data.token,
-      });
-
-      alert("Contraseña actualizada correctamente");
-
-      router.push(ROUTES.dashboard);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+    router.push(ROUTES.dashboard)
+  }) 
+ }
 
   return (
     <PageContainer>
@@ -65,7 +45,7 @@ export default function RecuperarPasswordPage() {
         <InputField
           label="Nueva contraseña"
           name="nuevaPassword"
-          value={data.nuevaPassword}
+          value={formData.nuevaPassword}
           onChange={handleChange}
           type="password"
         />

@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import PageContainer from "../ui/layout/PageContainer";
 import Image from "next/image";
 import { obtenerQrEquipo } from "@/services/qr.service";

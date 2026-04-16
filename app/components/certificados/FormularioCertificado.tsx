@@ -1,97 +1,93 @@
 "use client";
 
 import { ROUTES } from "@/app/routes/routes";
-import { registrarCertificado } from "@/services/certificados.service";
 import { consultarUsuarios } from "@/services/usuario.service";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
 import FormularioBase from "../ui/form/FormularioBase";
 import InputField from "../ui/input/InputField";
 import SelectField from "../ui/input/SelectField";
 import ButtonGrid from "../ui/layout/ButtonGrid";
+import { useError } from "@/hooks/useError";
+import { useList } from "@/hooks/useList";
+import { UsuarioResponse } from "@/types/Usuario.type";
+import { UseForm } from "@/hooks/useForm";
+import { CertificadoMetrologicoRequest } from "@/types/Certificado.type";
+import { certificadoToForm } from "@/mappers/certificado.mapper";
+import { useAction } from "@/hooks/useAction";
+import PageContainer from "../ui/layout/PageContainer";
+import Card from "../ui/cards/Card";
+import { registrarCertificado } from "@/services/certificados.service";
+import { useHandle } from "@/hooks/useHandle";
 
 export default function FormularioRegistroCertificado() {
-  const [usuarios, setUsuarios] = useState<any[]>([]);
-  const [certificadoData, setCertificadoData] = useState({
-    idCertificado: 0,
-    numeroCertificado: 0,
-    responsable: 0,
-    fecha: "",
-  });
-
   const router = useRouter();
 
-  useEffect(() => {
-    const cargarUsuarios = async () => {
-      const response = await consultarUsuarios();
-      setUsuarios(Array.isArray(response) ? response : []);
-    };
-    cargarUsuarios();
-  }, []);
+  const {error} = useError()
 
-  const handleChange = (e: any) => {
-    const { name, value } = e.target;
+  const {data:usuarios} = useList<UsuarioResponse>(consultarUsuarios);
 
-    setCertificadoData({
-      ...certificadoData,
-      [name]: value,
-    });
-  };
+  const {formData, handleChange} = UseForm<CertificadoMetrologicoRequest>(certificadoToForm())
 
-  const handleSubmit = async (e: any) => {
+  const {handle} = useHandle();
+  
+  const {execute: crearCertificado,loading} = 
+  useAction(registrarCertificado)
+
+  const handleSubmit = (e:any) => {
     e.preventDefault();
 
-    const payload = {
-      idCertificado: Number(certificadoData.idCertificado),
-      numeroCertificado: Number(certificadoData.numeroCertificado),
-      responsable: Number(certificadoData.responsable),
-      fecha: String(certificadoData.fecha),
-    };
+    handle(async () => {
+      await crearCertificado(formData);
 
-    await registrarCertificado(payload);
+      alert("Certificado registrado correctamente");
 
-    alert("Certificado registrado correctamente");
-
-    router.push(ROUTES.certificados.LISTA);
-  };
+      router.push(ROUTES.certificados.LISTA)
+    })
+  }
 
   return (
-    <FormularioBase titulo="Registrar Certificado" onSubmit={handleSubmit}>
+   <PageContainer>
+    <Card variant="form">
+       <FormularioBase titulo="Registrar Certificado" onSubmit={handleSubmit}>
+        {error && <p className="text-red-500 mb-4">
+          {error}
+          </p>}
       <InputField
-        label="Id Certificado"
-        name="idCertificado"
-        value={certificadoData.idCertificado}
+        label="Numero Certificado"
+        name="numeroCertificado"
+        value={formData.numeroCertificado}
         onChange={handleChange}
         type="number"
       />
 
       <InputField
-        label="Numero Certificado"
-        name="numeroCertificado"
-        value={certificadoData.numeroCertificado}
+        label="Fecha"
+        name="fecha"
+        value={formData.fecha}
         onChange={handleChange}
         type="number"
       />
       <SelectField
         label="Responsable"
         name="responsable"
-        value={certificadoData.responsable.toString()}
+        value={formData.responsable.toString()}
         onChange={handleChange}
-        options={usuarios.map((usuario) => ({
-          value: usuario.idUsuario,
-          label: usuario.nombre,
+        options={(usuarios ?? []).map((usuario) => ({
+          value:usuario.id.toString(),
+          label:usuario.nombre,
         }))}
       />
       <ButtonGrid>
         <button
           type="submit"
-          className="px-8 py-3 rounded-full bg-blue-500 text-white"
+          disabled={loading}
+          className="border border-gray-400 px-8 py-3 rounded-full"
         >
-          Registrar Certificado
+          {loading ? "Registrando...": "Registrar Certificado"}
         </button>
         <button
           type="button"
-          className="px-8 py-3 rounded-full bg-blue-500 text-white"
+          className="border border-gray-400 px-8 py-3 rounded-full"
           onClick={() => router.push(ROUTES.certificados.LISTA)}
         >
           Cancelar
@@ -99,11 +95,13 @@ export default function FormularioRegistroCertificado() {
         <button
           type="button"
           onClick={() => router.push(ROUTES.dashboard)}
-          className="px-8 py-3 rounded-full bg-blue-500 text-white"
+          className="border border-gray-400 px-8 py-3 rounded-full"
         >
           Regresar a Dashboard
         </button>
       </ButtonGrid>
     </FormularioBase>
+    </Card>
+   </PageContainer>
   );
 }

@@ -2,7 +2,6 @@
 
 import { listarEquipos } from "@/services/equipos.service";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
 import PageContainer from "../../ui/layout/PageContainer";
 import FormularioBase from "../../ui/form/FormularioBase";
 import SelectField from "../../ui/input/SelectField";
@@ -16,6 +15,9 @@ import { UseForm } from "@/hooks/useForm";
 import { ProgramacionMantenimientoRequest } from "@/types/ProgramacionMantenimiento.type";
 import { useAction } from "@/hooks/useAction";
 import { crearProgramacionMantenimiento } from "@/services/programacionMantenimiento.service";
+import { useHandle } from "@/hooks/useHandle";
+import { programacionToForm } from "@/mappers/programacion.mapper";
+import Card from "../../ui/cards/Card";
 
 export default function FormularioRegistroProgramacion({
   idMantenimiento,
@@ -24,42 +26,39 @@ export default function FormularioRegistroProgramacion({
 }) {
   const router = useRouter();
 
-  const { error, handleError } = useError();
+  const { error } = useError();
+
+  const {handle} = useHandle();
 
   const { data: equipos } = useList<EquipoResponse>(listarEquipos);
 
-  const { formData, handleChange } = UseForm<ProgramacionMantenimientoRequest>({
-    equipo: 0,
-    frecuenciaMantenimiento: 0,
-    frecuenciaCalibracion: 0,
-    unidadFrecuencia: "dias",
-    proximoMantenimiento: "",
-    proximoCalibracion: "",
-  });
+  const {formData, handleChange} = 
+  UseForm<ProgramacionMantenimientoRequest>(
+    programacionToForm()
+  )
 
-  const { execute: registrarProgramacion, loading } = useAction(
-    crearProgramacionMantenimiento,
-  );
+  const {execute:crear,loading} = useAction(crearProgramacionMantenimiento)
 
-  const handleSubmit = async (e: any) => {
+  const handleSubmit = (e: any) => {
     e.preventDefault();
 
-    try {
-      await registrarProgramacion(idMantenimiento, formData);
+    handle(async () => {
+      await crear(idMantenimiento, formData)
 
-      alert("Programación registrada correctamente");
+      alert("Programación registrada correctamente")
 
       router.push(
-        ROUTES.mantenimientos.CONSULTAR_PROGRAMACION(idMantenimiento),
-      );
-    } catch (err) {
-      handleError(err);
-    }
+        ROUTES.mantenimientos.CONSULTAR_PROGRAMACION(
+          idMantenimiento
+        )
+      )
+    })
   };
 
   return (
     <PageContainer>
-      <FormularioBase titulo="Registrar Programacion" onSubmit={handleSubmit}>
+     <Card variant="form">
+       <FormularioBase titulo="Registrar Programacion" onSubmit={handleSubmit}>
         {error && <p className="text-red-500 mb-4">{error}</p>}
         <SelectField
           label="Equipo"
@@ -127,6 +126,7 @@ export default function FormularioRegistroProgramacion({
           </button>
         </ButtonGrid>
       </FormularioBase>
+     </Card>
     </PageContainer>
   );
 }

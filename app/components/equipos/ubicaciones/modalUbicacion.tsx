@@ -9,6 +9,7 @@ import FormularioBase from "../../ui/form/FormularioBase";
 import ButtonGrid from "../../ui/layout/ButtonGrid";
 import InputField from "../../ui/input/InputField";
 import SelectField from "../../ui/input/SelectField";
+import Modal from "../../ui/modal/Modal";
 
 interface Props {
   onClose: () => void;
@@ -63,47 +64,18 @@ export default function ModalUbicacion({
   };
 
   return (
-    <div className="fixed inset-0 bg-black/40 flex justify-center items-center">
-      <div className="bg-white p-8 rounded w-[500px]">
-        <FormularioBase
-          titulo={
-            ubicacionInicial ? "Actualizar Ubicación" : "Registrar Ubicación"
-          }
-          onSubmit={handleSubmit}
-        >
-          <div>
-            <label className="block mb-1">Sede</label>
-            <select
-              name="sede"
-              value={ubicacionData.sede}
-              onChange={handleChange}
-              className="border w-full p-2 rounded"
-            >
-              <option value="">Seleccione sede</option>
-              <option value="centro_cuidados">
-                Centro de Cuidados Cardioneurovascular Pabón
-              </option>
-              <option value="pabon">Clínica Cardiovascular Pabón</option>
-            </select>
-          </div>
-          <InputField
-            label="Departamento"
-            name="departamento"
-            value={ubicacionData.departamento}
-            onChange={handleChange}
-          />
-          <InputField
-            label="Ciudad"
-            name="ciudad"
-            value={ubicacionData.ciudad}
-            onChange={handleChange}
-          />
-          <SelectField
-            label="Área"
-            name="area"
-            value={ubicacionData.area}
-            onChange={handleChange}
-            options={[
+    <Modal  onClose={onClose} >
+      <FormularioBase titulo={ubicacionInicial ? "Actualizar Ubicación": "Registrar Ubicación"}  onSubmit={handleSubmit}>
+         <SelectField label="Área" name="area" value={ubicacionData.area} onChange={handleChange} options={[
+              {
+                value: "centrocuidados",
+                label: "Centro de Cuidados Pabon",
+              },
+              { value: "pabon", label: "Clínica Cardiovascular Pabón" },
+         ]}/> 
+        <InputField label="Departamento" name="departamento" value={ubicacionData.departamento}  onChange={handleChange}/>
+        <InputField label="Ciudad" name="departamento" value={ubicacionData.ciudad}  onChange={handleChange}/>
+        <SelectField label="Sede" name="sede" value={ubicacionData.sede} onChange={handleChange} options={[
               {
                 value: "hemodinamia",
                 label: "Hemodinamia y cirugía cardiovascular",
@@ -123,28 +95,10 @@ export default function ModalUbicacion({
               { value: "farmacia", label: "Farmacia" },
               { value: "imagenología", label: "Imagenología" },
               { value: "laboratorio", label: "Laboratorio clínico" },
-            ]}
-          />
-          <InputField
-            label="Detalle"
-            name="detalle"
-            value={ubicacionData.detalle}
-            onChange={handleChange}
-          />
+            ]} />
+            <InputField label="Detalle" name="detalle" value={ubicacionData.detalle} onChange={handleChange} />
 
-          <ButtonGrid>
-            <button className="border px-6 py-2 rounded">Guardar</button>
-
-            <button
-              type="button"
-              onClick={onClose}
-              className="border px-6 py-2 rounded"
-            >
-              Cancelar
-            </button>
-          </ButtonGrid>
-        </FormularioBase>
-      </div>
-    </div>
+      </FormularioBase>
+    </Modal>
   );
 }

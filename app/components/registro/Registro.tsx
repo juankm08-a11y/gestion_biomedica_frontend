@@ -1,7 +1,7 @@
 "use client";
 import { registrarSesion } from "@/services/usuario.service";
 import { useState } from "react";
-import { RegistroUsuarioRequest } from "@/types/auth.type";
+import { RegistroUsuarioRequest } from "@/types/Auth.type";
 import PageContainer from "../ui/layout/PageContainer";
 import FormularioBase from "../ui/form/FormularioBase";
 import InputField from "../ui/input/InputField";
@@ -10,47 +10,38 @@ import ButtonGrid from "../ui/layout/ButtonGrid";
 import PrimaryButton from "../ui/buttons/PrimaryButton";
 import { useRouter } from "next/navigation";
 import { ROUTES } from "@/app/routes/routes";
+import { UseForm } from "@/hooks/useForm";
+import { useAction } from "@/hooks/useAction";
+import { useHandle } from "@/hooks/useHandle";
 
-export default function Register() {
+export default function RegisterPage() {
   const router = useRouter();
-  const [data, setData] = useState<RegistroUsuarioRequest>({
-    nombre: "",
-    correo: "",
-    estado: "activo",
-    password: "",
-    rol: "administrador",
-  });
 
-  const handleChange = (e: any) => {
-    const { name, value } = e.target;
+  const {handle} = useHandle()
+  
+  const {formData,handleChange} = 
+  UseForm<RegistroUsuarioRequest>({
+    nombre:"",
+    correo:"",
+    estado:"activo",
+    password:"",
+    rol:"administrador",
+  })
 
-    setData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
+  const {execute:register,loading} = 
+  useAction(registrarSesion)
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
 
-    try {
-      await registrarSesion(data);
+    handle(async () => {
+      await register(formData)
 
-      alert("Usuario creado correctamente");
+      router.push(ROUTES.dashboard)
+    })
 
-      router.push(ROUTES.dashboard);
-    } catch (error: any) {
-      console.error("Error:", error.response);
-    }
   };
 
-  const roles = [
-    { value: "ingenierobiomedico", label: "Ingeniero Biomédico" },
-    { value: "tecnicobiomedico", label: "Tecnico Biomédico" },
-    { value: "coordinador", label: "Coordinador" },
-    { value: "administrador", label: "Administrador" },
-    { value: "superadministrador", label: "SuperAdministrador" },
-  ];
 
   return (
     <PageContainer>
@@ -58,28 +49,28 @@ export default function Register() {
         <InputField
           label="Nombre"
           name="nombre"
-          value={data.nombre}
+          value={formData.nombre}
           onChange={handleChange}
         />
         <InputField
           label="Contraseña"
           name="password"
           type="password"
-          value={data.password}
+          value={formData.password}
           onChange={handleChange}
         />
         <InputField
           label="Correo"
           name="correo"
           type="email"
-          value={data.correo}
+          value={formData.correo}
           onChange={handleChange}
         />
-        <SelectField
+       <SelectField
           label="Estado"
           name="estado"
           onChange={handleChange}
-          value={data.estado}
+          value={formData.estado}
           options={[
             { value: "activo", label: "Activo" },
             { value: "inactivo", label: "Inactivo" },
@@ -88,12 +79,18 @@ export default function Register() {
         <SelectField
           label="Rol"
           name="rol"
-          value={data.rol}
+          value={formData.rol}
           onChange={handleChange}
-          options={roles}
+          options={[
+            { value: "superadministrador", label: "Super Administrador" },
+            { value: "administrador", label: "Administrador" },
+            {value:"coordinador",label:"Coordinador"},
+            {value:"ingenierobiomedico",label:"Ingeniero biomédico"},
+            {value:"tecnicobiomedico",label:"Técnico biomédico"}
+          ]}
         />
         <ButtonGrid>
-          <PrimaryButton text="Registrar" />
+          <PrimaryButton text={loading ? "Registrando...":"Registrar"} />
         </ButtonGrid>
       </FormularioBase>
     </PageContainer>

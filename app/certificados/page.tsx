@@ -1,4 +1,4 @@
-import ProtectedRoute from "@/app/components/equipos/ProtectedRoute";
+import ProtectedRoute from "@/app/auth/ProtectedRoute";
 import HistorialCertificados from "../components/certificados/HistorialCertificado";
 
 export const dynamic = "force-dynamic";

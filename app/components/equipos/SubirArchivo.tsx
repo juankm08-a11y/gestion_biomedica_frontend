@@ -1,36 +1,70 @@
 "use client";
 import { subirArchivo } from "@/services/archivos.service";
-import { useState } from "react";
 import PageContainer from "../ui/layout/PageContainer";
 import FormularioBase from "../ui/form/FormularioBase";
 import ButtonGrid from "../ui/layout/ButtonGrid";
+import { useError } from "@/hooks/useError";
+import { useRouter } from "next/router";
+import { UseForm } from "@/hooks/useForm";
+import { ArchivoRequest } from "@/types/ArchivoAdjunto.type";
+import { useAction } from "@/hooks/useAction";
+import Card from "../ui/cards/Card";
+import { useHandle } from "@/hooks/useHandle";
+import { ROUTES } from "@/app/routes/routes";
 
 export default function SubirArchivo({ equipoId }: { equipoId: number }) {
-  const [archivo, setArchivo] = useState<File | null>(null);
+  const router = useRouter();
+  const { error, handleError } = useError();
 
-  const handleSubmit = async (e: any) => {
+  const {handle} = useHandle();
+
+  const { formData, setField } = UseForm<ArchivoRequest>({
+    equipo: equipoId,
+    nombre: "",
+    archivo: undefined as any,
+  });
+
+  const { execute: uploadArchivo, loading } = useAction(
+    (data: ArchivoRequest) => subirArchivo(data.equipo, data.archivo),
+  );
+
+  const handleSubmit = (e: any) => {
     e.preventDefault();
 
-    if (!archivo) {
-      alert("Seleccione un archivo");
-      return;
-    }
+    handle(async () => {
+      if (!formData.archivo) {
+        alert("Seleccione un archivo");
+        return;
+      }
 
-    await subirArchivo(equipoId, archivo);
-    alert("Archivo subido correctamente");
+      await uploadArchivo(formData)
+
+      alert("Archivo subido correctamente")
+
+      router.push(ROUTES.equipos.LISTA)
+    })
   };
   return (
     <PageContainer>
-      <FormularioBase titulo="Subir Archivo" onSubmit={handleSubmit}>
-        <label>Archivo</label>
-        <input
-          type="file"
-          onChange={(e: any) => setArchivo(e.target.files[0])}
-        />
-        <ButtonGrid>
-          <button className="border px-6 py-2 rounded">Subir</button>
-        </ButtonGrid>
-      </FormularioBase>
+      <Card variant="form">
+        <FormularioBase titulo="Subir Archivo" onSubmit={handleSubmit}>
+          {error && <p className="text-red-500 mb-4">{error}</p>}
+          <label>Archivo</label>
+          <input
+            type="file"
+            onChange={(e: any) => setField("archivo", e.target.files)}
+          />
+          <ButtonGrid>
+            <button
+              type="submit"
+              disabled={loading}
+              className="border px-6 py-2 rounded"
+            >
+              {loading ? "Subiendo..." : "Subir"}
+            </button>
+          </ButtonGrid>
+        </FormularioBase>
+      </Card>
     </PageContainer>
   );
 }

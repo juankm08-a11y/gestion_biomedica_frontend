@@ -1,4 +1,4 @@
-import ProtectedRoute from "../components/equipos/ProtectedRoute";
+import ProtectedRoute from "../auth/ProtectedRoute";
 import ReporteDashboard from "../components/reportes/HistorialReportes";
 
 export default function ListaReportesPage() {

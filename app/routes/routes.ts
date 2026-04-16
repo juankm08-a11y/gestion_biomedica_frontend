@@ -25,8 +25,7 @@ export const ROUTES = {
     ACTUALIZAR_PROGRAMACION: (
       programacionId: number,
       mantenimientoId: number,
-    ) =>
-      `/mantenimientos/${mantenimientoId}/programacion/${programacionId}/actualizar`,
+    ) => `/mantenimientos/${mantenimientoId}/programacion/actualizar`,
     CONSULTAR_PROGRAMACION: (mantenimientoId: number) =>
       `/mantenimientos/${mantenimientoId}/programacion`,
   },

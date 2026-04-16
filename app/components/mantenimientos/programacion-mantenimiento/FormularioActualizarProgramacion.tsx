@@ -1,6 +1,9 @@
 "use client";
 import { listarEquipos } from "@/services/equipos.service";
-import { actualizarProgramacion } from "@/services/programacionMantenimiento.service";
+import {
+  actualizarProgramacion,
+  consultarProgramacionMantenimiento,
+} from "@/services/programacionMantenimiento.service";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import PageContainer from "../../ui/layout/PageContainer";
@@ -18,45 +21,56 @@ import { useList } from "@/hooks/useList";
 import { EquipoResponse } from "@/types/Equipo.type";
 import { UseForm } from "@/hooks/useForm";
 import { useAction } from "@/hooks/useAction";
+import { programacionToForm } from "@/mappers/programacion.mapper";
+import { useHandle } from "@/hooks/useHandle";
+import { useFetch } from "@/hooks/useFetch";
+import Card from "../../ui/cards/Card";
 
-export default function FormularioActualizarProgramacion<
-  ProgramacionMantenimientoResponse,
->({ idProgramacion }: { idProgramacion: number }) {
+export default function FormularioActualizarProgramacion({ idProgramacion }: { idProgramacion: number }) {
   const router = useRouter();
   const { error, handleError } = useError();
 
+  const {handle} = useHandle();
+
   const { data: equipos } = useList<EquipoResponse>(listarEquipos);
 
-  const { formData, handleChange } = UseForm<ProgramacionMantenimientoRequest>({
-    equipo: 0,
-    frecuenciaMantenimiento: 0,
-    frecuenciaCalibracion: 0,
-    unidadFrecuencia: "dias",
-    proximoMantenimiento: "",
-    proximoCalibracion: "",
-  });
+  const { formData, handleChange, setFormData } =
+    UseForm<ProgramacionMantenimientoRequest>(programacionToForm());
 
   const { execute: updateProgramacion, loading } = useAction(
     actualizarProgramacion,
   );
 
-  const handleSubmit = async (e: any) => {
-    e.preventDefault();
+  const {data} = useFetch<ProgramacionMantenimientoResponse>(
+    () => consultarProgramacionMantenimiento(idProgramacion),
+    [idProgramacion]
+  )
 
-    try {
-      await updateProgramacion(idProgramacion, formData);
-
-      alert("Programacion actualizada correctamente");
-
-      router.push(ROUTES.mantenimientos.CONSULTAR_PROGRAMACION(idProgramacion));
-    } catch (err) {
-      handleError(err);
+  useEffect(() => {
+    if (data) {
+      setFormData(programacionToForm(data))
     }
-  };
+  },[data])
 
+  const handleSubmit = (e:any) => {
+    e.preventDefault()
+
+    handle(async () => {
+      await updateProgramacion(idProgramacion, formData)
+
+      alert("Programación actualizada correctamente")
+
+      router.push(
+        ROUTES.mantenimientos.CONSULTAR_PROGRAMACION(
+          idProgramacion
+        )
+      )
+    })
+  }
   return (
     <PageContainer>
-      <FormularioBase titulo="Actualizar Programación" onSubmit={handleSubmit}>
+      <Card variant="form">
+        <FormularioBase titulo="Actualizar Programación" onSubmit={handleSubmit}>
         {error && <p className="text-red-500 mb-4">{error}</p>}
         <SelectField
           label="Equipo"
@@ -124,6 +138,7 @@ export default function FormularioActualizarProgramacion<
           </button>
         </ButtonGrid>
       </FormularioBase>
+      </Card>
     </PageContainer>
   );
 }

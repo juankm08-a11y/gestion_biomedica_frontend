@@ -4,80 +4,72 @@ import { ROUTES } from "@/app/routes/routes";
 import { consultarMantenimientos } from "@/services/mantenimientos.service";
 import { crearOrden } from "@/services/ordenesServicio.service";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
 import FormularioBase from "../../ui/form/FormularioBase";
 import SelectField from "../../ui/input/SelectField";
 import InputField from "../../ui/input/InputField";
 import ButtonGrid from "../../ui/layout/ButtonGrid";
+import { useHandle } from "@/hooks/useHandle";
+import { useList } from "@/hooks/useList";
+import { MantenimientoResponse } from "@/types/Mantenimiento.type";
+import { UseForm } from '../../../../hooks/useForm';
+import { OrdenRequest } from "@/types/OrdenServicio.type";
+import { ordenToForm } from "@/mappers/orden.mapper";
+import { useAction } from "@/hooks/useAction";
 
 export default function FormularioRegistrarOrden() {
-  const [mantenimientos, setMantenimientos] = useState<any[]>([]);
-  const [ordenData, setOrdenData] = useState({
-    idOrden: 0,
-    mantenimiento: 0,
-    tipoServicio: "",
-    descripcion: "",
-    fechaInicio: "",
-    fechaFin: "",
-    estado: "pendiente" as "aprobado" | "pendiente" | "ejecutado",
-  });
+  const router = useRouter()
 
-  const router = useRouter();
+  const {handle} = useHandle();
 
-  useEffect(() => {
-    const cargar = async () => {
-      const data = await consultarMantenimientos();
-      setMantenimientos(Array.isArray(data) ? data : []);
-    };
-    cargar();
-  }, []);
+  const {data:mantenimientos} = 
+  useList<MantenimientoResponse>(consultarMantenimientos)
 
-  const handleChange = (e: any) => {
-    const { name, value } = e.target;
-    setOrdenData((prev) => ({ ...prev, [name]: value }));
-  };
+  const {formData,handleChange} = 
+  UseForm<OrdenRequest>(ordenToForm())
 
-  const handleSubmit = async (e: any) => {
+  const {execute:crear,loading} = 
+  useAction(crearOrden)
+
+  const handleSubmit = (e:any) => {
     e.preventDefault();
-    const payload = {
-      ...ordenData,
-      mantenimiento: Number(ordenData.mantenimiento),
-    };
-    await crearOrden(payload);
 
-    alert("Orden registrada correctamente");
+    handle(async() => {
+      await crear(formData);
 
-    router.push(ROUTES.ordenSerivicio.LISTA);
-  };
+      alert("Orden registrada correctamente")
+
+      router.push(ROUTES.ordenSerivicio.LISTA)
+    })
+  }
 
   return (
     <FormularioBase titulo="Registrar Orden" onSubmit={handleSubmit}>
       <SelectField
         label="Mantenimiento"
         name="mantenimiento"
-        value={ordenData.mantenimiento.toString()}
+        value={formData.mantenimiento.toString()}
         onChange={handleChange}
-        options={mantenimientos.map((mantenimiento) => ({
-          value: mantenimiento.idMantenimiento,
-          label: mantenimiento.idMantenimiento.toString(),
+        options={(mantenimientos ?? []).map((m) => ({
+          value: m.idMantenimiento.toString(),
+          label: `Mantenimiento ${m.idMantenimiento}`,
         }))}
       />
       <InputField
         label="Tipo Servicio"
         name="tipoServicio"
-        value={ordenData.tipoServicio}
+        value={formData.tipoServicio}
         onChange={handleChange}
       />
       <InputField
         label="Descripcion"
         name="descripcion"
-        value={ordenData.descripcion}
+        value={formData.descripcion}
         onChange={handleChange}
       />
       <SelectField
         label="Estado"
         name="estado"
-        value={ordenData.estado}
+        value={formData.estado}
         onChange={handleChange}
         options={[
           { value: "aprobado", label: "Aprobado" },

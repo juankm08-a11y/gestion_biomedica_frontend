@@ -3,8 +3,8 @@ import {
   MantenimientoRequest,
 } from "../types/Mantenimiento.type";
 export function mantenimientoToForm(
-  data: MantenimientoResponse,
-  idEquipo?: Number,
+  data?: Partial<MantenimientoResponse>,
+  idEquipo?: number,
 ): MantenimientoRequest {
   return {
     equipo: data?.equipo ?? idEquipo ?? 0,
