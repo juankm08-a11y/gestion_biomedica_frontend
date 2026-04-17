@@ -3,7 +3,6 @@
 import { useRouter } from "next/navigation";
 import { ROUTES } from "@/app/routes/routes";
 import InputField from "../ui/input/InputField";
-import ButtonGrid from "../ui/layout/ButtonGrid";
 import PrimaryButton from "../ui/buttons/PrimaryButton";
 import { LoginRequest } from "@/types/Auth.type";
 import { UseForm } from "@/hooks/useForm";
@@ -23,7 +22,7 @@ export default function Login() {
     password:"",
   })
 
-  const {execute:login} = useAction(iniciarSesion);
+  const {execute:login,loading} = useAction(iniciarSesion);
 
   const {handle} = useHandle()
 
@@ -39,8 +38,25 @@ export default function Login() {
       localStorage.setItem("refresh",response.refresh)
       localStorage.setItem("rol",response.rol)
       localStorage.setItem("usuario",response.usuario)
+
+      router.push(ROUTES.dashboard)
     })
   }
+
+  const actions = [
+    {
+      label: "¿Olvidaste tu contraseña?",
+      route:ROUTES.recuperarpassword
+    },
+    {
+      label:"¿Aún no tienes cuenta?",
+      route:ROUTES.register,
+    },
+    {
+      label:"No puedes acceder a tu cuenta?",
+      route:ROUTES.recuperarCuenta
+    },
+  ]
 
   return (
     <AuthLayout>
@@ -50,44 +66,27 @@ export default function Login() {
             {error}
           </p>
         )}
+         <InputField
+          label="Correo"
+          name="correo"
+          value={formData.correo}
+          onChange={handleChange}
+        />
         <InputField
           label="Contraseña"
           name="password"
           value={formData.password}
           onChange={handleChange}
         />
-        <InputField
-          label="Correo"
-          name="correo"
-          value={formData.correo}
-          onChange={handleChange}
-        />
+        <PrimaryButton text={loading ? "Ingresando...":"Iniciar Sesión"}/>
 
-        <ButtonGrid>
-          <PrimaryButton text="Iniciar Sesion" />
-        </ButtonGrid>
-        <div className="flex flex-col items-center gap-2 mt-4">
-          <button
-            type="button"
-            className="text-blue-500 hover:underline text-sm"
-            onClick={() => router.push(ROUTES.recuperarpassword)}
-          >
-            ¿Olvidaste tu contraseña?
+    
+        <div className="flex flex-col items-start gap-1 mt-4">
+         {actions.map((item) => (
+          <button type="button" key={item.label} className="text-sm text-[var(--color-primary)] hover:underline" onClick={() => router.push(item.route)}>
+            {item.label}
           </button>
-          <button
-            type="button"
-            className="text-blue-500 hover:underline text-sm"
-            onClick={() => router.push(ROUTES.register)}
-          >
-            ¿Aún no tienes cuenta?
-          </button>
-          <button
-            type="button"
-            className="text-blue-500 hover:underline text-sm"
-            onClick={() => router.push(ROUTES.recuperarCuenta)}
-          >
-            No puedes acceder a tu cuenta?
-          </button>
+         ))}
         </div>
       </AuthForm>
      

@@ -3,7 +3,6 @@ import { registrarSesion } from "@/services/usuario.service";
 import { RegistroUsuarioRequest } from "@/types/Auth.type";
 import InputField from "../ui/input/InputField";
 import SelectField from "../ui/input/SelectField";
-import ButtonGrid from "../ui/layout/ButtonGrid";
 import PrimaryButton from "../ui/buttons/PrimaryButton";
 import { useRouter } from "next/navigation";
 import { ROUTES } from "@/app/routes/routes";
@@ -88,9 +87,7 @@ export default function RegisterPage() {
             {value:"tecnicobiomedico",label:"Técnico biomédico"}
           ]}
         />
-        <ButtonGrid>
           <PrimaryButton text={loading ? "Registrando...":"Registrar"} />
-        </ButtonGrid>
       </AuthForm>
     </AuthLayout>
   );

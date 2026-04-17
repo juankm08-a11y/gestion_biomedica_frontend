@@ -13,6 +13,9 @@ import { ROUTES } from "@/app/routes/routes";
 import { UseForm } from "@/hooks/useForm";
 import { useAction } from "@/hooks/useAction";
 import { useHandle } from "@/hooks/useHandle";
+import { useError } from "@/hooks/useError";
+import AuthLayout from "../ui/layout/AuthLayout";
+import AuthForm from "../ui/form/AuthForm";
 
 export default function RecuperarPasswordPage() {
   const searchParams = useSearchParams();
@@ -29,6 +32,21 @@ export default function RecuperarPasswordPage() {
 
  const {handle} = useHandle()
 
+ const {error} = useError()
+
+ useEffect(() => {
+  const uid = searchParams.get("uid");
+  const token = searchParams.get("token");
+
+  if (uid && token) {
+    setFormData(prev => ({
+      ...prev,
+      uid,
+      token
+    }))
+  }
+ }, [searchParams])
+
  const handleSubmit = (e:any) => {
   e.preventDefault()
 
@@ -40,9 +58,14 @@ export default function RecuperarPasswordPage() {
  }
 
   return (
-    <PageContainer>
-      <FormularioBase titulo="Actualizar contraseña" onSubmit={handleSubmit}>
-        <InputField
+    <AuthLayout>
+     <AuthForm title="Actualizar contraseña" subtitle="Ingresa tu nueva contraseña" onSubmit={handleSubmit}>
+      {error && (
+        <p className="text-red-500 tex-sm text-center">
+          {error}
+        </p>
+      )}
+       <InputField
           label="Nueva contraseña"
           name="nuevaPassword"
           value={formData.nuevaPassword}
@@ -50,10 +73,9 @@ export default function RecuperarPasswordPage() {
           type="password"
         />
 
-        <ButtonGrid>
-          <PrimaryButton text="Actualizar Contraseña" />
-        </ButtonGrid>
-      </FormularioBase>
-    </PageContainer>
+      
+        <PrimaryButton text="Actualizar Contraseña" />
+      </AuthForm>    
+    </AuthLayout>
   );
 }

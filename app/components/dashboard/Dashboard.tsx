@@ -25,7 +25,7 @@ export default function Dashboard() {
           <MetricCard title="Mantenimientos Preventivos" value={4} />
           <MetricCard title="Alertas Activas" value={12} />
         </div>
-        <div className="mb-10">
+        <div className="mb-10 w-full h-[320px]">
           <EquiposChart />
         </div>
         <ButtonGrid>
