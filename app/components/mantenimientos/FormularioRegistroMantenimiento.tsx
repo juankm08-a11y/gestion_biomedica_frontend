@@ -21,7 +21,7 @@ import { mantenimientoToForm } from "@/mappers/mantenimiento.mapper";
 import { useAction } from "@/hooks/useAction";
 
 
-export default function FormularioRegistro() {
+export default function FormularioRegistro({idEquipo}:{idEquipo:number}) {
   const router = useRouter();
 
   const {handle} = useHandle();
@@ -30,7 +30,7 @@ export default function FormularioRegistro() {
 
   const {data:equipos} = useList<EquipoResponse>(listarEquipos);
 
-  const {formData,handleChange} = UseForm<MantenimientoRequest>(mantenimientoToForm())
+  const {formData,handleChange} = UseForm<MantenimientoRequest>(mantenimientoToForm(undefined,idEquipo))
 
   const {execute: crearMantenimiento,loading} = 
   useAction(registrarMantenimiento)

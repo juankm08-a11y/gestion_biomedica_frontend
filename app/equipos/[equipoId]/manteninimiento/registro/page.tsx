@@ -6,15 +6,15 @@ import { useParams } from "next/navigation";
 
 export default function RegistroMantenimientoPage() {
   const params = useParams();
-  const id = Number(Array.isArray(params.id) ? params.id[0] : params.id);
+  const idEquipo = Number(Array.isArray(params.id) ? params.id[0] : params.id);
 
-  if (!id || isNaN(id)) {
+  if (!idEquipo || isNaN(idEquipo)) {
     return <p>Cargando equipo...</p>;
   }
 
   return (
     <ProtectedRoute roles={["superadministrador", "ingenierobiomedico"]}>
-      <FormularioRegistro equipoId={id} />
+      <FormularioRegistro idEquipo={idEquipo} />
     </ProtectedRoute>
   );
 }

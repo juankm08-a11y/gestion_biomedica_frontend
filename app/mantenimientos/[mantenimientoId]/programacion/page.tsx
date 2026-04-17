@@ -1,10 +1,20 @@
+"use client";
 import ProtectedRoute from "@/app/auth/ProtectedRoute";
 import HistorialProgramacion from "@/app/components/mantenimientos/programacion-mantenimiento/HistorialProgramacion";
+import { useParams } from "next/navigation";
 
 export default function ProgramacionMantenimientoPage() {
+  const params = useParams()
+  
+  const idParam = params.mantenimientoId;
+  const idMantenimiento = Number(Array.isArray(idParam) ? idParam[0] : idParam)
+
+  if (!idParam || isNaN(idMantenimiento)) {
+    return <div>Cargando mantenimiento...</div>
+  }
   return (
     <ProtectedRoute>
-      <HistorialProgramacion />
+      <HistorialProgramacion idMantenimiento={idMantenimiento} />
     </ProtectedRoute>
   );
 }
