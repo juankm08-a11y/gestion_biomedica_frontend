@@ -3,6 +3,8 @@ import ProtectedRoute from "@/app/auth/ProtectedRoute";
 import HistorialProgramacion from "@/app/components/mantenimientos/programacion-mantenimiento/HistorialProgramacion";
 import { useParams } from "next/navigation";
 
+export const dynamic = 'force-dynamic';
+
 export default function ProgramacionMantenimientoPage() {
   const params = useParams()
   

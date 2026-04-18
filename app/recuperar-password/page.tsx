@@ -1,9 +1,6 @@
-import { Suspense } from "react";
-
+export const dynamic = 'force-dynamic';
 export default function RecuperarPasswordPage() {
   return (
-    <Suspense fallback={<div>Cargando...</div>}>
-      <RecuperarPasswordPage />
-    </Suspense>
+    <RecuperarPasswordPage />
   );
 }

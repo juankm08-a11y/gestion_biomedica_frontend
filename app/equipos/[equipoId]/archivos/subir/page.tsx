@@ -1,6 +1,8 @@
 import ProtectedRoute from "@/app/auth/ProtectedRoute";
 import SubirArchivo from "../../../../components/equipos/SubirArchivo";
 
+export const dynamic = 'force-dynamic';
+
 export default async function CargarArchivoPage({
   params,
 }: {

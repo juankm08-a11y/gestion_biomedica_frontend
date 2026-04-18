@@ -3,6 +3,8 @@ import { useParams } from "next/navigation";
 import ProtectedRoute from "../../../auth/ProtectedRoute";
 import SupervisarMantenimiento from "../../../components/mantenimientos/supervisar-mantenimiento/SupervisarMantenimiento";
 
+export const dynamic = 'force-dynamic';
+
 export default function ListaReportes() {
   const params = useParams();
 

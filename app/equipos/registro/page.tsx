@@ -2,6 +2,8 @@ import FormularioRegistroEquipo from "@/app/components/equipos/FormularioRegistr
 import ProtectedRoute from "@/app/auth/ProtectedRoute";
 import PageContainer from "@/app/components/ui/layout/PageContainer";
 
+export const dynamic = 'force-dynamic';
+
 export default function RegistroEquipoPage() {
   return (
     <ProtectedRoute

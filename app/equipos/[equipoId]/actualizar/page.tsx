@@ -3,6 +3,8 @@ import ProtectedRoute from "@/app/auth/ProtectedRoute";
 import FormularioActualizarEquipo from "@/app/components/equipos/FormularioActualizarEquipo";
 import { useParams } from "next/navigation";
 
+export const dynamic = 'force-dynamic';
+
 export default function ActualizarEquipoPage() {
   const params = useParams();
   const idParam = params.equipoId;

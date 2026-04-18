@@ -1,6 +1,8 @@
 import HistorialArchivos from "@/app/components/equipos/HistorialArchivos";
 import ProtectedRoute from "@/app/auth/ProtectedRoute";
 
+export const dynamic = 'force-dynamic';
+
 export default async function HistorialEquiposPage({
   params,
 }: {

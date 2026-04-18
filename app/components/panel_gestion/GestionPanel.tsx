@@ -1,5 +1,7 @@
 import Icon from "../ui/iconos/Icon";
 import Panel from "../ui/panel/Panel";
+export const dynamic = 'force-dynamic';
+
 
 export default function GestionUsuariosPanel() {
   return (

@@ -2,6 +2,7 @@
 import ProtectedRoute from "@/app/auth/ProtectedRoute";
 import FormularioActualizarMantenimiento from "@/app/components/mantenimientos/FormularioActualizarMantenimiento";
 import { useParams } from "next/navigation";
+export const dynamic = 'force-dynamic';
 
 export default function ActualizarMantenimientoPage() {
   const params = useParams();

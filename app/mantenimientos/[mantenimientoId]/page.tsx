@@ -3,6 +3,8 @@
 import { useParams } from "next/navigation";
 import FormularioActualizarMantenimiento from "../../components/mantenimientos/FormularioActualizarMantenimiento";
 
+export const dynamic = 'force-dynamic';
+
 export default function ActualizarMantenimiento() {
   const params = useParams();
 
