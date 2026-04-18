@@ -1,7 +1,10 @@
 export interface ReporteRequest {
-  fechaInicio?:string;
-  fechaFin?:string;
-  tipoReporte?:string;
+  equipo?:number;
+  nombre:string;
+  descripcion?:string;
+  tipo:string;
+  falla?:string;
+  archivo?:File|null;
 }
 
 export interface ReporteResponse {
